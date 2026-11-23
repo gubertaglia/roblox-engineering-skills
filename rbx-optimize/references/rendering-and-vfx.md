@@ -29,6 +29,10 @@
 
 Fontes: https://create.roblox.com/docs/performance-optimization/improve · https://create.roblox.com/docs/characters
 
+## Onde executar VFX, animação e apresentação
+
+Use [client-server-work-placement.md](client-server-work-placement.md) quando a questão incluir custo de **replicar propriedades**, interpolação/fade no servidor, FX de múltiplos observadores ou estado persistente. Decidir por contrato (autoridade, streaming, late join, colisão) **antes** de mover efeitos para o cliente. Não assumir que tudo o que é animação deve ser local, especialmente rigs de personagens. Não declarar economia em bytes ou FPS só por contar tweens no código.
+
 ## Qualidade adaptativa, LOD e efeito local
 
 - **Sinal:** equipamento-alvo sofre mais que desktop; efeitos cosméticos têm custo variável e não participam de regra autoritativa.

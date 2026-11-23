@@ -1,16 +1,19 @@
-# Atualização — v1.9 → v1.9.1 (inclusive versões anteriores)
+# Atualização — v1.9.1 → v1.10.0 (inclusive versões anteriores)
 
-A **v1.9.1** corrige três imprecisões técnicas da v1.9: `ModelLevelOfDetail.Automatic`, aerodinâmica/forças fluidas e `Motor6D` versus `AnimationConstraint` em avatares modernos. Corrige também a numeração das lentes de auditoria e o manifesto SHA-256. Mantém as quatro skills e seus nomes.
+A **v1.10.0** mantém `$rbx-audit`, `$rbx-root-cause`, `$rbx-optimize` e `$rbx-review` opcional, com os mesmos nomes e políticas de invocação. O principal ajuste é o procedimento **análise de código primeiro**, evitando ciclos de Studio MCP sem necessidade e mantendo testes dirigidos quando o usuário os pedir.
 
 ## Atualizar o Codex Desktop
 
-1. No GitHub, acesse a branch `main` e selecione **Code → Download ZIP**. O ZIP é gerado pelo GitHub a partir do código-fonte; não é um asset anexado a uma GitHub Release.
-2. Extraia o arquivo, localize `rbx-audit`, `rbx-root-cause` e `rbx-optimize`, copie **as pastas inteiras** e substitua as antigas no diretório de skills que seu Codex já reconhece (ex.: `%USERPROFILE%\.codex\skills` no ambiente documentado). Não crie duplicatas.
-3. Para usar a skill opcional, instale `optional/rbx-review` como `rbx-review`.
-4. Atualize ou reinicie a descoberta no Codex e confira o seletor `$`.
+1. Extraia este ZIP. Localize `rbx-audit`, `rbx-root-cause` e `rbx-optimize` dentro da pasta externa `roblox-engineering-skills-v1.10.0`.
+2. Copie as **pastas inteiras** e substitua suas versões no diretório de skills já reconhecido (no ambiente documentado: `%USERPROFILE%\.codex\skills`). Não instale a pasta externa como se fosse uma skill.
+3. Opcional: instale `optional/rbx-review` como `rbx-review`. Não substitua Ponytail, Caveman, configurações do Studio/MCP ou outras skills.
+4. Atualize/reinicie a descoberta de habilidades do Codex e confira os nomes no seletor `$`.
+5. Para planejamento **sem testes**, peça expressamente análise estática do Source/código e uso de medições existentes. Para comprovação runtime, peça reprodução e métricas-alvo: a v1.10.0 não desativa testes, apenas os torna proporcionais.
 
-## Integridade e limites
+## Compatibilidade e integridade
 
-O `MANIFEST.json` lista SHA-256 de **43 arquivos** (todos os arquivos de conteúdo, menos o próprio manifesto). Não foram executados testes A/B reais com Codex/Studio, nem medições de FPS ou RAM. A versão não altera o Roblox Studio, MCP, Caveman, Ponytail ou jogos.
+- Sem novas dependências, scripts executáveis, CLI, acesso a APIs adicionais ou alteração de jogos.
+- `MANIFEST.json` contém hashes SHA-256 dos arquivos de conteúdo; a validação do manifesto verifica apenas integridade do pacote, **não** eficiência ou correção do Codex em Roblox.
+- Casos propostos em [EVALUATION_CASES.md](EVALUATION_CASES.md) e [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md) **não foram executados com Codex/Studio** nesta geração.
 
-Veja [INSTALL_WINDOWS.md](INSTALL_WINDOWS.md), [EVALUATION_CASES.md](EVALUATION_CASES.md) e [SOURCES.md](SOURCES.md).
+Consulte [README.md](README.md) e [INSTALL_WINDOWS.md](INSTALL_WINDOWS.md).

@@ -1,3 +1,26 @@
+# Changelog — v1.10.0 (2026-11-23)
+
+## Análise estática primeiro e menor custo de ferramentas
+
+- `$rbx-optimize`: reutilizar métricas/Source existentes, inspecionar Scripts/LocalScripts/ModuleScripts em lote e separar **observado no código**, **inferido**, **medido** e **não verificado** antes de propor técnica. Baseline ausente não inicia teste automaticamente.
+- Zero `Start/Stop Play`/`Execute Luau` de instrumentação **por padrão** para pedidos de análise/plano sem reprodução; quando o usuário pede explicitamente medir, executar testes seletivos sem nova aprovação artificial. Não existe teto inflexível: risco relevante pode exigir escalar.
+- Edição autorizada prioriza patch e checagens estáticas, preservando diferença entre editar, salvar e publicar. Não se pode prometer ganho medido a partir de inspeção.
+- Nova referência `rbx-optimize/references/static-first-and-tool-efficiency.md`; instruções correspondentes em auditoria, causa raiz, otimização, revisão opcional e guias Studio.
+
+## Rede, segurança e distribuição de trabalho
+
+- Nova referência `rbx-audit/references/security-and-remote-contracts.md`: validar payloads, números finitos, autorização, distância, custo, rate limiting, replay/idempotência contextual e bloqueios de `RemoteFunction`/`InvokeClient`.
+- Nova referência `rbx-optimize/references/client-server-work-placement.md`: matriz para VFX, som, UI, fades, estado voxel, personagens, observadores, streaming e late join. Estado crítico permanece autoritativo; cosmético pode ser interpolado localmente conforme o contrato.
+- `networking-and-replication.md` ampliado para distinguir envio de remotes, replicação nativa, fan-out, filtragem, coalescing e custo sem inventar bytes por atribuição nem limites de banda universais.
+
+## Avaliação, instalação e compatibilidade
+
+- Novos casos v1.10.0 em `EVALUATION_CASES.md` para qualidade por chamada, uso de MCP, cenários com/sem testes, segurança e falsa causalidade; `INTEGRATION_TESTS.md` distingue checagens estáticas do pacote de avaliação do comportamento do agente.
+- Mantidas as quatro skills, nomes, estrutura, frontmatter e roteamento; sem scripts executáveis ou MCP adicional. Substituir as pastas completas ao instalar; `MANIFEST.json` regenerado com SHA-256.
+- **Validação desta entrega:** apenas integridade estrutural/textual, links internos, manifesto e ZIP; **nenhum** Play Solo, medição de FPS, teste A/B do Codex ou teste funcional no Roblox Studio foi executado.
+
+---
+
 # Changelog — v1.9.1 (2026-11-23)
 
 ## Correções após auditoria técnica da v1.9

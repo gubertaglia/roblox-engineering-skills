@@ -1,6 +1,6 @@
 # Runtime Roblox Studio + MCP — causa raiz
 
-Use quando há sintoma em execução, Studio conectado ou divergência de origem dos dados.
+Use quando há sintoma em execução, Studio conectado ou divergência de origem dos dados. **Antes de chamar MCP**, confira se Source/logs disponíveis já discriminam a causa. Desnecessário abrir e encerrar Play repetidamente para diagnosticar um ramo de código conhecido. Se o usuário pediu reprodução, faça o teste dirigido; senão descreva a lacuna e o menor teste manual.
 
 - Descubra ferramentas expostas antes de chamar. Se disponível, `list_roblox_studios` identifica a instância e `studio_id`; `get_studio_state` identifica Play/Edit e contextos. Não presuma que uma conexão MCP forneça todas as habilidades oficiais.
 - Confirme código carregado (hash ou Source quando necessário), place e processo em que a ação ocorreu. `game.PlaceVersion` pode estar defasado em relação ao código do editor; disco/Studio/Play/Team Create podem divergir.

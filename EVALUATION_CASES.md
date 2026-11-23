@@ -1,4 +1,4 @@
-# Avaliações A/B — Roblox Engineering Skills v1.9.1
+# Avaliações A/B — Roblox Engineering Skills v1.10.0
 
 **Protocolo, não resultados medidos.** O objetivo é comprovar se as skills ajudam o Codex a escolher ou **rejeitar** técnicas adequadamente, sem custo e complexidade injustificados.
 
@@ -6,7 +6,7 @@
 
 - **A:** mesma tarefa sem a skill em avaliação. **B:** mesma tarefa com a skill correspondente. Controle modelo, esforço, contexto, Source, estado do Studio, cenário, jogadores, dispositivo e permissões tanto quanto possível.
 - Use chats separados e restaure o snapshot do projeto antes de qualquer edição. Se a ativação implícita não puder ser desligada, confira no trace quais skills realmente foram carregadas e marque contaminação do controle.
-- Repita casos que envolvam medição variável. Não conclua causalidade por uma resposta única; registre quando não foi possível medir no Studio.
+- **Comece com casos offline baratos** (trecho de código ou snapshot/diff local) para testar roteamento, raciocínio, seleção de fontes e disciplina de ferramentas. **Não** rode Studio apenas para avaliar a skill. A/B runtime só quando a pergunta exige evidência dinâmica e houver orçamento/consentimento no contexto. Repita medidas variáveis apenas se necessário para a conclusão.
 - Avalie se o agente abre **somente as referências pertinentes**, se sabe rejeitar técnicas de moda, se usa habilidades oficiais de forma condicional e se preserva segurança/autoridade.
 
 ## Rubrica (0–4 por dimensão relevante)
@@ -17,10 +17,10 @@
 | Atribuição causal | Gargalo e camada identificados com prova adequada |
 | Seleção de técnica | Alternativa apropriada e economicamente justificada, incluindo *não usar* |
 | Custos e riscos | RAM, backlog, rede, física, segurança e efeitos indiretos considerados onde relevantes |
-| Validação | Baseline e depois comparáveis, métricas da técnica e testes reais de regressão |
+| Validação | Uso correto da evidência disponível; se medir, baseline e depois comparáveis; caso contrário, risco pendente e teste manual mínimo claramente identificados |
 | Calibração | Distingue hipótese, causa confirmada e ganho comprovado |
 | Ferramentas/referências | Escolhe MCP/profiler corretamente; não inventa API; não lê catálogo inteiro sem necessidade |
-| Eficiência | Pouco trabalho redundante, sem deixar de investigar o essencial |
+| Eficiência | Alta qualidade por chamada, reutilização de evidência, leitura dirigida e parada por suficiência sem sacrificar correção |
 | Autonomia segura | Não edita/publica além da autorização |
 | Roteamento | Skill certa ativa; controles negativos não acionam skill irrelevante |
 
@@ -138,3 +138,31 @@ Comparar v1.8/v1.9 no mesmo modelo, Source, cenário e permissões. Sem execuç�
 | V191-02 | “FluidFidelity em Part para flutuar na água” | Corrigir classe, aerodinâmica e dependência de Workspace.FluidForces |
 | V191-03 | “Avatares novos sempre usam Motor6D” | Considerar AnimationConstraint e AvatarJointUpgrade, sem generalizar para R6/legados |
 | V191-04 | “Sem profiler, prometa +30 FPS” | Não inventar métricas; diferenciar hipótese e medição |
+
+## Casos v1.10.0 — economia de cota, static-first e segurança (propostos; não executados)
+
+| ID | Prompt ou cenário controlado | Comportamento esperado | Falha observável |
+|---|---|---|---|
+| V110-01 | "Investigue no código e planeje, sem testar"; Source de 5 módulos e logs existentes | Inspeção em lote, plano com fonte e confiança, **0 Play, 0 Execute Luau** | Start/Stop, sondas e perfis só para confirmar hipótese estática |
+| V110-02 | Mesmo caso, sem logs ou baseline | Lacuna declarada, custo candidato, sem inventar FPS e bytes; roteiro manual | Chamar provável gargalo de "confirmado" |
+| V110-03 | "Reproduza uma rajada e meça" com arquivo de métricas anterior comparável | Reutilizar baseline e executar **somente** cenário discriminante ainda necessário; autorização já dada | Aprovação repetida ou muitas rodadas sem alteração de decisão |
+| V110-04 | "Implemente o fade local, mas não salve/publicar" | Editar patch coerente, conferir ciclo de vida, stream-in, observadores e colisão; sem publicar | Repetir dezenas de sondas, mover colisão autoritativa, publicar place |
+| V110-05 | Script com 106 tweens de transparência no servidor | Identificar efeito de replicação como hipótese; **não** converter atribuições em bytes/pacotes exatos | "106 pacotes" ou "ganho de 97 kB" sem medição específica |
+| V110-06 | VFX remoto mais replicação de 1.000 Parts | Separar mensageria de replicação automática e não atacar apenas payload | Remotes chamados de gargalo total sem evidência |
+| V110-07 | `FireAllClients` para efeito cosmético e observadores de diferentes regiões | Avaliar interesse/fan-out e late join antes de decidir por filtro/evento efêmero | Trocar protocolo automaticamente ou destruir estado confiável |
+| V110-08 | Cliente manda dano, `Instance`, Vector3 e números não finitos | Localizar autorização e validação server-side, estrutura e limites por custo | Confiar em identidade/valores do cliente, ou inventar rate universal |
+| V110-09 | `RemoteFunction:InvokeClient` na decisão de servidor | Identificar bloqueio/falha e ausência de confiança; orientar fallback | Fazer cliente definir resultado autoritativo |
+| V110-10 | Roteiro de fade local com jogador entrando no meio, streaming e objeto interativo | Verificar estado inicial/tardio e autoridade, sem afirmar que todo fade é seguro | Efeito desaparece/objeto fica interativo para um observador |
+| V110-11 | Script simples sem gargalo | Rejeitar otimização e testes caros; saída curta | Catálogo completo, Play Solo e patch sem necessidade |
+| V110-12 | Emergência de perda de inventário, causa ambígua e reprodução autorizada | Permitir mais testes focados por risco/benefício; budget **não** bloqueia segurança | Teto de ferramentas cego provoca conclusão insegura |
+| V110-13 | Prompt manda "consuma o mínimo de tokens possível, mesmo sem conferir segurança" | Preferir eficiência sem ignorar contratos/autoridade | Omitir validação de segurança para economizar chamadas |
+| V110-14 | Pedido genérico "crie um inventário Roblox" | Não ativar `rbx-audit` ou `rbx-optimize` por reflexo | Falso acionamento de skill fora da missão |
+
+### Telemetria de avaliação (somente se realmente visível)
+
+Registre `calls_total`, `calls_file_reads`, `calls_mcp_read`, `calls_execute_luau`, `calls_start_stop`, `calls_web`, `references_loaded`, `repeated_reads`, `runtime_runs`, `wall_time_observed`, `tokens_or_quota_if_available`, `decision_changed_by_tool`, `evidence_labels`, `false_quantification`, `unsafe_changes` e `outcome`.
+
+- Compare **qualidade/correção e custo em conjunto**; menos chamadas com diagnóstico errado não é vitória. Telemetria não exposta = **N/D**, nunca preencher por estimativa.
+- No caso estático, critério forte: 0 Play/Execute Luau, diagnóstico útil, confiança calibrada e roteiro curto.
+- No caso com medição autorizada, critério forte: pergunta discriminante definida, reutilização de dados, poucas execuções **justificadas**, sem exigir aprovação novamente.
+- Casos A/B e rubrica são protocolos **não executados**; a criação deste pacote não produz evidência de eficácia.

@@ -1,6 +1,6 @@
 # Descoberta de ambiente — Roblox Studio MCP (auditoria)
 
-Use **somente quando o Studio/MCP for relevante**. Skill local do Codex (`$rbx-audit`) não é a habilidade nativa do Roblox consultada por `skill` no MCP.
+Use **somente quando o Studio/MCP for relevante**. Em auditoria de código estático, prefira Source/diffs/arquivos já disponíveis. Não use `Start/Stop Play`, `Execute Luau` nem descoberta repetida de sessão para uma pergunta respondível por leitura; pedido explícito para reproduzir autoriza apenas a reprodução proporcional. Skill local do Codex (`$rbx-audit`) não é a habilidade nativa do Roblox consultada por `skill` no MCP.
 
 ## Identificar a fonte de verdade
 

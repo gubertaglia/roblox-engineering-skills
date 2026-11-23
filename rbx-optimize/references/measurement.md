@@ -1,5 +1,7 @@
 # Medição comparativa — prova de melhoria, não só de gargalo
 
+**Não é uma etapa obrigatória em todo pedido.** Se o usuário pediu somente análise/plano, use o código e dados existentes, diferencie hipótese de custo medido e apresente **um roteiro manual curto**. Se pediu "reproduza/meça", medição já está autorizada dentro do escopo: selecione o menor experimento que altera a decisão, reutilize controles anteriores e evite ciclos repetitivos de `Start/Stop Play` e `Execute Luau`. Para implementação já autorizada, validar código e contratos primeiro; testes runtime focalizados onde necessários. Para política completa consulte [static-first-and-tool-efficiency.md](static-first-and-tool-efficiency.md).
+
 Consulte para planejar, executar ou relatar otimização. O rigor é proporcional ao risco e ao impacto alegado.
 
 ## Tipos de teste e limites

@@ -1,0 +1,89 @@
+name: Publish Roblox Engineering Skills v1.10.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-v1.10.0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact release commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Verify manifest and build release ZIP
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+
+          version = "1.10.0"
+          manifest = json.loads(Path("MANIFEST.json").read_text(encoding="utf-8"))
+          assert manifest["version"] == version, "Wrong manifest version"
+          hashes = manifest["sha256"]
+          assert len(hashes) == manifest["files"] == 46, "Unexpected content file count"
+          assert set(hashes) == {str(p) for p in Path(".").rglob("*") if p.is_file() and ".git" not in p.parts and ".github" not in p.parts and p.name != "MANIFEST.json"}, "Manifest does not match repository content"
+          for name, expected in hashes.items():
+              path = Path(name)
+              assert path.is_file(), f"Missing file: {name}"
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, f"SHA mismatch: {name}"
+
+          package_name = f"roblox-engineering-skills-v{version}.zip"
+          package_root = f"roblox-engineering-skills-v{version}"
+          with ZipFile(package_name, "w", ZIP_DEFLATED, compresslevel=9) as archive:
+              for name in sorted([*hashes, "MANIFEST.json"]):
+                  archive.write(name, f"{package_root}/{name}")
+          with ZipFile(package_name) as archive:
+              assert archive.testzip() is None, "Corrupt ZIP"
+              assert len(archive.namelist()) == 47, "Wrong ZIP file count"
+          print(f"Verified {len(hashes)} SHA-256 hashes; generated {package_name}")
+          PY
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-notes.md <<'NOTES'
+          # Roblox Engineering Skills v1.10.0
+
+          Atualização compatível com a v1.9.1: preserva as quatro skills, nomes, roteamento e instalação. Não adiciona MCP obrigatório nem automações no jogo.
+
+          ## Principais mudanças
+          - **Static-first e eficiência:** prioriza inspeção de Script, LocalScript, ModuleScript e evidência existente. Reproduções, Start/Stop Play, Execute Luau e sondas não são obrigatórios para pedidos de análise sem medição.
+          - **Evidência calibrada:** separa observações no código, inferências, medições reais e hipóteses não verificadas. Evita afirmar ganhos de FPS ou bytes sem medição.
+          - **Segurança de remotes:** critérios práticos para validar payloads, autorização, valores não finitos, carga excessiva, limites de taxa e uso de RemoteFunction.
+          - **Rede e autoridade:** orientação sobre replicação nativa, fan-out, eventos cosméticos, e critérios de divisão cliente/servidor para VFX, fades, animações e estado de gameplay.
+          - **Avaliação proporcional:** testes estáticos/offline e rubrica de qualidade por chamada; ensaios runtime quando justificados.
+
+          ## Instalação
+          1. Baixe o arquivo **roblox-engineering-skills-v1.10.0.zip** anexado.
+          2. Extraia e substitua as pastas completas `rbx-audit`, `rbx-root-cause` e `rbx-optimize` na pasta local de skills do Codex.
+          3. Opcional: instale `optional/rbx-review` como `rbx-review`.
+          4. Atualize a descoberta de skills no Codex.
+
+          ## Verificações e limites
+          Conteúdo verificado por 46 hashes SHA-256 no manifesto e integridade do ZIP. Testes comportamentais no Codex/Studio e ganhos de FPS, RAM, tráfego ou cota **não foram medidos nesta publicação**.
+          NOTES
+
+      - name: Publish v1.10.0 and attach ZIP
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "v1.10.0" >/dev/null 2>&1; then
+            gh release upload "v1.10.0" "roblox-engineering-skills-v1.10.0.zip" --clobber
+            gh release edit "v1.10.0" --title "Roblox Engineering Skills v1.10.0" --notes-file release-notes.md --latest
+          else
+            gh release create "v1.10.0" "roblox-engineering-skills-v1.10.0.zip"               --target "$GITHUB_SHA"               --title "Roblox Engineering Skills v1.10.0"               --notes-file release-notes.md               --latest
+          fi

@@ -1,6 +1,6 @@
 interface:
   display_name: "Roblox Optimize"
   short_description: "Identificar e reduzir gargalos de performance Roblox"
-  default_prompt: "Use $rbx-optimize para investigar e reduzir o custo deste sistema Roblox, validando as alterações autorizadas."
+  default_prompt: "Use $rbx-optimize para inspecionar o código e otimizar este sistema Roblox com evidência existente primeiro; teste no Studio só se for solicitado ou necessário e autorizado."
 policy:
   allow_implicit_invocation: true

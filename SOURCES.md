@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v1.9.1 (2026-11-23)
+# Fontes de referência e verificação — v1.10.0 (2026-11-23)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -108,3 +108,14 @@ Estas fontes sustentam semântica e API, **não** ganhos medidos de desempenho. 
 - `AnimationConstraint`: https://create.roblox.com/docs/reference/engine/classes/AnimationConstraint.md
 
 Fontes oficiais sustentam a semântica da API, **não** ganhos medidos de CPU, GPU, FPS ou RAM.
+
+## Referências para procedimentos v1.10.0
+
+- Roblox, fronteira de confiança cliente/servidor e validação: https://create.roblox.com/docs/scripting/security/client-server-boundary
+- Roblox, RemoteEvent/UnreliableRemoteEvent/RemoteFunction: https://create.roblox.com/docs/scripting/events/remote
+- Roblox, `RemoteFunction` e semântica de chamada: https://create.roblox.com/docs/reference/engine/classes/RemoteFunction
+- Roblox, inspeção de custos de rede (sem equivaler atribuição a pacote): https://create.roblox.com/docs/performance-optimization/microprofiler/network
+- Roblox, streaming e presence: https://create.roblox.com/docs/workspace/streaming
+- Roblox, network ownership: https://create.roblox.com/docs/physics/network-ownership
+
+**Nota de método:** "static-first" e orçamento flexível de ferramentas são **decisões de design destas skills**, não um protocolo oficial imposto pela Roblox. O custo de cota relatado em um caso de usuário não equivale a benchmark controlado de economia de tokens. Nenhuma fonte aqui comprova ganhos quantitativos para a v1.10.0.

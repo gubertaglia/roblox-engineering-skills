@@ -1,8 +1,8 @@
-# Roblox Engineering Skills — v1.9.1
+# Roblox Engineering Skills — v1.10.0
 
 Skills locais para o **Codex no aplicativo ChatGPT (Windows 11)**, com integração **opcional** ao **Roblox Studio MCP oficial**. São procedimentos reutilizáveis para investigação e tomada de decisão; **não** são ferramentas de profiling, subagentes ou substitutos das habilidades oficiais da Roblox. Não exigem CLI, IDE, chave de API extra ou MCP adicional.
 
-**Novidade v1.9.1:** corrige `ModelLevelOfDetail.Automatic`, a interpretação de forças aerodinâmicas (`EnableFluidForces`/`FluidFidelity`) e a transição de rigs de avatar para `AnimationConstraint`. Mantém as decisões condicionais da v1.9 sobre Models, Parts, MeshParts, Unions e juntas, sem presets globais ou alterações automáticas no jogo. **Não** instala presets nem altera jogos automaticamente.
+**Novidade v1.10.0: economia de cota e tempo com análise estática primeiro.** Ao receber código/Source e métricas existentes, o Codex deve raciocinar sobre o fluxo e os custos antes de executar `Start/Stop Play`, `Execute Luau`, sondas ou benchmarks. Testes continuam disponíveis quando pedidos ou materialmente necessários; não há promessa de ganhos de FPS sem medição. Foram aprofundados contratos de remotes e segurança, distribuição de trabalho cliente/servidor e avaliações de **qualidade versus custo de ferramentas**. Sem nova skill, comandos ou dependências.
 
 ## Escolha pela intenção, não pelo tema
 
@@ -16,6 +16,16 @@ Skills locais para o **Codex no aplicativo ChatGPT (Windows 11)**, com integraç
 A mesma área técnica (rede, VFX, voxel, física, cache) pode surgir em todas as skills. **O que decide a skill é a pergunta do usuário.** Se a missão mudar, a transição pode ser feita sem repetir o trabalho já comprovado. Não é necessário carregar todas para tarefas grandes.
 
 `agents/openai.yaml` controla apresentação e política de invocação; **não cria subagentes**. As três principais aceitam invocação implícita e explícita; a revisão opcional é configurada como explicit-only (`allow_implicit_invocation: false`). A disponibilidade e o comportamento exato da seleção dependem da versão/superfície do Codex.
+
+## Como reduzir chamadas MCP sem reduzir a qualidade
+
+O padrão da **v1.10.0** é: **reutilizar evidências → inspecionar código e consumidores → identificar hipótese/contrato → propor ou implementar (se autorizado) → verificação proporcional**. Inspecionar um loop ou fade no servidor pode demonstrar o mecanismo, mas **não** quantifica bytes, FPS ou melhora real. Etiquete: **observado no código**, **inferência técnica**, **medido** e **não verificado**.
+
+- **"Investigue e monte um plano"**: sem Play/Execute Luau de instrumentação por padrão; leitura estática primeiro; oferecer teste manual breve quando necessário.
+- **"Reproduza e meça"**: o pedido já autoriza testes no escopo; fazer **poucos ensaios discriminantes**, reutilizar medições e interromper controles redundantes. Não transformar isso em profiler exaustivo sem benefício de decisão.
+- **"Corrija/otimize no código"**: a edição já autorizada vem primeiro, seguida de checagens estáticas e runtime focalizado quando preciso; **editar ≠ salvar/publicar place**.
+
+Referências condicionais: [análise estática e economia de ferramentas](rbx-optimize/references/static-first-and-tool-efficiency.md), [distribuição cliente/servidor](rbx-optimize/references/client-server-work-placement.md) e [segurança dos remotes](rbx-audit/references/security-and-remote-contracts.md). Limites de ferramentas são **flexíveis**: não sacrificar segurança, integridade ou correção apenas para reduzir contagem de chamadas.
 
 ## Como o Codex usa as skills
 
@@ -38,6 +48,8 @@ O Codex não precisa ler todas as referências para escolher uma técnica. A `$r
 | Retenção de memória, churn, pools | [Memória e lifecycle](rbx-optimize/references/memory-and-lifecycle.md) |
 | Fila crescente, trabalho por frame, paralelo | [Concorrência e scheduling](rbx-optimize/references/concurrency-and-scheduling.md) |
 | Payloads, remotes, tráfego ou divergência | [Rede e replicação](rbx-optimize/references/networking-and-replication.md) |
+| Fades, partículas e responsabilidades cliente/servidor | [Distribuição de trabalho](rbx-optimize/references/client-server-work-placement.md) |
+| Risco de abuso via remotes e autorização | [Segurança e fronteira de confiança](rbx-audit/references/security-and-remote-contracts.md) |
 | Assemblies, colliders, raycasts | [Física e espacial](rbx-optimize/references/physics-and-spatial.md) |
 | Overdraw, partículas, GPU | [Renderização e VFX](rbx-optimize/references/rendering-and-vfx.md) |
 | Streaming, carregamento, mundo grande | [Streaming e escala](rbx-optimize/references/streaming-and-world-scale.md) |
@@ -62,7 +74,7 @@ A skill não deve fabricar métricas ou recomendar uma técnica apenas por apare
 
 ## Instalação no Codex Desktop
 
-Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para uma instalação v1.9 ou anterior, a v1.9.1 exige substituir integralmente as pastas das skills para incluir as referências e orientações novas; os nomes de invocação são mantidos.
+Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v1.9.1 (ou anterior) à v1.10.0, substitua integralmente as pastas das skills para incluir as novas referências; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
 
 1. Na branch `main` do GitHub, clique em **Code → Download ZIP** e extraia o ZIP do código-fonte gerado pelo GitHub (a pasta extraída costuma se chamar `roblox-engineering-skills-main`).
 2. Copie **as três pastas completas** `rbx-audit`, `rbx-root-cause`, `rbx-optimize` diretamente para o diretório de skills reconhecido pelo seu Codex, substituindo as versões antigas. Não copie a pasta externa do ZIP como uma skill.
@@ -79,6 +91,6 @@ Leitura e análise dentro do pedido não precisam de aprovações artificiais. *
 
 ## Escopo desta versão
 
-A v1.9.1 mantém as melhorias estruturais da v1.8 e acrescenta decisões condicionais de propriedades da engine, preservando conhecimento discriminante derivado de pesquisa sobre [Agent Skills](https://agentskills.io/specification) e orientações oficiais da OpenAI. Não foram adicionados scripts executáveis, MCPs, agentes, frameworks ou dependências. Não houve benchmarking real de Roblox/Studio nem testes A/B de ganho da skill; **integridade do `MANIFEST.json` e do código-fonte não equivale a validação comportamental no Codex**. Referências técnicas são condicionais e não garantem FPS, menos RAM ou melhor arquitetura automaticamente.
+A v1.10.0 preserva integralmente o núcleo funcional da v1.9.1, acrescenta um fluxo estático-primeiro e critérios de uso proporcional de ferramentas, além de referências de segurança e client/server. Não adiciona scripts executáveis, MCPs, agentes, frameworks ou dependências. A versão foi checada estaticamente como pacote; **não** foram executados benchmarking Roblox/Studio nem testes A/B com Codex. Integridade do `MANIFEST.json` não comprova eficácia comportamental, ganhos de FPS/RAM ou segurança em runtime.
 
 Consulte [CHANGELOG.md](CHANGELOG.md) para mudanças, [MIGRATION.md](MIGRATION.md) para atualização, [SOURCES.md](SOURCES.md) para documentação e [EVALUATION_CASES.md](EVALUATION_CASES.md) / [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md) para protocolos opcionais.

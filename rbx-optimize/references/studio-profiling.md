@@ -1,5 +1,8 @@
 # Escolha de ferramentas — evidência faltante primeiro
 
+**Controle de custo:** perfilar somente se a pergunta exigir evidência runtime ou houver hipótese decisiva que análise estática não diferencia. Não descobrir skills/MCP e executar repetidamente Play/`Execute Luau` por ritual. Reutilize capturas/JSON existentes, escolha a menor sonda e pare quando houver evidência suficiente; os testes de performance são particularmente custosos e podem perturbar a medição.
+
+
 **Use quando precisar selecionar uma medição.** Não percorra todas as ferramentas como ritual: a escolha depende da pergunta ainda sem resposta. O MCP oficial e as habilidades nativas variam por sessão; **descubra antes de chamar**.
 
 | Pergunta | Evidência candidata | O que NÃO demonstra isoladamente |

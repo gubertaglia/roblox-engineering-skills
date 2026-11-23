@@ -7,9 +7,9 @@ description: Encontrar a causa raiz de um bug ou sintoma específico em Roblox/L
 
 **Missão:** explicar o mecanismo que produz um sintoma concreto, distinguindo-o de causas alternativas plausíveis.
 
-1. Recupere o sintoma, observações e tentativas já fornecidas; confira versão do código, place, Client/Server e contexto efetivamente executado. Se Studio/MCP importar, consulte [runtime e MCP](references/studio-runtime.md).
+1. Reutilize sintoma, código, logs, observações e tentativas já fornecidas; confira versão do código, Client/Server e contexto somente conforme a evidência necessária. **Reconstrua a causa por inspeção de Source primeiro.** Se Studio/MCP importar, consulte [runtime e MCP](references/studio-runtime.md); não abra Play por hábito.
 2. Reconstrua entrada → validação → processamento → estado/replicação → efeito observado. Diferencie rejeição legítima, erro lógico, fila que não progride, atraso cosmético, dado obsoleto e sobrecarga. Para corrida, eventos fora de ordem, rollback ou ownership, consulte [transições de estado](references/state-transitions.md); para saves/filas persistentes, [falhas de persistência](references/persistence-failures.md), apenas se relevantes.
-3. Escolha o **menor experimento discriminante** ainda necessário. Use código, breakpoints, captura de perfil, contadores ou instrumentação conforme a dúvida; a skill Roblox-authored `rbx-debug` é opcional e somente quando disponível no Studio MCP.
+3. Escolha primeiro a **menor verificação discriminante** possível por leitura de fluxo, invariantes e logs existentes. Sem pedido de testes, não iniciar Play, `Execute Luau` ou sondas; se runtime for indispensável, descrever teste manual e hipótese pendente. Se o usuário já autorizou reprodução, execute no máximo o necessário para distinguir hipóteses, sem controles repetitivos. `rbx-debug` é opcional quando disponível.
 4. Se logs forem úteis, leia [diagnostics.md](references/diagnostics.md) e preserve correlação temporal/entre processos com pouco overhead; não instrumente por ritual.
 5. Determine a explicação mais bem sustentada. Separe o que está confirmado, provável e não verificado. **Provar a causa** não equivale a **provar ganho de desempenho** de uma futura correção.
 

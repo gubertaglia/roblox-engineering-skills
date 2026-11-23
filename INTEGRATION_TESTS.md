@@ -1,4 +1,4 @@
-# Protocolo de integração v1.9.1 — Codex App + Roblox Studio MCP
+# Protocolo de integração v1.10.0 — Codex App + Roblox Studio MCP
 
 **Instalação reconhecida no ambiente do usuário:** capturas mostram **Roblox Systems Audit**, **Roblox Root Cause** e **Roblox Optimize** como **Arquivo local** no seletor `$`, após cópia para `%USERPROFILE%\.codex\skills`. Isso valida **descoberta local**, não a execução com o MCP ou as avaliações abaixo.
 
@@ -47,3 +47,26 @@ Registrar o que foi efetivamente executado; não chamar testes desta lista de �
 - Rodar V191-01–V191-04 do [EVALUATION_CASES.md](EVALUATION_CASES.md) com/sem a skill e evidências de resposta.
 - Conferir que `Workspace.FluidForces`, `AvatarJointUpgrade` e outras configurações não são alteradas sem escopo.
 - Sem dados reais não declarar ganho de FPS, RAM ou melhora quantitativa de seleção do Codex.
+
+## Checagens específicas v1.10.0
+
+### Inspeção estática do pacote (sem Studio)
+
+- [ ] ZIP contém as mesmas quatro skills (`rbx-review` opcional) e frontmatter `name`/política `allow_implicit_invocation` preservados.
+- [ ] `MANIFEST.json` corresponde byte a byte aos SHA-256 de todos os arquivos de conteúdo, exceto o próprio manifesto.
+- [ ] Todos os links relativos locais Markdown resolvem para arquivos internos; nomes v1.10.0 consistentes em README/MIGRATION/INSTALL/EVALUATION.
+- [ ] `rbx-optimize/SKILL.md` remete às três referências novas da v1.10.0; os demais SKILL.md contêm instrução de inspeção antes de runtime.
+- [ ] Nenhum arquivo executável nem novo MCP/skill de implementação foi adicionado.
+
+**Status desta geração:** verificações automatizadas de estrutura, manifesto, links internos e ZIP podem ser relatadas como realizadas **somente acompanhadas por evidência do build**. As checagens de comportamento abaixo **não foram executadas**.
+
+### Comportamento do Codex (proposto; não executado)
+
+1. V110-01 e V110-02: plano estático com arquivos disponíveis, sem `Start/Stop Play` ou `Execute Luau` nem ganho percentual inventado.
+2. V110-03: o pedido explícito de reprodução **já autoriza** a medição, mas a skill evita repetir controles além do necessário.
+3. V110-04: patch autorizado é prioridade; conferir código e invariantes antes de começar ensaios adicionais; não salvar/publicar sem autorização distinta.
+4. V110-05 a V110-10: reconhecer limites da inferência de bytes, segurança de remotes, fan-out, streaming e late join.
+5. V110-11 a V110-14: recusar ferramentas desnecessárias, preservar segurança e roteamento pela intenção.
+6. Comparar A/B com a mesma versão de Source e modelo; registrar contagens reais de chamadas, latência/cota **quando disponíveis**, e qualidade/correção das conclusões.
+
+**Não converter texto de protocolo em resultado de teste.**

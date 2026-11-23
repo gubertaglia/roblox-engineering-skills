@@ -36,6 +36,10 @@ Documentação oficial de referência:
 - https://create.roblox.com/docs/luau/comments
 - https://create.roblox.com/docs/scripting/security/network-ownership
 
+## Evidências e custo de ferramentas (v1.10.0)
+
+Revisão de diff/consumidores e checagem de contratos primeiro. `Start/Stop Play`, `Execute Luau`, instrumentação e testes de carga não são parte obrigatória da revisão; evite-os sem pedido ou autorização contextual. Mudança de segurança/replicação pode justificar teste direcionado, mas falha só inferida pelo código deve ser rotulada como risco, não reprodução. Reutilize resultados existentes e inclua um roteiro manual breve para riscos que ficaram sem validação.
+
 ## Evidências de patch
 
 - Atribuir um problema ao **diff** somente quando ele for novo ou agravado pela mudança; separar dívida técnica pré-existente de regressão.
