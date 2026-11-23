@@ -1,10 +1,16 @@
-# Atualização — v1.8 → v1.9
+# Atualização — v1.9 → v1.9.1 (inclusive versões anteriores)
 
-A v1.9 acrescenta a referência `rbx-optimize/references/instance-property-decisions.md` e atualiza roteamento e guardrails. Não altera automaticamente propriedades no jogo.
+A **v1.9.1** corrige três imprecisões técnicas da v1.9: `ModelLevelOfDetail.Automatic`, aerodinâmica/forças fluidas e `Motor6D` versus `AnimationConstraint` em avatares modernos. Corrige também a numeração das lentes de auditoria e o manifesto SHA-256. Mantém as quatro skills e seus nomes.
 
-1. Localize o diretório de skills já reconhecido pelo Codex (no ambiente documentado: `%USERPROFILE%\.codex\skills`; em outras instalações pode ser `%USERPROFILE%\.agents\skills`). Não duplique.
-2. Faça backup se personalizou arquivos.
-3. Quando o ZIP v1.9 estiver disponível, substitua **pastas inteiras** `rbx-audit`, `rbx-root-cause` e `rbx-optimize`; a opcional `optional/rbx-review` deve ser instalada como `rbx-review`.
-4. Atualize a descoberta no Codex e execute os casos do [EVALUATION_CASES.md](EVALUATION_CASES.md) se possível.
+## Atualizar o Codex Desktop
 
-**Uma branch ou PR não gera ZIP automaticamente.** Não confundir checagem de integridade com testes no Roblox Studio. Consulte [INSTALL_WINDOWS.md](INSTALL_WINDOWS.md) e [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md).
+1. No GitHub, acesse a branch `main` e selecione **Code → Download ZIP**. O ZIP é gerado pelo GitHub a partir do código-fonte; não é um asset anexado a uma GitHub Release.
+2. Extraia o arquivo, localize `rbx-audit`, `rbx-root-cause` e `rbx-optimize`, copie **as pastas inteiras** e substitua as antigas no diretório de skills que seu Codex já reconhece (ex.: `%USERPROFILE%\.codex\skills` no ambiente documentado). Não crie duplicatas.
+3. Para usar a skill opcional, instale `optional/rbx-review` como `rbx-review`.
+4. Atualize ou reinicie a descoberta no Codex e confira o seletor `$`.
+
+## Integridade e limites
+
+O `MANIFEST.json` lista SHA-256 de **43 arquivos** (todos os arquivos de conteúdo, menos o próprio manifesto). Não foram executados testes A/B reais com Codex/Studio, nem medições de FPS ou RAM. A versão não altera o Roblox Studio, MCP, Caveman, Ponytail ou jogos.
+
+Veja [INSTALL_WINDOWS.md](INSTALL_WINDOWS.md), [EVALUATION_CASES.md](EVALUATION_CASES.md) e [SOURCES.md](SOURCES.md).

@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v1.9 (2026-11-23)
+# Fontes de referência e verificação — v1.9.1 (2026-11-23)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -99,3 +99,12 @@ Estas páginas embasam o catálogo **condicional**; não garantem disponibilidad
 - Motor6D/WeldConstraint: https://create.roblox.com/docs/reference/engine/classes/Motor6D · https://create.roblox.com/docs/reference/engine/classes/WeldConstraint
 
 Estas fontes sustentam semântica e API, **não** ganhos medidos de desempenho. Verificar alterações futuras na engine.
+
+## Fontes verificadas para correções v1.9.1
+
+- `ModelLevelOfDetail.Automatic` atualmente equivalente a `Disabled`: https://create.roblox.com/docs/reference/engine/enums/ModelLevelOfDetail.md
+- `TriangleMeshPart.FluidFidelity` para forças e torques aerodinâmicos, dependentes de `Workspace.FluidForces` e configuração com permissões adequadas: https://create.roblox.com/docs/reference/engine/classes/TriangleMeshPart.md
+- `Motor6D` substituído por `AnimationConstraint` para avatares atualizados; `AvatarJointUpgrade` em personagens R15: https://create.roblox.com/docs/reference/engine/classes/Motor6D.md
+- `AnimationConstraint`: https://create.roblox.com/docs/reference/engine/classes/AnimationConstraint.md
+
+Fontes oficiais sustentam a semântica da API, **não** ganhos medidos de CPU, GPU, FPS ou RAM.

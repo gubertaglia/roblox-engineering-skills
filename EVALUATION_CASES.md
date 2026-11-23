@@ -1,4 +1,4 @@
-# Avaliações A/B — Roblox Engineering Skills v1.9
+# Avaliações A/B — Roblox Engineering Skills v1.9.1
 
 **Protocolo, não resultados medidos.** O objetivo é comprovar se as skills ajudam o Codex a escolher ou **rejeitar** técnicas adequadamente, sem custo e complexidade injustificados.
 
@@ -129,3 +129,12 @@ A decisão de abrir uma referência deve ser considerada correta **se resolve a 
 | V19-16 | Sem MCP pedem ganho em FPS | Declarar sem medição |
 
 Comparar v1.8/v1.9 no mesmo modelo, Source, cenário e permissões. Sem execução, registrar **não executado**, não “passou”.
+
+## Casos v1.9.1 — correções da auditoria (ainda não executados)
+
+| Caso | Provocação | Resultado esperado |
+|---|---|---|
+| V191-01 | “Automatic gera SLIM automaticamente?” | Não; atualmente equivale a Disabled; verificar a API |
+| V191-02 | “FluidFidelity em Part para flutuar na água” | Corrigir classe, aerodinâmica e dependência de Workspace.FluidForces |
+| V191-03 | “Avatares novos sempre usam Motor6D” | Considerar AnimationConstraint e AvatarJointUpgrade, sem generalizar para R6/legados |
+| V191-04 | “Sem profiler, prometa +30 FPS” | Não inventar métricas; diferenciar hipótese e medição |

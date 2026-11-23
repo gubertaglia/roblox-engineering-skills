@@ -1,8 +1,8 @@
-# Roblox Engineering Skills — v1.9
+# Roblox Engineering Skills — v1.9.1
 
 Skills locais para o **Codex no aplicativo ChatGPT (Windows 11)**, com integração **opcional** ao **Roblox Studio MCP oficial**. São procedimentos reutilizáveis para investigação e tomada de decisão; **não** são ferramentas de profiling, subagentes ou substitutos das habilidades oficiais da Roblox. Não exigem CLI, IDE, chave de API extra ou MCP adicional.
 
-**Novidade v1.9:** decisões condicionais sobre propriedades de Model, BasePart, MeshPart, UnionOperation e juntas (Motor6D/WeldConstraint). Corrige generalizações das capturas com fontes oficiais, preserva o núcleo causal da v1.8 e adiciona avaliações de regressão. **Não** instala presets nem altera jogos automaticamente.
+**Novidade v1.9.1:** corrige `ModelLevelOfDetail.Automatic`, a interpretação de forças aerodinâmicas (`EnableFluidForces`/`FluidFidelity`) e a transição de rigs de avatar para `AnimationConstraint`. Mantém as decisões condicionais da v1.9 sobre Models, Parts, MeshParts, Unions e juntas, sem presets globais ou alterações automáticas no jogo. **Não** instala presets nem altera jogos automaticamente.
 
 ## Escolha pela intenção, não pelo tema
 
@@ -62,9 +62,9 @@ A skill não deve fabricar métricas ou recomendar uma técnica apenas por apare
 
 ## Instalação no Codex Desktop
 
-Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para uma instalação v1.8 ou anterior, a v1.9 exige substituir integralmente as pastas das skills para incluir as referências e orientações novas; os nomes de invocação são mantidos.
+Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para uma instalação v1.9 ou anterior, a v1.9.1 exige substituir integralmente as pastas das skills para incluir as referências e orientações novas; os nomes de invocação são mantidos.
 
-1. Extraia `roblox-engineering-skills-v1.9.zip`.
+1. Na branch `main` do GitHub, clique em **Code → Download ZIP** e extraia o ZIP do código-fonte gerado pelo GitHub (a pasta extraída costuma se chamar `roblox-engineering-skills-main`).
 2. Copie **as três pastas completas** `rbx-audit`, `rbx-root-cause`, `rbx-optimize` diretamente para o diretório de skills reconhecido pelo seu Codex, substituindo as versões antigas. Não copie a pasta externa do ZIP como uma skill.
 3. Opcionalmente, copie `optional/rbx-review` como `rbx-review` no mesmo diretório.
 4. Verifique em **Personalizar → Habilidades** e no seletor `$rbx` do chat Codex. A descoberta na interface não comprova acesso ao Studio MCP.
@@ -79,6 +79,6 @@ Leitura e análise dentro do pedido não precisam de aprovações artificiais. *
 
 ## Escopo desta versão
 
-A v1.9 mantém as melhorias estruturais da v1.8 e acrescenta decisões condicionais de propriedades da engine, preservando conhecimento discriminante derivado de pesquisa sobre [Agent Skills](https://agentskills.io/specification) e orientações oficiais da OpenAI. Não foram adicionados scripts executáveis, MCPs, agentes, frameworks ou dependências. Não houve benchmarking real de Roblox/Studio nem testes A/B de ganho da skill; **validação de formato, caminhos e integridade do ZIP não equivale a validação comportamental no Codex**. Referências técnicas são condicionais e não garantem FPS, menos RAM ou melhor arquitetura automaticamente.
+A v1.9.1 mantém as melhorias estruturais da v1.8 e acrescenta decisões condicionais de propriedades da engine, preservando conhecimento discriminante derivado de pesquisa sobre [Agent Skills](https://agentskills.io/specification) e orientações oficiais da OpenAI. Não foram adicionados scripts executáveis, MCPs, agentes, frameworks ou dependências. Não houve benchmarking real de Roblox/Studio nem testes A/B de ganho da skill; **integridade do `MANIFEST.json` e do código-fonte não equivale a validação comportamental no Codex**. Referências técnicas são condicionais e não garantem FPS, menos RAM ou melhor arquitetura automaticamente.
 
 Consulte [CHANGELOG.md](CHANGELOG.md) para mudanças, [MIGRATION.md](MIGRATION.md) para atualização, [SOURCES.md](SOURCES.md) para documentação e [EVALUATION_CASES.md](EVALUATION_CASES.md) / [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md) para protocolos opcionais.
