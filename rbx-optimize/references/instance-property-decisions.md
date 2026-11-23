@@ -1,11 +1,11 @@
-# Propriedades de instâncias e juntas — decisão condicionada (v1.9)
+# Propriedades de instâncias e juntas — decisão condicionada (v1.9.1)
 
 **Abrir apenas quando a tarefa envolve Model, BasePart, MeshPart, UnionOperation ou juntas.** As capturas do usuário são hipóteses, **não presets**. Não aplicar valores por categoria de asset sem entender o contrato. Nenhuma propriedade isolada garante FPS, memória ou latência melhores.
 
 ## Protocolo curto
 
 1. Verificar classe real e herança, hierarquia, `Workspace.StreamingEnabled`, `Workspace.ModelStreamingBehavior`, assembly, rig, scripts consumidores e lado Client/Server.
-2. Identificar contratos de colisão, toque, raycast/overlap, sombra, áudio, massa, água, animação, replicação, presença no cliente e late join.
+2. Identificar contratos de colisão, toque, raycast/overlap, sombra, áudio, massa, aerodinâmica, animação, replicação, presença no cliente e late join.
 3. Localizar a camada de custo (GPU/render, física, rede, memória, carregamento). Escolher hipótese pequena, reversível, com alternativa “não mudar nada”.
 4. Testar antes/depois com mesmo cenário, dispositivo, câmera, número de jogadores e Source. Verificar funcionalidade e custo novo. Sem dados, rotular hipótese, **não** ganho medido.
 5. Para enums, rollout, permissões e comportamento de engine, consultar documentação oficial atual ou `rbx-docs-search` quando realmente exposto no MCP.
@@ -14,10 +14,10 @@
 
 | Propriedade | Uso condicional | Armadilha |
 |---|---|---|
-| `LevelOfDetail=Automatic` | LOD visual gerenciado pela engine, quando compatível | Não garante melhoria ou perda uniforme de detalhe |
+| `LevelOfDetail=Automatic` | Valor padrão da engine | **Atualmente equivalente a `Disabled`**; não ativa SLIM automaticamente; conferir a documentação se o padrão mudar |
 | `Disabled` | Exceção se simplificação visual for inaceitável | Desativa LOD do modelo, não toda otimização |
-| `SLIM` | Avaliar com streaming/SLIM suportados e teste visual | Não prometer “otimização agressiva” para toda vegetação |
-| `StreamingMesh` | Enum documentado; verificar uso atual | Não garantir “malha levíssima no horizonte” |
+| `SLIM` | Avaliar com instance streaming, modelos estáticos compatíveis e comparação visual | Evitar assumir suporte a modelos animados ou alterados em runtime; medir antes de aplicar em lote |
+| `StreamingMesh` | Imposter simplificado fora do raio de streaming, distinto de SLIM | Geometria de baixa resolução sem texturas; validar aparência, suporte e distância |
 | `ModelStreamingMode=Default` | Seguir política do place | Depende de `Workspace.ModelStreamingBehavior` |
 | `Atomic` | Dependentes chegam como unidade no stream-in | Não garante presença imediata nem permanência |
 | `Nonatomic` | Consumidores toleram partes chegando separadamente | Requer lógica que aceite ausência temporária |
@@ -38,7 +38,7 @@ Streaming aplica-se a descendentes de `Workspace`, não a modelos armazenados em
 | `Anchored` | Objeto não deve simular movimento | Uma âncora pode fixar assembly; **múltiplas âncoras em peças soldadas podem dividi-la em assemblies** |
 | `Massless` | Acessório/visual soldado não deve influenciar massa/inércia | Ignorado para a root part; exige outra parte com massa na assembly; não elimina render/colisão |
 | `RootPriority` | Estabilidade da raiz da assembly é necessária | Interage com `Anchored`, `Massless` e ownership; não é botão de FPS |
-| `EnableFluidForces` | Há custo/contrato real de simulação em fluidos | Não desativar indiscriminadamente, testar água e objetos móveis |
+| `EnableFluidForces` | O modelo de forças **aerodinâmicas** de `Workspace.FluidForces` é relevante | Não confundir com flutuação na água do Terrain; não presumir ganho ao desativar se o recurso não estiver ativo |
 | `AudioCanCollide` | Oclusão/reflexão de áudio é relevante | `false` deixa áudio passar; testar comportamento acústico |
 
 `Model` não equivale a assembly física; `Massless` não desliga colisão, toque, queries ou sombras. `CanTouch` e `CanQuery` não são sinônimos. Fontes: [BasePart](https://create.roblox.com/docs/reference/engine/classes/BasePart), [Assemblies](https://create.roblox.com/docs/physics/assemblies), [Collisions](https://create.roblox.com/docs/workspace/collisions), [RaycastParams](https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams).
@@ -50,7 +50,7 @@ Streaming aplica-se a descendentes de `Workspace`, não a modelos armazenados em
 | `MeshPart.DoubleSided` | Superfícies sem espessura precisam ser vistas dos dois lados | Pode elevar render/overdraw; não afirmar custo exatamente 2x |
 | `MeshPart.RenderFidelity` e `PartOperation.RenderFidelity` | Comparar `Automatic`, `Performance`, `Precise` | Validar silhueta e hardware; `Precise` não é regra para spawn |
 | `TriangleMeshPart.CollisionFidelity` | Comparar `Default`, `Hull`, `Box`, `PreciseConvexDecomposition`, `Tunable` | `Precise` **não é valor de CollisionFidelity**; testar vãos, rampas, contatos, raycasts |
-| `TriangleMeshPart.FluidFidelity` | Água/flutuação em MeshPart/Union, quando aplicável | `Automatic`, `UseCollisionGeometry`, `UsePreciseGeometry`; **não é propriedade de Part comum** |
+| `TriangleMeshPart.FluidFidelity` | Controlar geometria para forças/torques **aerodinâmicos** quando `Workspace.FluidForces` se aplica | `Automatic`, `UseCollisionGeometry`, `UsePreciseGeometry` (pode custar mais); **não existe em Part comum**; configurar com permissões adequadas no Studio |
 | `PartOperation.UsePartColor` | Deseja uma cor uniforme para Union | É escolha visual, não ganho de performance automático |
 | Unions/CSG | Representação adequada da geometria | Menos instâncias não garante menos GPU, RAM ou física; testar |
 
@@ -58,12 +58,12 @@ Streaming aplica-se a descendentes de `Workspace`, não a modelos armazenados em
 
 ## Motor6D, WeldConstraint e constraints
 
-- **`Motor6D`** é junta animável de rig; `Animator` depende de nomes/estrutura/offsets coerentes com animações. Não substitua por weld rígido para “otimizar”.
+- **`Motor6D`** é junta animável usada por rigs legados e mecânicos não-avatar; preservar nomes, offsets e animações. Para **novos rigs de avatar**, a Roblox documenta `AnimationConstraint` como sucessor. Com `StarterPlayer.AvatarJointUpgrade` habilitado (padrão de novas experiências), R15 pode usar `AnimationConstraint` em lugar de `Motor6D`: código que procura somente Motor6D pode falhar. Verificar rig/configuração antes de migrar; não converter R6, rigs antigos ou mecânicos por hábito.
 - **`WeldConstraint`** fixa posição/orientação relativas sem articulação animada; opção para conjunto rígido.
 - **Constraints físicos** servem para movimento/forças/articulação reais. Bones/skinned meshes têm contrato diferente.
 - **Network ownership** requer análise de assembly/root e validação do servidor para objetos que afetam gameplay.
 
-Fontes: [Motor6D](https://create.roblox.com/docs/reference/engine/classes/Motor6D), [WeldConstraint](https://create.roblox.com/docs/reference/engine/classes/WeldConstraint), [NPC kit](https://create.roblox.com/docs/resources/npc-kit), [Network ownership](https://create.roblox.com/docs/physics/network-ownership).
+Fontes: [Motor6D](https://create.roblox.com/docs/reference/engine/classes/Motor6D), [AnimationConstraint](https://create.roblox.com/docs/reference/engine/classes/AnimationConstraint), [StarterPlayer](https://create.roblox.com/docs/reference/engine/classes/StarterPlayer), [WeldConstraint](https://create.roblox.com/docs/reference/engine/classes/WeldConstraint), [NPC kit](https://create.roblox.com/docs/resources/npc-kit), [Network ownership](https://create.roblox.com/docs/physics/network-ownership).
 
 ## Auditoria das alegações das capturas
 
@@ -80,8 +80,8 @@ Fontes: [Motor6D](https://create.roblox.com/docs/reference/engine/classes/Motor6
 | “CollisionFidelity=Box obrigatório para decoração” | Incorreto | Testar collider/queries; não é preset |
 | “CollisionFidelity=Precise” | Enum incorreto | Nome correto `PreciseConvexDecomposition` |
 | “DoubleSided sempre dobra GPU” | Não comprovado | Depende de cena, geometria e overdraw |
-| “EnableFluidForces=false obrigatório em terra” | Generalização | Conferir comportamento aquático |
+| “EnableFluidForces=false obrigatório em terra” | Generalização | Conferir modelo aerodinâmico `Workspace.FluidForces`, não confundir com buoyancy do Terrain |
 | “UsePartColor é otimização” | Não sustentado | Controla aparência/cor |
-| “Motor6D é melhor para todas as juntas” | Incorreto | Animável ≠ rígida ≠ constraint física |
+| “Motor6D é melhor para todas as juntas” | Incorreto | Distinguir rig mecânico, WeldConstraint e AnimationConstraint de avatar atualizado |
 
-**Força da evidência:** existência, herança, enums e semântica são sustentados por documentação oficial consultada em 2026-11-23. Ganhos de FPS/CPU/GPU/RAM **não foram medidos**. Se o problema é Luau puro, não abra esta referência por hábito.
+**Força da evidência:** existência, herança, enums e semântica são sustentados pela documentação oficial consultada em 2026-11-23. `TriangleMeshPart.FluidFidelity` possui restrições de configuração no Studio e não deve ser tratado como alteração livre por scripts em runtime. Ganhos de FPS/CPU/GPU/RAM **não foram medidos**. Se o problema é Luau puro, não abra esta referência por hábito.

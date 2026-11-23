@@ -9,10 +9,10 @@ Fonte conceitual: biblioteca de prompts do usuário. Não é uma lista de tarefa
 5. **Fonte de verdade:** duplicação de lógica, estado replicado sem contrato de consistência, listeners redundantes e invalidadores incompletos.
 6. **Propriedades da engine (condicional):** se a mudança afeta `CanQuery`, `CanTouch`, `Massless`, `Anchored`, streaming ou juntas, rastrear consumidores de raycast, toque, assembly, rig e presença no cliente antes de recomendar valores.
 7. **Segurança e autoridade:** entrada do cliente, autorização, limites de requisição, estado editável no servidor e transferência de propriedade física.
-11. **Ciclo de vida:** criação/remoção, pools com resets incompletos, referências, conexões, tarefas, retenção de instâncias e crescimento após períodos longos.
-8. **Caminhos quentes:** código por frame/evento, iterações em estruturas grandes, consultas espaciais, alocações e atualização repetida de propriedades.
-9. **Acoplamento e isolamento:** dependências implícitas, módulos com responsabilidades excessivas, estados globais e falhas que se propagam silenciosamente.
-10. **Falhas e observabilidade:** erros ignorados, timeouts, retries, filas sem progresso, backpressure ausente, commits obsoletos, métricas desconectadas do contexto executado e diagnósticos que reportam falso zero.
+8. **Ciclo de vida:** criação/remoção, pools com resets incompletos, referências, conexões, tarefas, retenção de instâncias e crescimento após períodos longos.
+9. **Caminhos quentes:** código por frame/evento, iterações em estruturas grandes, consultas espaciais, alocações e atualização repetida de propriedades.
+10. **Acoplamento e isolamento:** dependências implícitas, módulos com responsabilidades excessivas, estados globais e falhas que se propagam silenciosamente.
+11. **Falhas e observabilidade:** erros ignorados, timeouts, retries, filas sem progresso, backpressure ausente, commits obsoletos, métricas desconectadas do contexto executado e diagnósticos que reportam falso zero.
 
 Para cada achado relevante, perguntar: **o que observamos, por que acontece, o que afeta, como comprovar, como validar uma correção?**
 Se não houver acesso ao fluxo necessário, rotular **risco não verificável** em vez de completar lacunas com suposições.
