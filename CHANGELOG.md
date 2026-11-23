@@ -1,3 +1,13 @@
+# Changelog — v1.9 (2026-11-23)
+
+- Nova referência `rbx-optimize/references/instance-property-decisions.md` para decisões condicionais sobre Model, BasePart, MeshPart, UnionOperation, Motor6D e WeldConstraint, com auditoria das alegações das capturas.
+- Guardrails para `CanQuery`/`CanCollide`, `CanTouch`, `Massless`/root, `Anchored`/assemblies, streaming e persistência, LOD, CollisionFidelity e FluidFidelity.
+- Roteamento seletivo em rbx-optimize; checagens curtas em auditoria, causa raiz e review.
+- Casos V19-01 a V19-16 e checagens de integração propostas; sem benchmark no Studio nem A/B comportamental.
+- Nenhuma dependência, script executável, preset ou alteração automática de jogo.
+
+---
+
 # Changelog — v1.8 (2026-11-23)
 
 ## Melhorias de decisão técnica (não enciclopédia de APIs)

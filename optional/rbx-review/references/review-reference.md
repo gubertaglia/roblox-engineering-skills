@@ -50,5 +50,6 @@ Documentação oficial de referência:
 - Parallel Luau: Actors e APIs thread-safe, fronteira de commit serial e overhead comprovado.
 - Rede: canal confiável para estado crítico, versionamento e late join/stream-in consistentes.
 - Física/VFX: conectividade, colisão, autoridade e semântica visual preservadas.
+- Propriedades: `CanQuery=false` exige `CanCollide=false`; `CanTouch=false` pode quebrar triggers; `Massless` não se aplica à root; múltiplas âncoras podem dividir assemblies; `Atomic` não é persistência; Motor6D e WeldConstraint não são equivalentes.
 
 Revisar apenas as categorias alteradas pelo diff. A presença de uma técnica sofisticada não é evidência de performance melhor.

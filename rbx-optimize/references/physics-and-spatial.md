@@ -11,7 +11,7 @@ Investigue **carga de solver/assemblies**, geometria e custo das consultas separ
 - **Rejeite:** atalhos que unem ilhas desconectadas, quebram hitboxes ou eliminam toque/consulta necessários.
 - **Prova:** physics time, assemblies ativos, contacts, instâncias residentes, colisões e invariantes estruturais sob cenas equivalentes.
 
-`CanCollide`, `CanTouch`, `CanQuery`, `CollisionFidelity` e configurações de simulação são **semânticas de jogo**, não botões universais de performance. Verificar documentação e dependências antes de alterar.
+`CanCollide`, `CanTouch`, `CanQuery`, `CollisionFidelity` e configurações de simulação são **semânticas de jogo**, não botões universais de performance. `CanQuery=false` depende de `CanCollide=false`; `CanTouch=false` afeta eventos; `Massless` tem exceção de root; múltiplas âncoras soldadas podem dividir assemblies. Para mudanças concretas, consultar [propriedades e juntas](instance-property-decisions.md) sob demanda.
 
 ## Spatial queries e índices
 

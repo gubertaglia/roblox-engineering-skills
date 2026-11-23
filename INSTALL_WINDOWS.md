@@ -1,11 +1,11 @@
-# Instalação e verificação — Codex Desktop no Windows 11 (v1.8)
+# Instalação e verificação — Codex Desktop no Windows 11 (v1.9)
 
 Este é um guia **manual**, sem PowerShell, CLI, API keys ou dependências. As três skills principais são `rbx-audit`, `rbx-root-cause` e `rbx-optimize`. A `rbx-review` é opcional.
 
 ## Instalação pela primeira vez
 
-1. Baixe `roblox-engineering-skills-v1.8.zip` e use **Extrair Tudo** no Explorador de Arquivos do Windows.
-2. Abra a pasta extraída `roblox-engineering-skills-v1.8`. Nela, selecione as **pastas completas** `rbx-audit`, `rbx-root-cause` e `rbx-optimize`; copie com **Ctrl+C**.
+1. Baixe `roblox-engineering-skills-v1.9.zip` e use **Extrair Tudo** no Explorador de Arquivos do Windows.
+2. Abra a pasta extraída `roblox-engineering-skills-v1.9`. Nela, selecione as **pastas completas** `rbx-audit`, `rbx-root-cause` e `rbx-optimize`; copie com **Ctrl+C**.
 3. Na barra de endereço do Explorador, abra `%USERPROFILE%\.codex\skills` **se esse diretório já existir e contiver as skills reconhecidas pelo seu Codex**. Em uma instalação real do Codex Desktop, esse foi o local de Caveman e Ponytail, e nele a skills anteriores apareceram no seletor como **Arquivo local**.
 4. Cole as três pastas com **Ctrl+V**. Elas precisam ficar **diretamente dentro de `skills`**, ao lado das demais skills, e cada uma deve conter o respectivo `SKILL.md`.
 5. Se não existir esse diretório ou não houver indicação de que é o diretório usado pelo seu Codex, consulte **[Qual caminho usar?](#qual-caminho-usar)** antes de criá-lo.
@@ -32,7 +32,7 @@ C:\Users\<seu-usuario>\.codex\skills\
     └── references/
 ```
 
-**Errado:** `...\skills\roblox-engineering-skills-v1.8\rbx-audit\SKILL.md` — a pasta externa do ZIP está um nível acima do necessário. **Certo:** `...\skills\rbx-audit\SKILL.md`.
+**Errado:** `...\skills\roblox-engineering-skills-v1.9\rbx-audit\SKILL.md` — a pasta externa do ZIP está um nível acima do necessário. **Certo:** `...\skills\rbx-audit\SKILL.md`.
 
 ## Qual caminho usar?
 
@@ -63,7 +63,7 @@ A interface pode exibir o **nome de apresentação** de `agents/openai.yaml` em 
 - Faça backup **apenas se tiver modificado as skills localmente**.
 - Substitua as pastas `rbx-audit`, `rbx-root-cause` e `rbx-optimize` **por inteiro** no mesmo diretório que já funciona. Evite mesclar referências antigas.
 - Não altere `cavecrew`, `caveman`, `ponytail`, `.system`, plugins ou configuração do Studio MCP.
-- **v1.6/v1.6.1/v1.7 → v1.8:** os `SKILL.md` e referências foram atualizados; substitua integralmente as pastas para obter as melhorias de decisão técnica. Consulte [MIGRATION.md](MIGRATION.md).
+- **v1.8 (ou anterior) → v1.9:** os `SKILL.md` e referências foram atualizados; substitua integralmente as pastas para obter as melhorias de decisão técnica. Consulte [MIGRATION.md](MIGRATION.md).
 
 ## Se não aparecer no Codex
 

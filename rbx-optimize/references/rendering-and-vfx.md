@@ -14,7 +14,7 @@
 ## Geometria, instancing e draw calls
 
 - **Sinal:** Scene Analysis ou MicroProfiler atribui custo a draw calls, triângulos, texturas ou meshes únicos.
-- **Opções:** reaproveitar assets idênticos quando a engine possa instanciá-los, reduzir materiais/recursos desnecessários, ajustar RenderFidelity/LOD compatíveis, separar geometria visível de colliders.
+- **Opções:** reaproveitar assets idênticos quando a engine possa instanciá-los, reduzir materiais/recursos desnecessários, ajustar RenderFidelity/LOD compatíveis, separar geometria visível de colliders. Para `CastShadow`, `DoubleSided`, Mesh/Union ou LOD, consultar [propriedades e juntas](instance-property-decisions.md) apenas quando a alteração for candidata real.
 - **Custos:** assets únicos podem ser necessários para aparência e deformação; meshes grandes podem piorar culling ou granularidade de atualização.
 - **Rejeite:** afirmar que qualquer mesh é mais rápido que Parts ou que reduzir número de objetos sempre reduz custo de GPU.
 - **Prova:** draw calls, geometria renderizada, uso de GPU e memória, aparência sob variações de câmera e escala.

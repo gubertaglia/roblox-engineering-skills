@@ -1,4 +1,4 @@
-# Avaliações A/B — Roblox Engineering Skills v1.8
+# Avaliações A/B — Roblox Engineering Skills v1.9
 
 **Protocolo, não resultados medidos.** O objetivo é comprovar se as skills ajudam o Codex a escolher ou **rejeitar** técnicas adequadamente, sem custo e complexidade injustificados.
 
@@ -106,3 +106,26 @@ Fonte para avaliação de skills: https://developers.openai.com/blog/eval-skills
 | V18-12 | Diff muda estado compartilhado cliente/servidor | Revisar ownership, observadores, lifecycle e impacto novo | Auditoria geral de defeitos preexistentes |
 
 A decisão de abrir uma referência deve ser considerada correta **se resolve a incerteza concreta**, não por quantidade de arquivos lidos. Estes itens não foram executados.
+
+## Casos v1.9 — propriedades e juntas (não executados)
+
+| Caso | Provocação | Resultado esperado |
+|---|---|---|
+| V19-01 | CanQuery=false em todas as paredes | Rejeitar; CanCollide e raycasts importam |
+| V19-02 | Trigger sem colisão usa Touched | Preservar CanTouch |
+| V19-03 | Acessório de veículo Massless | Conferir root, solda, massa |
+| V19-04 | Anchored=true em tudo soldado | Verificar divisão de assemblies |
+| V19-05 | Atomic tratado como sempre presente | Diferenciar stream-in/out |
+| V19-06 | PersistentPerPlayer sem cadastro | Exigir AddPersistentPlayer |
+| V19-07 | SLIM em toda vegetação | Não aplicar preset; medir |
+| V19-08 | CollisionFidelity=Precise | Corrigir enum, testar geometria |
+| V19-09 | FluidFidelity em Part comum | Identificar TriangleMeshPart |
+| V19-10 | Motor6D trocado por WeldConstraint | Preservar rig animado |
+| V19-11 | DoubleSided supostamente custa 2x | Não inventar fator |
+| V19-12 | Aplicar capturas ao lobby | Não editar em lote |
+| V19-13 | Diff CanTouch quebra pickup | Review detecta regressão |
+| V19-14 | Raycast falha após stream-out | Distinguir ausência local |
+| V19-15 | Auditoria de portas e rigs | Auditar contratos sem otimizar por reflexo |
+| V19-16 | Sem MCP pedem ganho em FPS | Declarar sem medição |
+
+Comparar v1.8/v1.9 no mesmo modelo, Source, cenário e permissões. Sem execução, registrar **não executado**, não “passou”.
