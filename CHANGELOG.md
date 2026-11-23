@@ -1,3 +1,28 @@
+# Changelog — v1.9.1 (2026-11-23)
+
+## Correções após auditoria técnica da v1.9
+
+- Atualizado `ModelLevelOfDetail.Automatic`: a documentação oficial atualmente o considera equivalente a `Disabled`; diferenciados `SLIM` e `StreamingMesh`.
+- `EnableFluidForces` e `TriangleMeshPart.FluidFidelity` agora descrevem forças/torques aerodinâmicos associados a `Workspace.FluidForces`, não uma configuração universal de flutuação em água.
+- Acrescentado `AnimationConstraint` para rigs de avatar com `AvatarJointUpgrade`, preservando contratos de `Motor6D` legados ou mecânicos.
+- Corrigida a numeração 1–11 em `rbx-audit/references/audit-lenses.md`.
+- Regenerado `MANIFEST.json` a partir dos arquivos finais com hashes SHA-256, incluindo a referência adicionada na v1.9.
+- Atualizados README, instalação, migração, fontes e protocolos A/B para v1.9.1. Download do código-fonte via **Code → Download ZIP** no GitHub.
+
+**Limites:** nenhuma dependência ou script de execução novo; nenhuma configuração automática da engine; testes comportamentais Codex/Studio e ganhos de desempenho permanecem não medidos.
+
+---
+
+# Changelog — v1.9 (2026-11-23)
+
+- Nova referência `rbx-optimize/references/instance-property-decisions.md` para decisões condicionais sobre Model, BasePart, MeshPart, UnionOperation, Motor6D e WeldConstraint, com auditoria das alegações das capturas.
+- Guardrails para `CanQuery`/`CanCollide`, `CanTouch`, `Massless`/root, `Anchored`/assemblies, streaming e persistência, LOD, CollisionFidelity e FluidFidelity.
+- Roteamento seletivo em rbx-optimize; checagens curtas em auditoria, causa raiz e review.
+- Casos V19-01 a V19-16 e checagens de integração propostas; sem benchmark no Studio nem A/B comportamental.
+- Nenhuma dependência, script executável, preset ou alteração automática de jogo.
+
+---
+
 # Changelog — v1.8 (2026-11-23)
 
 ## Melhorias de decisão técnica (não enciclopédia de APIs)

@@ -1,4 +1,4 @@
-# Protocolo de integração v1.8 — Codex App + Roblox Studio MCP
+# Protocolo de integração v1.9.1 — Codex App + Roblox Studio MCP
 
 **Instalação reconhecida no ambiente do usuário:** capturas mostram **Roblox Systems Audit**, **Roblox Root Cause** e **Roblox Optimize** como **Arquivo local** no seletor `$`, após cópia para `%USERPROFILE%\.codex\skills`. Isso valida **descoberta local**, não a execução com o MCP ou as avaliações abaixo.
 
@@ -32,3 +32,18 @@ Registrar o que foi efetivamente executado; não chamar testes desta lista de �
 - Quando o Studio MCP expuser habilidades Roblox-authored, validar que o Codex usa somente a skill específica da questão e confere capacidade real antes de invocá-la.
 - Em cenário sem conexão, verificar que o Codex mantém análise estática útil e não simula acesso a `rbx-docs-search` ou a profiling.
 - Para UI/persistência, confirmar que as referências são lidas **apenas** quando o caso envolver esses subsistemas.
+
+## Checagens v1.9 (não executadas)
+
+1. Abrir a referência nova somente para propriedades/juntas, não para CPU Luau puro.
+2. Testar CanTouch/Touched, CanQuery/CanCollide, raycasts e CollisionGroup.
+3. Comparar root/massa e assemblies após Massless/Anchored.
+4. Testar streaming Atomic/Persistent/PersistentPerPlayer com join e stream-out.
+5. Preservar Motor6D e animações; testar vãos/rampas de Mesh/Union.
+6. Rodar V19-01 a V19-16 A/B e registrar traces, não resultados inventados.
+
+## Checagens específicas v1.9.1 (propostas, não executadas)
+
+- Rodar V191-01–V191-04 do [EVALUATION_CASES.md](EVALUATION_CASES.md) com/sem a skill e evidências de resposta.
+- Conferir que `Workspace.FluidForces`, `AvatarJointUpgrade` e outras configurações não são alteradas sem escopo.
+- Sem dados reais não declarar ganho de FPS, RAM ou melhora quantitativa de seleção do Codex.

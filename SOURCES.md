@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v1.8 (2026-11-23)
+# Fontes de referência e verificação — v1.9.1 (2026-11-23)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -87,3 +87,24 @@ Estas páginas embasam o catálogo **condicional**; não garantem disponibilidad
 - Desenvolvedor, changelog público de Dead Serious: https://devforum.roblox.com/t/dead-serious-update-log/4999072
 
 **Critério da v1.8:** referências locais para mecanismos e escolhas que tendem a permanecer válidos; consulta à documentação oficial para assinaturas, limites, thread-safety, recursos em rollout e APIs recentes. Casos públicos são analogias, não acesso ao código interno dos jogos. O 'decision kernel' é heurística criada para a skill, não uma equação disponibilizada pela engine.
+
+## Fontes oficiais específicas da v1.9
+
+- Model e enums: https://create.roblox.com/docs/reference/engine/classes/Model · https://create.roblox.com/docs/reference/engine/enums/ModelLevelOfDetail · https://create.roblox.com/docs/reference/engine/enums/ModelStreamingMode
+- Streaming: https://create.roblox.com/docs/workspace/streaming
+- BasePart, massa, colisão, toque, consulta: https://create.roblox.com/docs/reference/engine/classes/BasePart · https://create.roblox.com/docs/physics/assemblies
+- Raycasts: https://create.roblox.com/docs/reference/engine/datatypes/RaycastParams
+- Mesh/Union: https://create.roblox.com/docs/reference/engine/classes/MeshPart · https://create.roblox.com/docs/reference/engine/classes/TriangleMeshPart · https://create.roblox.com/docs/reference/engine/classes/PartOperation
+- CollisionFidelity e FluidFidelity: https://create.roblox.com/docs/reference/engine/enums/CollisionFidelity · https://create.roblox.com/docs/reference/engine/enums/FluidFidelity
+- Motor6D/WeldConstraint: https://create.roblox.com/docs/reference/engine/classes/Motor6D · https://create.roblox.com/docs/reference/engine/classes/WeldConstraint
+
+Estas fontes sustentam semântica e API, **não** ganhos medidos de desempenho. Verificar alterações futuras na engine.
+
+## Fontes verificadas para correções v1.9.1
+
+- `ModelLevelOfDetail.Automatic` atualmente equivalente a `Disabled`: https://create.roblox.com/docs/reference/engine/enums/ModelLevelOfDetail.md
+- `TriangleMeshPart.FluidFidelity` para forças e torques aerodinâmicos, dependentes de `Workspace.FluidForces` e configuração com permissões adequadas: https://create.roblox.com/docs/reference/engine/classes/TriangleMeshPart.md
+- `Motor6D` substituído por `AnimationConstraint` para avatares atualizados; `AvatarJointUpgrade` em personagens R15: https://create.roblox.com/docs/reference/engine/classes/Motor6D.md
+- `AnimationConstraint`: https://create.roblox.com/docs/reference/engine/classes/AnimationConstraint.md
+
+Fontes oficiais sustentam a semântica da API, **não** ganhos medidos de CPU, GPU, FPS ou RAM.

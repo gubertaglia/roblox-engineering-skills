@@ -1,8 +1,8 @@
-# Roblox Engineering Skills — v1.8
+# Roblox Engineering Skills — v1.9.1
 
 Skills locais para o **Codex no aplicativo ChatGPT (Windows 11)**, com integração **opcional** ao **Roblox Studio MCP oficial**. São procedimentos reutilizáveis para investigação e tomada de decisão; **não** são ferramentas de profiling, subagentes ou substitutos das habilidades oficiais da Roblox. Não exigem CLI, IDE, chave de API extra ou MCP adicional.
 
-**Novidade v1.8:** evolução da **qualidade das decisões técnicas**, não aumento indiscriminado do catálogo. Inclui um núcleo de decisão de performance, documentação condicional sobre fases da simulação/Server Authority, contratos de estado, UI, persistência e casos causais com proveniência. Mantém o roteamento/segurança da v1.7 e acesso seletivo às referências existentes.
+**Novidade v1.9.1:** corrige `ModelLevelOfDetail.Automatic`, a interpretação de forças aerodinâmicas (`EnableFluidForces`/`FluidFidelity`) e a transição de rigs de avatar para `AnimationConstraint`. Mantém as decisões condicionais da v1.9 sobre Models, Parts, MeshParts, Unions e juntas, sem presets globais ou alterações automáticas no jogo. **Não** instala presets nem altera jogos automaticamente.
 
 ## Escolha pela intenção, não pelo tema
 
@@ -41,6 +41,7 @@ O Codex não precisa ler todas as referências para escolher uma técnica. A `$r
 | Assemblies, colliders, raycasts | [Física e espacial](rbx-optimize/references/physics-and-spatial.md) |
 | Overdraw, partículas, GPU | [Renderização e VFX](rbx-optimize/references/rendering-and-vfx.md) |
 | Streaming, carregamento, mundo grande | [Streaming e escala](rbx-optimize/references/streaming-and-world-scale.md) |
+| Mudanças propostas em LOD, streaming de Model, BasePart, Mesh/Union ou juntas | [Decisões de propriedades e juntas](rbx-optimize/references/instance-property-decisions.md) |
 | Fase do frame, Deferred events, prediction/rollback | [Simulação e autoridade](rbx-optimize/references/simulation-and-authority.md) |
 | UI/layout/Z-order | [Performance de UI](rbx-optimize/references/ui-performance.md) |
 
@@ -61,9 +62,9 @@ A skill não deve fabricar métricas ou recomendar uma técnica apenas por apare
 
 ## Instalação no Codex Desktop
 
-Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para uma instalação funcional da v1.6, v1.6.1 ou v1.7, a v1.8 **exige substituir integralmente as pastas das skills** para incluir novas referências e procedimentos; os nomes de invocação são mantidos.
+Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para uma instalação v1.9 ou anterior, a v1.9.1 exige substituir integralmente as pastas das skills para incluir as referências e orientações novas; os nomes de invocação são mantidos.
 
-1. Extraia `roblox-engineering-skills-v1.8.zip`.
+1. Na branch `main` do GitHub, clique em **Code → Download ZIP** e extraia o ZIP do código-fonte gerado pelo GitHub (a pasta extraída costuma se chamar `roblox-engineering-skills-main`).
 2. Copie **as três pastas completas** `rbx-audit`, `rbx-root-cause`, `rbx-optimize` diretamente para o diretório de skills reconhecido pelo seu Codex, substituindo as versões antigas. Não copie a pasta externa do ZIP como uma skill.
 3. Opcionalmente, copie `optional/rbx-review` como `rbx-review` no mesmo diretório.
 4. Verifique em **Personalizar → Habilidades** e no seletor `$rbx` do chat Codex. A descoberta na interface não comprova acesso ao Studio MCP.
@@ -78,6 +79,6 @@ Leitura e análise dentro do pedido não precisam de aprovações artificiais. *
 
 ## Escopo desta versão
 
-A v1.8 mantém as melhorias estruturais da v1.7 e acrescenta conhecimento discriminante derivado de pesquisa sobre [Agent Skills](https://agentskills.io/specification) e orientações oficiais da OpenAI. Não foram adicionados scripts executáveis, MCPs, agentes, frameworks ou dependências. Não houve benchmarking real de Roblox/Studio nem testes A/B de ganho da skill; **validação de formato, caminhos e integridade do ZIP não equivale a validação comportamental no Codex**. Referências técnicas são condicionais e não garantem FPS, menos RAM ou melhor arquitetura automaticamente.
+A v1.9.1 mantém as melhorias estruturais da v1.8 e acrescenta decisões condicionais de propriedades da engine, preservando conhecimento discriminante derivado de pesquisa sobre [Agent Skills](https://agentskills.io/specification) e orientações oficiais da OpenAI. Não foram adicionados scripts executáveis, MCPs, agentes, frameworks ou dependências. Não houve benchmarking real de Roblox/Studio nem testes A/B de ganho da skill; **integridade do `MANIFEST.json` e do código-fonte não equivale a validação comportamental no Codex**. Referências técnicas são condicionais e não garantem FPS, menos RAM ou melhor arquitetura automaticamente.
 
 Consulte [CHANGELOG.md](CHANGELOG.md) para mudanças, [MIGRATION.md](MIGRATION.md) para atualização, [SOURCES.md](SOURCES.md) para documentação e [EVALUATION_CASES.md](EVALUATION_CASES.md) / [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md) para protocolos opcionais.

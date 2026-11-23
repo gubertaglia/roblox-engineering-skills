@@ -24,6 +24,7 @@ Antes de selecionar técnica, responda na medida permitida pela tarefa:
 | Picos por trabalho monolítico, backlog, independência entre tarefas | [concorrência e scheduling](concurrency-and-scheduling.md) | `task.spawn` como paralelismo, Actors sem cálculo independente |
 | Tráfego, atraso, divergência, mensagens repetidas ou payloads caros | [rede e replicação](networking-and-replication.md) | Remotes não confiáveis para estado crítico, batches gigantes |
 | Physics time, assemblies, colisores, raycasts, ownership | [física e consultas espaciais](physics-and-spatial.md) | Desabilitar colisão, unir ilhas, mudar autoridade sem validar |
+| Proposta de alterar Model LOD/streaming, BasePart, Mesh/Union ou Motor6D | [propriedades e juntas](instance-property-decisions.md) | Presets sem verificar contrato, herança, streaming e rig |
 | GPU, overdraw, partículas, draw calls, VFX | [renderização e VFX](rendering-and-vfx.md) | Reduzir fidelidade sem verificar custo real |
 | Mundo grande, streaming, carregamento, dispositivos e visibilidade | [streaming e escala de mundo](streaming-and-world-scale.md) | Tratar ausência no cliente como destruição |
 | UI, layout, lista de interface, rebuild Z ou bindings | [performance de UI](ui-performance.md) | Fazer pool de GUI sem identificar invalidadores |
