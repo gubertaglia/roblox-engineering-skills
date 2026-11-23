@@ -1,0 +1,91 @@
+name: Publish Roblox Engineering Skills v1.9.1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-v1.9.1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact release commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Verify SHA-256 manifest and generate installation ZIP
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+
+          version = "1.9.1"
+          manifest = json.loads(Path("MANIFEST.json").read_text(encoding="utf-8"))
+          assert manifest["version"] == version, "Wrong manifest version"
+          hashes = manifest["sha256"]
+          assert len(hashes) == manifest["files"] == 43, "Unexpected content file count"
+          for name, expected in hashes.items():
+              path = Path(name)
+              assert path.is_file() and path.is_relative_to(Path(".")), f"Missing file: {name}"
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, f"SHA mismatch: {name}"
+
+          package_name = f"roblox-engineering-skills-v{version}.zip"
+          package_root = f"roblox-engineering-skills-v{version}"
+          with ZipFile(package_name, "w", ZIP_DEFLATED, compresslevel=9) as archive:
+              for name in sorted([*hashes, "MANIFEST.json"]):
+                  archive.write(name, f"{package_root}/{name}")
+
+          with ZipFile(package_name) as archive:
+              assert archive.testzip() is None, "Corrupt ZIP"
+              assert len(archive.namelist()) == 44, "Wrong ZIP entry count"
+          print(f"Verified {len(hashes)} SHA-256 hashes and {package_name} ({Path(package_name).stat().st_size} bytes)")
+          PY
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-notes.md <<'NOTES'
+          # Roblox Engineering Skills v1.9.1
+
+          Evolução da v1.8 com decisões condicionais de propriedades e APIs da engine Roblox, sem presets automáticos.
+
+          ## Principais mudanças
+          - Nova referência para `Model.LevelOfDetail`, `ModelStreamingMode`, `CanQuery`, `CanTouch`, `Massless`, `Anchored`, MeshParts, Unions e juntas.
+          - Correções v1.9.1: `ModelLevelOfDetail.Automatic` atualmente equivalente a `Disabled`; `FluidFidelity`/forças aerodinâmicas; `AnimationConstraint` em avatares atualizados e compatibilidade com rigs `Motor6D`.
+          - Roteamento seletivo das skills, novas situações de avaliação e manifesto de integridade SHA-256.
+
+          ## Instalação
+          1. Baixe **roblox-engineering-skills-v1.9.1.zip** abaixo e extraia.
+          2. Copie **as pastas completas** `rbx-audit`, `rbx-root-cause`, `rbx-optimize` para o diretório local onde o Codex já reconhece skills, substituindo as antigas.
+          3. Opcional: instale `optional/rbx-review` como `rbx-review`.
+          4. Atualize a descoberta de habilidades e confira o seletor `$` no Codex.
+
+          ## Verificações e limites
+          O arquivo é gerado a partir da versão v1.9.1 na branch `main`, com 43 hashes SHA-256 verificados e teste de integridade do ZIP. Testes A/B no Codex/Roblox Studio e ganhos reais de FPS/RAM **não foram executados nem comprovados**.
+          NOTES
+
+      - name: Publish v1.9.1 release and attach ZIP
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "v1.9.1" >/dev/null 2>&1; then
+            gh release upload "v1.9.1" "roblox-engineering-skills-v1.9.1.zip" --clobber
+            gh release edit "v1.9.1" --title "Roblox Engineering Skills v1.9.1" --notes-file release-notes.md --latest
+          else
+            gh release create "v1.9.1" "roblox-engineering-skills-v1.9.1.zip" \
+              --target "$GITHUB_SHA" \
+              --title "Roblox Engineering Skills v1.9.1" \
+              --notes-file release-notes.md \
+              --latest
+          fi
