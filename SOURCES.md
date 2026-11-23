@@ -1,6 +1,20 @@
-# Fontes de referência e verificação — v1.6.1 (2026-11-23)
+# Fontes de referência e verificação — v1.8 (2026-11-23)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
+
+## Arquitetura de Agent Skills — pesquisa para v1.7
+
+- OpenAI, conceitos e ciclo de vida de skills: https://developers.openai.com/plugins/concepts/skills
+- OpenAI, criação e uso de skills com MCP: https://developers.openai.com/plugins/build/skills
+- OpenAI, `skill-creator` oficial: https://github.com/openai/skills/blob/main/skills/.system/skill-creator/SKILL.md
+- OpenAI, `agents/openai.yaml` (metadata de produto): https://github.com/openai/skills/blob/main/skills/.system/skill-creator/references/openai_yaml.md
+- OpenAI, decisões de design em modelos recentes: https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra
+- Padrão Agent Skills: https://agentskills.io/specification
+- Anthropic, carregamento progressivo e segurança: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
+- OpenAI, exemplo de references condicionais: https://github.com/openai/skills/blob/main/skills/.curated/chatgpt-apps/SKILL.md
+- OpenAI Agents SDK, contrato de escopo: https://github.com/openai/openai-agents-python/blob/main/.agents/skills/implementation-strategy/SKILL.md
+
+**Critério adotado na v1.7:** menor contexto que ainda muda decisões, descrição de disparo discriminativa, instruções com condições de entrada claras e separação de evidência, escolha e permissão. Adoção desses critérios não comprova ganho empírico das skills.
 
 ## Integração Codex e Roblox
 
@@ -47,8 +61,29 @@ Estas páginas embasam o catálogo **condicional**; não garantem disponibilidad
 
 **Limites de conhecimento:** algumas técnicas (dirty sets, coalescing, índices espaciais, SoA, idempotência) são padrões gerais de engenharia, não APIs com promessa de ganho pela Roblox. Suas condições de eficácia dependem do sistema concreto. `rbx-luau-heap-profiling` não foi confirmada como habilidade oficial, mesmo que ferramentas de profiling de memória existam. Números de limites e nomes de APIs podem mudar.
 
-## Instalação do Codex Desktop — correção documental v1.6.1
+## Instalação do Codex Desktop — contexto herdado da v1.6.1
 
 - OpenAI, *Build skills*, diretórios de skills locais e detecção: https://learn.chatgpt.com/docs/build-skills
 - OpenAI, *skill-installer* e local `$CODEX_HOME/skills`: https://github.com/openai/skills/blob/main/skills/.system/skill-installer/SKILL.md
 - Evidência fornecida neste projeto: capturas do Windows Explorer com `C:\Users\gubertaglia\.codex\skills` contendo Caveman/Ponytail, seguidas da lista `Roblox Systems Audit`, `Roblox Root Cause` e `Roblox Optimize` marcada como **Arquivo local**. **A instalação local, e não o profiling/integração, foi confirmada.**
+
+
+## Fontes específicas e critérios da v1.8
+
+- Roblox, fases e scheduler: https://create.roblox.com/docs/performance-optimization/microprofiler/task-scheduler
+- Roblox, eventos Deferred: https://create.roblox.com/docs/scripting/events/deferred
+- Roblox, Server Authority, prediction e rollback: https://create.roblox.com/docs/projects/server-authority
+- Roblox, character e SLIM: https://create.roblox.com/docs/characters
+- Roblox, streaming e modos de modelo: https://create.roblox.com/docs/workspace/streaming
+- Roblox, UI/ScreenGui: https://create.roblox.com/docs/reference/engine/classes/ScreenGui
+- Roblox, performance/tags UI: https://create.roblox.com/docs/performance-optimization/microprofiler/tag-table
+- Roblox, persistência DataStore: https://create.roblox.com/docs/cloud-services/data-stores/best-practices
+- Roblox, MemoryStore: https://create.roblox.com/docs/cloud-services/memory-stores/best-practices
+- Luau, sistema de tipos: https://luau.org/types/ e https://luau.org/types/type-refinements/
+- Roblox, habilidades integradas e limites de nome do Roblox Assistant (distinto das skills locais do Codex): https://github.com/Roblox/creator-docs/blob/main/content/en-us/assistant/skills.md
+- Roblox, LibMP e skill oficial: https://github.com/Roblox/libmp/blob/main/docs/SKILL.md
+- Roblox, RDC 2025, *Top Game Performance Tales*: https://www.youtube.com/watch?v=rwLEnBtXr30
+- Transcrição **terceirizada**, não fonte primária dos detalhes dos dois estudos: https://prepublish.ai/youtube-transcript/rwLEnBtXr30
+- Desenvolvedor, changelog público de Dead Serious: https://devforum.roblox.com/t/dead-serious-update-log/4999072
+
+**Critério da v1.8:** referências locais para mecanismos e escolhas que tendem a permanecer válidos; consulta à documentação oficial para assinaturas, limites, thread-safety, recursos em rollout e APIs recentes. Casos públicos são analogias, não acesso ao código interno dos jogos. O 'decision kernel' é heurística criada para a skill, não uma equação disponibilizada pela engine.

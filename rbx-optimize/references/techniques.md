@@ -1,6 +1,8 @@
-# Roteador de técnicas — decisões, não receitas (v1.6)
+# Roteador de técnicas — decisões, não receitas (v1.8)
 
-**Leia esta referência somente ao comparar alternativas de otimização.** Não percorra todos os documentos nem transforme o catálogo em checklist. Identifique o custo dominante por evidência; a classe causal importa mais do que o nome popular da técnica. Comece pela menor intervenção capaz de resolver o problema.
+**Use este roteiro quando houver hipóteses ou técnicas concorrentes.** O `SKILL.md` oferece acesso direto às referências especializadas; não é obrigatório abrir este roteiro antes de cada uma. Não percorra todos os documentos nem transforme o catálogo em checklist. Identifique o custo dominante por evidência; a classe causal importa mais do que o nome popular da técnica. Comece pela menor intervenção capaz de resolver o problema.
+
+Antes de comparar técnicas, use o [decision kernel](decision-kernel.md) se ainda faltar entender **cardinalidade, frequência, trabalho, residência, fan-out, fidelidade ou custo líquido**. Não leia o kernel se o mecanismo já estiver claro; não cite a heurística como equação oficial Roblox.
 
 ## Porta de entrada
 
@@ -24,6 +26,8 @@ Antes de selecionar técnica, responda na medida permitida pela tarefa:
 | Physics time, assemblies, colisores, raycasts, ownership | [física e consultas espaciais](physics-and-spatial.md) | Desabilitar colisão, unir ilhas, mudar autoridade sem validar |
 | GPU, overdraw, partículas, draw calls, VFX | [renderização e VFX](rendering-and-vfx.md) | Reduzir fidelidade sem verificar custo real |
 | Mundo grande, streaming, carregamento, dispositivos e visibilidade | [streaming e escala de mundo](streaming-and-world-scale.md) | Tratar ausência no cliente como destruição |
+| UI, layout, lista de interface, rebuild Z ou bindings | [performance de UI](ui-performance.md) | Fazer pool de GUI sem identificar invalidadores |
+| `SignalBehavior`, fase do frame, fixed simulation, prediction ou rollback | [simulação e autoridade](simulation-and-authority.md) | Habilitar Server Authority sem compatibilidade/necessidade |
 
 **Classificações podem se sobrepor.** Quando isso ocorrer, leia apenas os documentos associados às hipóteses que continuam plausíveis. A referência de [medições](measurement.md) distingue causa, melhoria e regressão. Para escolher profiler, use [studio-profiling](studio-profiling.md).
 

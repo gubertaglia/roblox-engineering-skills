@@ -1,5 +1,7 @@
 # Streaming, mapas grandes e entrada no mundo
 
+**Documentação dinâmica:** modos `Atomic`, `Persistent`, `PersistentPerPlayer`, comportamento de streaming, predictive streaming, Improved streaming e SLIM podem ter restrições/estado de rollout. Consulte Creator Hub/`rbx-docs-search` e propriedades reais do place antes de recomendar configuração. Não suponha que modelos ou propriedades fora de `Workspace` recebam as mesmas garantias de streaming; não habilite recursos globalmente para resolver um problema local.
+
 Use para memória/load time/cenas enormes ou bugs que só acontecem quando o cliente vê parte do mundo. **Streaming altera quais instâncias existem localmente; não é apenas uma opção de FPS.**
 
 ## Instance streaming

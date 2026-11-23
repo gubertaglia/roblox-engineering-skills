@@ -27,6 +27,12 @@ A biblioteca oficial [Roblox/libmp](https://github.com/Roblox/libmp) permite an�
 
 Para traces: confirmar unidade, processo/trilha, amostragem, janela e hierarquia de spans. Não somar intervalos inclusivos aninhados nem fabricar P95/P99 a partir de screenshots sem amostras.
 
+## Orquestração com habilidades oficiais — se disponíveis
+
+Descubra primeiro quais ferramentas e skills Roblox-authored estão expostas na **sessão atual**. Para MicroProfiler, `rbx-perf-profiling` é fonte oficial especializada quando disponível; para composição e recursos da cena, `rbx-scene-analysis`; para investigar comportamento em execução, `rbx-debug`; para contratos exercitáveis, `rbx-unit-test`; para detalhe de API em evolução, `rbx-docs-search`. Consultar a habilidade apropriada **sob demanda** é preferível a duplicar um manual da engine. LibMP tem skill/documentação próprias e somente deve ser usada quando o ambiente permitir.
+
+Uma skill documentada **não equivale** a ferramenta instalada, captura produzida ou teste executado. Se nenhuma estiver disponível, utilize as evidências fornecidas, ferramentas de Studio de que realmente dispõe e explique a limitação.
+
 ## Custo da própria medição
 
 - O Script Profiler pode operar com amostragem maior para precisão, mas também aumenta overhead; compare alternativas quando uma diferença pequena for relevante. Logs por frame e rastreamento excessivo também alteram resultados.

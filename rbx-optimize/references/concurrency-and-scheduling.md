@@ -19,6 +19,12 @@ Distinguir **reduzir trabalho total** (throughput) de **espalhar trabalho ao lon
 - **Custos:** perda de ordem, fairness, latência percebida e inconsistência se a semântica de substituição estiver incorreta.
 - **Prova:** backlog estabiliza sob carga, eventos essenciais chegam ao resultado correto, idempotência, burst, recuperação após pico, late join.
 
+## Em qual fase a lógica acontece?
+
+- Antes de otimizar um `Heartbeat`, confira se a causa é **frequência**, **fase incorreta** ou **trabalho por callback**. Para física, `PreSimulation` prepara mutações e `PostSimulation` lê resultados; rendering usa `PreRender`/`BindToRenderStep` apenas quando necessário. A escolha deve preservar dependências e prioridade de input/animação.
+- `Workspace.SignalBehavior` influencia a retomada de eventos e a ordem em que handlers observam mudanças; Deferred não é apenas uma flag de velocidade. Confira reentrância e consumer callbacks ao mudar o modo.
+- Se houver fixed simulation, prediction, rollback ou Server Authority, leia [simulation-and-authority.md](simulation-and-authority.md) e consulte documentação atual para APIs/compatibilidade. Não reconfigure Workspace como otimização padrão.
+
 ## `task` e coroutines
 
 - `task.spawn`, `task.defer`, `task.delay` e coroutines alteram agendamento/cooperatividade; **não criam múltiplos núcleos** por si só.

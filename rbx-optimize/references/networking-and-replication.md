@@ -19,6 +19,12 @@ Antes de escolher remote ou compressão, classifique **o contrato do dado**: gam
 
 `buffer` tem semântica de cópia ao atravessar APIs relevantes; não supor identidade compartilhada entre Actors/processos. Verifique a `SerializationService` e APIs atuais caso considere serializador caseiro.
 
+## Autoridade moderna, prediction e ordering (somente se relevante)
+
+O princípio geral de servidor autoritativo não implica que o jogo usa **Roblox Server Authority** com prediction/rollback/resimulation. Se a arquitetura o utilizar ou uma migração for solicitada, veja [simulation-and-authority.md](simulation-and-authority.md). Verifique `AuthorityMode` e pré-requisitos atuais na documentação; não presuma ordenação global entre replicação de propriedade/atributo e `RemoteEvent`. Defina sequence/versão ou confirmação quando o protocolo exigir.
+
+**Rejeite** transformar toda interação em prediction quando a economia não justificar replay, determinismo, reconciliação e alterações estruturais.
+
 ## Autoridade, late join e observadores
 
 - Server authority para estado relevante de gameplay; efeitos puramente cosméticos podem ser produzidos localmente quando observadores recebem contexto suficiente.

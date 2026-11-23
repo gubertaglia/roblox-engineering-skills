@@ -1,26 +1,30 @@
-# Atualizar Roblox Engineering Skills — v1.6 → v1.6.1
+# Atualização — v1.7 → v1.8 (e versões anteriores)
 
-**Esta é uma atualização de documentação de instalação.** O conteúdo de todas as `SKILL.md`, `agents/openai.yaml` e referências técnicas da v1.6 foi preservado, sem alterações.
+A **v1.8 altera os quatro `SKILL.md`** e acrescenta referências técnicas condicionais. Não é um patch apenas documental; para receber o novo comportamento é necessário substituir as pastas locais.
 
-## Para quem já instalou a v1.6
+## Procedimento (Windows / Codex Desktop)
 
-Se o Codex já exibe **Roblox Systems Audit**, **Roblox Root Cause** e **Roblox Optimize** como skills locais, **não é necessário reinstalar**. Você pode simplesmente consultar o novo [INSTALL_WINDOWS.md](INSTALL_WINDOWS.md) quando precisar atualizar ou instalar em outro PC.
+1. Localize o diretório de skills **já reconhecido** por seu Codex. Exemplos documentados no histórico: `%USERPROFILE%\.codex\skills` ou `%USERPROFILE%\.agents\skills`; não instale cópias duplicadas.
+2. Se você editou alguma skill localmente, faça backup **dessas pastas** antes da substituição.
+3. Extraia `roblox-engineering-skills-v1.8.zip` e copie **integralmente** `rbx-audit`, `rbx-root-cause` e `rbx-optimize` para o diretório de skills existente, substituindo as versões antigas. **Não mescle arquivos de releases diferentes.**
+4. Se usa a opcional, substitua `rbx-review` pelo conteúdo de `optional/rbx-review`.
+5. Atualize/reinicie a descoberta das skills se necessário e confirme `$rbx-audit`, `$rbx-root-cause`, `$rbx-optimize` e, se instalada, `$rbx-review`.
 
-## Para novas instalações
+Não altere outras skills, configurações, Codex, Roblox Studio ou MCP. Nenhuma chave, script, biblioteca, ferramenta adicional ou configuração de engine é exigida.
 
-Siga o [guia de instalação Windows](INSTALL_WINDOWS.md). Em especial:
+## Alterações esperadas
 
-- Use o diretório que seu Codex já reconhece. Neste ambiente Windows 11, o caminho comprovado foi `%USERPROFILE%\.codex\skills`, onde outras skills já estavam instaladas.
-- A documentação atual também indica `%USERPROFILE%\.agents\skills` como local de skills pessoais; não duplique skills em ambos os lugares por precaução.
-- Copie as três pastas completas, diretamente para `skills/`: `rbx-audit`, `rbx-root-cause`, `rbx-optimize`.
-- A quarta skill `optional/rbx-review` continua **opcional**. Instale-a diretamente como `rbx-review/` somente se desejar.
+- **Otimização:** identificação de mecanismo de custo por cardinalidade, frequência, trabalho, residência, fan-out, fidelidade exigida e ganho líquido. Ajuda a rejeitar técnicas que só deslocam custo.
+- **Simulação:** orientação condicional sobre fases RunService, Deferred events e arquitetura Server Authority/prediction/rollback; **não** habilita nem migra esse modelo automaticamente.
+- **Render/escala:** investigação de Humanoid, Animator, FastCluster e SLIM quando a evidência apontar nessa direção.
+- **Qualidade arquitetural:** contratos de ownership, invariantes, transições e lifecycle, com análise de persistência somente nas missões relevantes.
+- **UI e casos:** referências pequenas para layout/UI e casebook causal com indicação de fontes e hipóteses.
+- **Fontes atuais:** quando a escolha depende de comportamento variável de engine/API, orientação para consultar habilidades Roblox-authored e documentação oficial, se disponíveis.
 
-## Se estiver migrando de v1.5 ou anterior
+**Mantido:** nomes das quatro skills, fronteiras entre auditoria/bug/otimização/review, limites de autorização, referências anteriores, sem workflows obrigatórios longos.
 
-Substitua as três pastas completas, **sem mesclar versões antigas**; a v1.6 reorganizou `rbx-optimize/references/techniques.md` como roteador para oito referências. Faça backup de personalizações locais antes de substituir. Não remova a habilidade oficial Roblox `rbx-debug`, nem modifique outras skills.
+## Limites da entrega
 
-## Verificação
+A v1.8 foi conferida como pacote/arquivos e em relação à documentação estudada. Não se afirma que foi testada no Studio do usuário, nem que produz ganho comprovado de FPS, RAM ou tokens. Validação de comportamento e benchmarks são etapas distintas e continuam opcionais.
 
-Abra **Personalizar → Habilidades**, procure `Roblox` e no chat Codex digite `$rbx`. Confirme que as três aparecem como **Arquivo local**; reinicie o app se necessário. O reconhecimento não substitui os testes de integração em [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md).
-
-Nenhum recurso novo, mudança de API ou dependência adicional foi introduzido na v1.6.1.
+Consulte [INSTALL_WINDOWS.md](INSTALL_WINDOWS.md) para instruções completas e [CHANGELOG.md](CHANGELOG.md) para diferenças detalhadas.

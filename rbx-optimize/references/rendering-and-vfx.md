@@ -19,6 +19,16 @@
 - **Rejeite:** afirmar que qualquer mesh é mais rápido que Parts ou que reduzir número de objetos sempre reduz custo de GPU.
 - **Prova:** draw calls, geometria renderizada, uso de GPU e memória, aparência sob variações de câmera e escala.
 
+## Personagens densos, Humanoid e FastCluster (condicional)
+
+- **Sinal:** MicroProfiler/Scene Analysis mostra custo de atualização de animação, `Humanoid`, rebuild de `FastCluster`, skinned meshes ou alteração frequente da hierarquia de avatar; não atribuir automaticamente a scripts Luau.
+- **Hipóteses:** NPCs distantes continuam com animação/estados completos, mutações de hierarquia invalidam estruturas de render, física de character domina custo, ou draw calls de avatares são relevantes.
+- **Opções condicionais:** reduzir trabalho de NPCs fora de alcance sem quebrar gameplay, desativar estados Humanoid **somente quando seguros**, estudar `AnimationController` em personagens que não exigem Humanoid, reduzir mudanças estruturais por frame, avaliar SLIM/LOD em cenas densas **se compatível e com streaming habilitado**.
+- **Rejeite:** trocar Humanoid indiscriminadamente, ancorar NPCs ainda interativos, ativar feature de engine por hábito, ou alegar ganho sem verificar o subsistema real.
+- **Prova:** scopes de animação/FastCluster, CPU/physics/GPU, comportamento de NPC, animadores, visibilidade e dispositivos-alvo.
+
+Fontes: https://create.roblox.com/docs/performance-optimization/improve · https://create.roblox.com/docs/characters
+
 ## Qualidade adaptativa, LOD e efeito local
 
 - **Sinal:** equipamento-alvo sofre mais que desktop; efeitos cosméticos têm custo variável e não participam de regra autoritativa.

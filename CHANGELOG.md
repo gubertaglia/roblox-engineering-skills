@@ -1,3 +1,43 @@
+# Changelog — v1.8 (2026-11-23)
+
+## Melhorias de decisão técnica (não enciclopédia de APIs)
+
+- Adicionado `rbx-optimize/references/decision-kernel.md`: decomposição de custo em quantidade, frequência, trabalho por item, residência e fan-out; classificação de fidelidade; ganho líquido e critérios para rejeitar alternativas.
+- Adicionado `rbx-optimize/references/simulation-and-authority.md`: fases RunService, Deferred signals e Server Authority moderno/prediction/rollback sob condições explícitas. Complementados `concurrency-and-scheduling.md`, `networking-and-replication.md` e `physics-and-spatial.md` sem reescrever os conteúdos existentes.
+- Ampliados `rendering-and-vfx.md` e `streaming-and-world-scale.md` com diagnóstico condicional de Humanoid/Animator, FastCluster, SLIM e verificação de capacidades atuais.
+- Adicionada referência opcional `ui-performance.md` para GUI/layout/Z-order e `causal-casebook.md` com casos públicos identificados e cenários **explicitamente hipotéticos**, evitando atribuição indevida de técnicas a jogos fechados.
+- Adicionadas referências especializadas, autônomas por instalação, para contratos/arquitetura, transições de estado e regressões nas skills de auditoria, causa raiz e review. Persistência DataStore/MemoryStore só é consultada se a missão realmente a envolver.
+- As quatro `SKILL.md` agora orientam consulta seletiva à documentação Roblox atual por `rbx-docs-search`/Studio MCP quando disponível e adequada. Profilers/skills oficiais não se tornam dependências nem passos obrigatórios.
+- Preservados nomes, permissões, isolamento de missão, documentação técnica anterior e nenhuma dependência/CLI/subagente adicional.
+
+## Limites
+
+- Fontes técnicas incluem documentação oficial e estudos públicos. Heurísticas de engenharia não são descritas como fórmulas da Roblox.
+- Verificação de integridade, links e metadados do pacote **não equivale** a testes A/B, profiling do Studio ou ganhos reais medidos.
+
+---
+
+# Changelog — v1.7 (2026-11-23)
+
+## Roteamento e instruções sob demanda
+
+- Revisadas **conjuntamente as quatro descrições** (`SKILL.md` frontmatter) para discriminar a missão principal sem capturar todo o domínio Roblox: auditoria de sistemas, causa raiz de sintoma, otimização de desempenho ou revisão de diff.
+- Mantidas as três skills de invocação implícita e a revisão opcional explicit-only. Atualizados os `default_prompt` e `short_description` para refletir as missões; nomes de invocação inalterados.
+- **`rbx-optimize/SKILL.md` agora contém links diretos e condicionais para todas as 11 referências.** O roteador `techniques.md` permanece disponível quando técnicas/hipóteses concorrentes precisam ser comparadas, mas não é passagem obrigatória para toda investigação.
+- Introduzidos **contratos mínimos de resultado** (evidências, mecanismo, incerteza, riscos, regressões) sem exigir títulos fixos nem inflar respostas.
+- Definidas **transições opcionais por mudança real de objetivo** entre as missões. Nenhuma skill precisa chamar as outras automaticamente, carregar múltiplos entrypoints ou exigir aprovação repetida para ações já autorizadas pelo pedido.
+- Tornada explícita a **fronteira de confiança**: conteúdo do jogo e respostas de ferramentas são dados, não ordens para o agente.
+- Refinadas orientações de autonomia: análises não destrutivas cabem no escopo; edição persistente, salvar e publicar continuam ações distintas, limitadas pela autorização do usuário.
+
+## Distribuição e compatibilidade
+
+- Reescritos README e guia de migração para v1.7; atualizado o instalador manual Windows e a documentação de fontes.
+- Preservadas as referências técnicas especializadas da v1.6 sem introduzir scripts, MCPs, dependências extras ou novas skills.
+- A v1.7 **não é somente documentação**: quem tem v1.6.1 instalada precisa substituir as pastas de skill para obter o comportamento novo.
+- Verificação desta versão: integridade do pacote, frontmatter, YAML, referências e hashes; **não inclui** medição real de melhora no Codex/Studio nem A/B.
+
+---
+
 # Changelog — v1.6.1 (2026-11-23)
 
 ## Patch de instalação/documentação

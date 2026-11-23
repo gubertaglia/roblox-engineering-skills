@@ -22,6 +22,10 @@ Investigue **carga de solver/assemblies**, geometria e custo das consultas separ
 - **Rejeite:** octree personalizada sem necessidade demonstrada quando a engine já fornece consulta satisfatória. Evite `BruteForceAllSlow` em experiências live.
 - **Prova:** consultas/segundo, cardinalidade candidata, CPU, correção do conjunto de resultados, resposta com conteúdo streamed-in e streamed-out.
 
+## Simulação e APIs de acesso
+
+Confira se a lógica está na fase correta (`PreSimulation` para mutação relevante antes da física, `PostSimulation` para leitura de resultados) e se APIs usadas em Parallel Luau oferecem a thread-safety exigida **na versão atual**. Modelo Server Authority moderno/rollback tem semântica distinta de `SetNetworkOwner`; consulte [simulation-and-authority.md](simulation-and-authority.md) apenas quando o projeto estiver nesse contexto.
+
 ## Network ownership e segurança
 
 - **Sinal:** simulação física no servidor domina CPU ou latência de interação é alta.
