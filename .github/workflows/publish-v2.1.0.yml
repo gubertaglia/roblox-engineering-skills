@@ -1,0 +1,88 @@
+name: Publish Roblox Engineering Skills v2.1.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-v2.1.0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact release commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Verify manifest and build release ZIP
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+
+          version = "2.1.0"
+          manifest = json.loads(Path("MANIFEST.json").read_text(encoding="utf-8"))
+          assert manifest["version"] == version, "Wrong manifest version"
+          hashes = manifest["sha256"]
+          assert len(hashes) == manifest["files"] == 46, "Unexpected content file count"
+          assert set(hashes) == {str(p) for p in Path(".").rglob("*") if p.is_file() and ".git" not in p.parts and ".github" not in p.parts and p.name != "MANIFEST.json"}, "Manifest does not match repository content"
+          for name, expected in hashes.items():
+              path = Path(name)
+              assert path.is_file(), f"Missing file: {name}"
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, f"SHA mismatch: {name}"
+
+          package_name = f"roblox-engineering-skills-v{version}.zip"
+          package_root = f"roblox-engineering-skills-v{version}"
+          with ZipFile(package_name, "w", ZIP_DEFLATED, compresslevel=9) as archive:
+              for name in sorted([*hashes, "MANIFEST.json"]):
+                  archive.write(name, f"{package_root}/{name}")
+          with ZipFile(package_name) as archive:
+              assert archive.testzip() is None, "Corrupt ZIP"
+              assert len(archive.namelist()) == 47, "Wrong ZIP file count"
+          print(f"Verified {len(hashes)} SHA-256 hashes; generated {package_name}")
+          PY
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-notes.md <<'NOTES'
+          # Roblox Engineering Skills — v2.1.0
+
+          ## Por que esta atualização existe
+          Em uma execução real relatada no Codex Plus, aproximadamente 24 minutos de trabalho consumiram 95 pontos percentuais da cota de cinco horas, com 108 chamadas e 14,7 milhões de tokens acumulados incluindo cache. Observações posteriores mostraram que o mantenedor prefere realizar os testes no Studio e as medições pessoalmente. Não houve comparação controlada que isolasse a causa do consumo.
+
+          ## Principais mudanças
+          - **Validation Ownership:** modalidades manual, híbrida e autônoma; aprovação de implementação não autoriza automaticamente testes práticos.
+          - **Static First e Implementation First:** análise de Source, contratos, diff e implementação quando sustentada pela evidência, sem bloquear por falta de benchmark.
+          - **Runtime Testing Opt-in:** Play/Stop, profiling, simulação, instrumentação, benchmarks e sessões multi-cliente apenas no escopo autorizado.
+          - **Manual Handoff:** comunicar riscos, validações pendentes e verificações práticas essenciais; distinguir ganhos esperados de ganhos medidos.
+          - **Tool Efficiency:** não repetir medições, cenários e confirmações sem utilidade decisória.
+          - README, changelog, migração, instalação, referências e casos de avaliação atualizados, incluindo preferência persistente em AGENTS.md.
+          - Quatro skills preservadas, sem dependências novas.
+
+          ## Instalação
+          Baixe o ZIP anexado, extraia e substitua as pastas das skills conforme INSTALL_WINDOWS.md e MIGRATION.md. A revisão rbx-review permanece opcional.
+
+          ## Verificação e limites
+          O workflow valida 46 hashes SHA-256 do manifesto e a integridade dos 47 arquivos do ZIP. Os casos de avaliação comportamental no Codex/Studio ainda não foram executados; a redução efetiva de tempo e cota não está comprovada.
+          NOTES
+
+      - name: Publish v2.1.0 and attach ZIP
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "v2.1.0" >/dev/null 2>&1; then
+            echo "Release already exists; not replacing published assets."
+            exit 1
+          fi
+          gh release create "v2.1.0" "roblox-engineering-skills-v2.1.0.zip" --target "$GITHUB_SHA" --title "Roblox Engineering Skills — v2.1.0" --notes-file release-notes.md --latest

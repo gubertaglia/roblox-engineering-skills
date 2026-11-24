@@ -1,4 +1,4 @@
-# Instalação e verificação — Codex Desktop no Windows 11 (v2.0.0)
+# Instalação e verificação — Codex Desktop no Windows 11 (v2.1.0)
 
 Este é um guia **manual**, sem PowerShell, CLI, API keys ou dependências. As três skills principais são `rbx-audit`, `rbx-root-cause` e `rbx-optimize`. A `rbx-review` é opcional.
 
@@ -63,7 +63,7 @@ A interface pode exibir o **nome de apresentação** de `agents/openai.yaml` em 
 - Faça backup **apenas se tiver modificado as skills localmente**.
 - Substitua as pastas `rbx-audit`, `rbx-root-cause` e `rbx-optimize` **por inteiro** no mesmo diretório que já funciona. Evite mesclar referências antigas.
 - Não altere `cavecrew`, `caveman`, `ponytail`, `.system`, plugins ou configuração do Studio MCP.
-- **v1.10.0 (ou anterior) → v2.0.0:** `SKILL.md` e referências refinam controle de execução, compartilhamento de evidências e validação proporcional; substitua integralmente as pastas para obter os novos arquivos. Consulte [MIGRATION.md](MIGRATION.md).
+- **v2.0.0 (ou anterior) → v2.1.0:** `SKILL.md` e referências refinam responsabilidade pela validação, implementação fundamentada e autorização explícita de runtime; substitua integralmente as pastas para obter os novos arquivos. Consulte [MIGRATION.md](MIGRATION.md).
 
 ## Se não aparecer no Codex
 
@@ -83,3 +83,5 @@ Não instala nem modifica o Roblox Studio, o Studio MCP ou habilidades nativas d
 - OpenAI, *Build skills*: https://learn.chatgpt.com/docs/build-skills — documenta `$HOME/.agents/skills` e a detecção de skills locais.
 - OpenAI, skill-installer: https://github.com/openai/skills/blob/main/skills/.system/skill-installer/SKILL.md — documenta `$CODEX_HOME/skills` como destino do instalador, em geral `~/.codex/skills`.
 - O funcionamento de `%USERPROFILE%\.codex\skills` **neste Codex Desktop** foi observado nas capturas de tela fornecidas pelo usuário, não presumido universal para todas as instalações.
+
+Para deixar a validação prática com o usuário permanentemente, use as instruções de projeto sugeridas no [README.md](README.md). Isso não altera permissões do aplicativo nem impede checagens estáticas pertinentes.

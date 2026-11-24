@@ -1,5 +1,7 @@
 # Evidência para auditorias sistêmicas
 
+**Limite de execução v2.1:** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Autorização de edição não autoriza teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
+
 Use quando a conclusão depende de execução, fonte de código, comparação de versões ou risco entre módulos.
 
 ## Identidade e proveniência

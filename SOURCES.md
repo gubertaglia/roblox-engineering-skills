@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v2.0.0 (2026-11-23)
+# Fontes de referência e verificação — v2.1.0 (2026-11-24)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -126,3 +126,7 @@ Fontes oficiais sustentam a semântica da API, **não** ganhos medidos de CPU, G
 - OpenAI, documentação de skills: https://developers.openai.com/codex/skills
 
 As regras de checkpoint, reutilização de evidências e agrupamento seguro são decisões de design deste pacote inspiradas nessas orientações; não são garantia de redução de cota nem mecanismo de cobrança. As APIs e referências Roblox anteriores foram preservadas; esta revisão não é uma revalidação integral das APIs do engine.
+
+## Motivação da v2.1.0
+
+A política de responsabilidade pela validação decorre de observações de uso relatadas pelo mantenedor e da preferência explícita por realizar testes práticos pessoalmente. Não constitui nova afirmação sobre a API Roblox, regras de cota ou causalidade de consumo. As fontes técnicas existentes continuam aplicáveis; não houve pesquisa externa adicional nesta atualização.

@@ -1,6 +1,8 @@
 # Medição comparativa — prova de melhoria, não só de gargalo
 
-**Não é uma etapa obrigatória em todo pedido.** Se o usuário pediu somente análise/plano, use o código e dados existentes, diferencie hipótese de custo medido e apresente **um roteiro manual curto**. Se pediu "reproduza/meça", medição já está autorizada dentro do escopo: selecione o menor experimento que altera a decisão, reutilize controles anteriores e evite ciclos repetitivos de `Start/Stop Play` e `Execute Luau`. Para implementação já autorizada, validar código e contratos primeiro; testes runtime focalizados onde necessários. Para política completa consulte [static-first-and-tool-efficiency.md](static-first-and-tool-efficiency.md).
+**Limite de execução v2.1:** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Autorização de edição não autoriza teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
+
+**Não é uma etapa obrigatória em todo pedido.** Se o usuário pediu somente análise/plano, use o código e dados existentes, diferencie hipótese de custo medido e apresente **um roteiro manual curto**. Se pediu "reproduza/meça", medição já está autorizada dentro do escopo: selecione o menor experimento que altera a decisão, reutilize controles anteriores e evite ciclos repetitivos de `Start/Stop Play` e `Execute Luau`. Para implementação já autorizada, validar código e contratos primeiro; testes runtime somente dentro da autorização correspondente. A ausência de baseline não impede um patch fundamentado: preserve a versão anterior recuperável e entregue a comparação ao responsável pela validação. Para política completa consulte [static-first-and-tool-efficiency.md](static-first-and-tool-efficiency.md).
 
 Consulte para planejar, executar ou relatar otimização. O rigor é proporcional ao risco e ao impacto alegado.
 
@@ -27,7 +29,9 @@ metric=<nome>  unit=<ms/MiB/bytes/count/...>
 
 Não preencha campos indisponíveis por adivinhação. Uma amostra de `Stats` pode incluir outros sistemas do jogo; uma contagem de eventos de criação não equivale a partes residentes; 1 Part pode carregar vários filhos.
 
-## Como provar uma mudança
+## Como provar uma mudança (quando for necessário comprovar empiricamente)
+
+Os passos são critérios de uma comparação válida, não uma lista de tarefas obrigatórias para todo patch. Quem realiza a medição segue a responsabilidade acordada. Não exija uma matriz de cenários, métricas ou atribuição exata de custos sem benefício decisório.
 
 1. **Baseline:** fonte de código conhecida, mesma cena/estado inicial, aquecimento, ação, duração e contexto do lado correto. Separe cold start/warm-up e steady state; repetir quando ruído for relevante.
 2. **Hipótese:** identificar mecanismo/custo dominante e previsão testável; não confundir esse diagnóstico com ganho.
@@ -59,6 +63,6 @@ Não extrapole de benchmarks Luau isolados para custos da engine. Use o menor co
 
 ## Execução eficiente de campanhas de medição (v2)
 
-Defina antes a decisão e a métrica primária, controles e critérios de comparação. Reutilize harness existente quando compatível; não crie framework de benchmark para teste pontual. Agrupe cenários independentes numa execução quando isolamento, reset, warm-up e proveniência forem mantidos. Retorne resumo com unidades, amostras, percentis pertinentes, extremos e erros; solicite trace bruto apenas para dúvida concreta. Não misture medições de versões, foco, qualidade gráfica, carga ou processos diferentes sem qualificação. Invalide somente os ensaios afetados por pré-condição incorreta.
+Defina antes a decisão e a métrica primária, controles e critérios de comparação. Comece com um cenário representativo quando suficiente; aproveite o mesmo ensaio para controles funcionais compatíveis. Se a leitura falhar, tente alternativa apenas se houver perspectiva concreta de evidência útil; não encadeie ferramentas/Play para produzir número a qualquer custo. Reutilize harness existente quando compatível; não crie framework de benchmark para teste pontual. Agrupe cenários independentes numa execução quando isolamento, reset, warm-up e proveniência forem mantidos. Retorne resumo com unidades, amostras, percentis pertinentes, extremos e erros; solicite trace bruto apenas para dúvida concreta. Não misture medições de versões, foco, qualidade gráfica, carga ou processos diferentes sem qualificação. Invalide somente os ensaios afetados por pré-condição incorreta.
 
 Repita o suficiente para distinguir efeito de ruído e verificar o risco material, não para satisfazer contagem fixa. Uma vez atendidos os critérios de aceite, encerre; se a diferença for inconclusiva, relate incerteza e o menor experimento discriminante. Para comparação solicitada, não substitua a prova por inferência de código só para poupar cota. Se uma meta não for alcançada, informe o resultado e trade-off, não prometa ganho nem persiga otimizações marginais fora do escopo.

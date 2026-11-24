@@ -1,5 +1,7 @@
 # Runtime Roblox Studio + MCP — causa raiz
 
+**Limite de execução v2.1:** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Autorização de edição não autoriza teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
+
 Use quando há sintoma em execução, Studio conectado ou divergência de origem dos dados. **Antes de chamar MCP**, confira se Source/logs disponíveis já discriminam a causa. Desnecessário abrir e encerrar Play repetidamente para diagnosticar um ramo de código conhecido. Se o usuário pediu reprodução, faça o teste dirigido; senão descreva a lacuna e o menor teste manual.
 
 - Descubra ferramentas expostas antes de chamar. Se disponível, `list_roblox_studios` identifica a instância e `studio_id`; `get_studio_state` identifica Play/Edit e contextos. Não presuma que uma conexão MCP forneça todas as habilidades oficiais.

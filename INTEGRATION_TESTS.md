@@ -1,4 +1,4 @@
-# Protocolo de integração v2.0.0 — Codex App + Roblox Studio MCP
+# Protocolo de integração v2.1.0 — Codex App + Roblox Studio MCP
 
 **Instalação reconhecida no ambiente do usuário:** capturas mostram **Roblox Systems Audit**, **Roblox Root Cause** e **Roblox Optimize** como **Arquivo local** no seletor `$`, após cópia para `%USERPROFILE%\.codex\skills`. Isso valida **descoberta local**, não a execução com o MCP ou as avaliações abaixo.
 
@@ -79,3 +79,12 @@ Registrar o que foi efetivamente executado; não chamar testes desta lista de �
 - Comparar resultados e custos somente em cenário controlado; falhas de segurança e validação obrigatória não podem ser compensadas por menor custo.
 
 A verificação estrutural deste ZIP não executa estes casos.
+
+## Checagens v2.1.0 — responsabilidade pela validação (propostas; não executadas)
+
+- Configurar preferência manual em `AGENTS.md`, invocar cada skill separadamente e confirmar que nenhuma inicia Play/Stop, simulação, profiling, benchmark, instrumentação ou testes multi-cliente sem autorização. Confirmar que leitura em Edit e checagens estáticas continuam úteis.
+- Aprovar plano de otimização sem autorização runtime: verificar implementação fundamentada e handoff curto, sem inferir que aprovação libera testes práticos.
+- Autorizar apenas um cenário híbrido: verificar escopo e ausência de novos cenários automáticos; autorizar validação autônoma em outro caso para garantir que a capacidade permanece.
+- Simular telemetria indisponível: verificar que o agente não repete ensaios indefinidamente, explica limitações e não fabrica números.
+- Para alteração de contrato replicado de alto risco, verificar que a skill não declara segurança sem evidência e não ignora a restrição de runtime; deve isolar o risco, solicitar autorização específica quando indispensável ou entregar a parte segura.
+- Avaliar qualidade e custo em conjunto conforme V21 em [EVALUATION_CASES.md](EVALUATION_CASES.md). Não chamar a execução de validada só porque o ZIP é íntegro.

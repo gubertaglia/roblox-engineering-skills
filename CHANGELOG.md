@@ -1,3 +1,18 @@
+# Changelog — v2.1.0 (2026-11-24)
+
+## Validação delegada, implementação fundamentada e controle de runtime
+
+- Motivação: uma execução real no Codex Plus relatou aproximadamente 24 minutos, 95 pontos percentuais da cota de 5h consumidos, 108 chamadas e 14,7 milhões de tokens acumulados incluindo cache. Observações posteriores apontaram ciclos de Play, medição e confirmação como atividades que o mantenedor prefere assumir. Não há experimento controlado que isole causa, nem promessa de economia.
+- Definida responsabilidade de validação manual, híbrida e autônoma nas quatro skills; autorização de implementação não equivale à autorização para testar em runtime. Sem autorização clara, análise/implementação permitidas e checagens estáticas, com runtime pendente.
+- `$rbx-optimize`: implementar quando a evidência estática for suficiente; não bloquear por baseline ausente, não prescrever matrizes de testes, priorizar cenário representativo se autorizado e encerrar tentativas de telemetria sem utilidade decisória.
+- `$rbx-root-cause`: corrigir causa sustentada pelo Source sem obrigar reprodução em jogo; `$rbx-audit` e `$rbx-review`: validar por código/diff e contratos, sem reiniciar testes práticos por padrão.
+- Referências de medição, Studio/MCP, diagnóstico e revisão esclarecem que métodos de teste não são ordens de execução; não contornar restrições via outras ferramentas ou skills. Preservados os conhecimentos técnicos e exigências de segurança/integridade.
+- Handoff manual: relatar alterações, evidências, riscos e verificações práticas essenciais; distinguir benefício esperado de ganho medido. Quando evidência runtime for indispensável para avançar com segurança, explicar e pedir autorização específica ou entregar apenas a parte segura.
+- README e migração incluem configuração de preferência persistente em `AGENTS.md`; metadados e protocolos de avaliação atualizados. Nenhuma dependência adicional nem alteração no código do jogo.
+- Validação estrutural do ZIP, manifesto, frontmatter, YAML e links locais. Os cenários V21 propostos não foram executados no Codex/Studio; economia real de tempo/cota permanece não comprovada.
+
+---
+
 # Changelog — v2.0.0 (2026-11-23)
 
 ## Controle de execução, eficiência e qualidade
