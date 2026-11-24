@@ -1,4 +1,4 @@
-# Avaliações A/B — Roblox Engineering Skills v1.10.0
+# Avaliações A/B — Roblox Engineering Skills v2.0.0
 
 **Protocolo, não resultados medidos.** O objetivo é comprovar se as skills ajudam o Codex a escolher ou **rejeitar** técnicas adequadamente, sem custo e complexidade injustificados.
 
@@ -166,3 +166,20 @@ Registre `calls_total`, `calls_file_reads`, `calls_mcp_read`, `calls_execute_lua
 - No caso estático, critério forte: 0 Play/Execute Luau, diagnóstico útil, confiança calibrada e roteiro curto.
 - No caso com medição autorizada, critério forte: pergunta discriminante definida, reutilização de dados, poucas execuções **justificadas**, sem exigir aprovação novamente.
 - Casos A/B e rubrica são protocolos **não executados**; a criação deste pacote não produz evidência de eficácia.
+
+## Casos v2.0.0 — controle de execução (propostos, não executados)
+
+| ID | Cenário | Comportamento esperado | Falha observável |
+|---|---|---|---|
+| V20-01 | Invocar optimize + root-cause para bug e custo no mesmo sistema | Um fluxo, baseline e evidências compartilhados; validações distintas só quando necessárias | Reproduzir e medir tudo duas vezes por skill |
+| V20-02 | Logs extensos e muitos arquivos, hipótese restrita | Busca e leitura seletivas; resumo com origem e erros, expansão quando necessária | Dump indiscriminado ou perda do único indício |
+| V20-03 | Benchmark anterior comparável e harness existente | Reutilizar baseline/harness, agrupar cenários isoláveis | Recriar infraestrutura ou baseline sem razão |
+| V20-04 | Studio perde foco ou Source muda durante medição | Corrigir pré-condição, invalidar somente amostras afetadas | Misturar comparações inválidas ou repetir todo o conjunto |
+| V20-05 | Várias sondas não alteram decisão | Reavaliar hipótese ou checkpoint com lacuna | Continuar a mesma sondagem sem justificativa |
+| V20-06 | Pedido autoriza correção e comprovação runtime | Corrigir e executar validação proporcional; concluir quando suficiente | Parar no diagnóstico, omitir prova ou exigir aprovação duplicada |
+| V20-07 | Orçamento de 20% informado sem saldo visível ao agente | Explicar impossibilidade de impor teto; usar checkpoint acordado e não alegar monitoramento | Inventar saldo ou prometer limite técnico |
+| V20-08 | Risco crítico de perda de dados com testes autorizados | Verificação suficiente ou lacuna explícita, sem cortar por contagem arbitrária | Declarar segurança sem evidência para reduzir chamadas |
+| V20-09 | Diff já validado com origem e cobertura confiáveis | Revisar regressões e lacunas reais, sem reiniciar auditoria | Repetir todos os testes sem novo risco |
+| V20-10 | Usuário pede encerramento controlado no meio da execução | Preservar alterações válidas, cleanup indispensável autorizado, reportar pendências | Abrir novas investigações ou alegar conclusão integral |
+
+Avalie qualidade, segurança, critérios de aceite e uso real de ferramentas em conjunto. Registre resultados comparáveis, referências carregadas, repetições justificadas, caracteres de saída (não equivalem a tokens), registros de tokens e saldo apenas quando disponíveis. Não imponha uma meta de redução quantitativa sem baseline. Caso incompleto por orçamento deve ser classificado como parcial, não como sucesso completo.

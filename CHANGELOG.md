@@ -1,3 +1,16 @@
+# Changelog — v2.0.0 (2026-11-23)
+
+## Controle de execução, eficiência e qualidade
+
+- Todas as quatro skills receberam um contrato curto de controle de execução: uma única missão combinada, critérios de conclusão, evidência compartilhada, operações focadas, repetição justificada e checkpoints úteis sem aprovação artificial.
+- `$rbx-optimize`: procedimento principal consolidado; mantido acesso direto às referências técnicas, sem leitura obrigatória adicional. `$rbx-root-cause`: não parar no diagnóstico quando correção e validação estiverem autorizadas. `$rbx-audit` e `$rbx-review`: evitar repetir trabalho já comprovado ou ampliar escopo sem motivo material.
+- Refinadas referências de economia de ferramentas, medição e Studio MCP: resumos com proveniência, agrupamento seguro, controle de pré-condições, reuso de harness e tratamento de medições inconclusivas.
+- Preservados nomes, políticas de invocação, segurança, autoridade, fidelidade acordada, permissões de salvar/publicar e todas as referências técnicas da v1.10.0. Nenhum MCP, script executável ou dependência adicional; skills externas não foram modificadas.
+- Atualizados metadados, documentação de instalação/migração, manifesto e avaliações de comportamento V20-01 a V20-10.
+- Validação: integridade do ZIP, manifesto, nomes, frontmatter, políticas e links locais. Não houve execução do Codex/Roblox Studio, benchmark A/B nem demonstração de redução percentual de cota.
+
+---
+
 # Changelog — v1.10.0 (2026-11-23)
 
 ## Análise estática primeiro e menor custo de ferramentas

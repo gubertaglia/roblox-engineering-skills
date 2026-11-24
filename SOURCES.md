@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v1.10.0 (2026-11-23)
+# Fontes de referência e verificação — v2.0.0 (2026-11-23)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -119,3 +119,10 @@ Fontes oficiais sustentam a semântica da API, **não** ganhos medidos de CPU, G
 - Roblox, network ownership: https://create.roblox.com/docs/physics/network-ownership
 
 **Nota de método:** "static-first" e orçamento flexível de ferramentas são **decisões de design destas skills**, não um protocolo oficial imposto pela Roblox. O custo de cota relatado em um caso de usuário não equivale a benchmark controlado de economia de tokens. Nenhuma fonte aqui comprova ganhos quantitativos para a v1.10.0.
+
+## Fontes para controle de execução v2.0.0
+
+- OpenAI, adaptação de skills e prompts a modelos agentes, progressive disclosure e conclusão: https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra
+- OpenAI, documentação de skills: https://developers.openai.com/codex/skills
+
+As regras de checkpoint, reutilização de evidências e agrupamento seguro são decisões de design deste pacote inspiradas nessas orientações; não são garantia de redução de cota nem mecanismo de cobrança. As APIs e referências Roblox anteriores foram preservadas; esta revisão não é uma revalidação integral das APIs do engine.

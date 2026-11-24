@@ -1,4 +1,4 @@
-# Protocolo de integração v1.10.0 — Codex App + Roblox Studio MCP
+# Protocolo de integração v2.0.0 — Codex App + Roblox Studio MCP
 
 **Instalação reconhecida no ambiente do usuário:** capturas mostram **Roblox Systems Audit**, **Roblox Root Cause** e **Roblox Optimize** como **Arquivo local** no seletor `$`, após cópia para `%USERPROFILE%\.codex\skills`. Isso valida **descoberta local**, não a execução com o MCP ou as avaliações abaixo.
 
@@ -54,7 +54,7 @@ Registrar o que foi efetivamente executado; não chamar testes desta lista de �
 
 - [ ] ZIP contém as mesmas quatro skills (`rbx-review` opcional) e frontmatter `name`/política `allow_implicit_invocation` preservados.
 - [ ] `MANIFEST.json` corresponde byte a byte aos SHA-256 de todos os arquivos de conteúdo, exceto o próprio manifesto.
-- [ ] Todos os links relativos locais Markdown resolvem para arquivos internos; nomes v1.10.0 consistentes em README/MIGRATION/INSTALL/EVALUATION.
+- [ ] Todos os links relativos locais Markdown resolvem para arquivos internos; versão corrente consistente em README/MIGRATION/INSTALL/EVALUATION.
 - [ ] `rbx-optimize/SKILL.md` remete às três referências novas da v1.10.0; os demais SKILL.md contêm instrução de inspeção antes de runtime.
 - [ ] Nenhum arquivo executável nem novo MCP/skill de implementação foi adicionado.
 
@@ -70,3 +70,12 @@ Registrar o que foi efetivamente executado; não chamar testes desta lista de �
 6. Comparar A/B com a mesma versão de Source e modelo; registrar contagens reais de chamadas, latência/cota **quando disponíveis**, e qualidade/correção das conclusões.
 
 **Não converter texto de protocolo em resultado de teste.**
+
+## Checagens v2.0.0 (comportamento proposto, não executado)
+
+- V20-01 a V20-10 de [EVALUATION_CASES.md](EVALUATION_CASES.md), com atenção a combinações de skills, resultados extensos e interrupções.
+- Confirmar que cada skill funciona instalada de forma independente, sem depender de arquivo compartilhado fora de sua pasta.
+- Confirmar que o agente não transforma o contrato de eficiência em nova checklist obrigatória, não alega monitorar cota sem capacidade real e não encerra uma correção antes de verificar requisitos autorizados.
+- Comparar resultados e custos somente em cenário controlado; falhas de segurança e validação obrigatória não podem ser compensadas por menor custo.
+
+A verificação estrutural deste ZIP não executa estes casos.

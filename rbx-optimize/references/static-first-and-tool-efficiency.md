@@ -1,4 +1,4 @@
-# Análise estática primeiro, evidências e economia de ferramentas — v1.10.0
+# Análise estática primeiro, evidências e economia de ferramentas — v2.0.0
 
 **Objetivo:** maximizar qualidade por tempo/cota, não minimizar chamadas a qualquer preço. Esta referência é condicional: leia quando houver tentação de fazer múltiplos testes/MCP, um pedido de planejamento ou dúvida sobre a suficiência da evidência.
 
@@ -36,3 +36,15 @@ Use quando houver: risco de regressão de gameplay/autoridade que leitura não r
 ## Contrato de saída econômica
 
 Responder, sem relatório inflado: **achado + origem → mecanismo/inferência e confiança → mudança recomendada/patch autorizado → impacto visual/gameplay → verificação mínima**, anotando o que **não foi medido**. Para cenário voxel, análise estática de fade no servidor pode justificar **candidato** a fade local, mas não atribuir KB economizados; validar espectadores, stream-in, remoção e hitboxes se migrar.
+
+## Controle de trabalho acumulado e checkpoints
+
+A unidade de decisão é a tarefa, não a skill. Para pedidos combinados (diagnóstico + otimização + correção), mantenha um mapa breve de sintomas, contratos, hipóteses, evidências e critérios de aceite. Reutilize esse mapa na transição entre missões. Uma skill adicional não inicia nova auditoria, novo baseline ou novo conjunto de controles automaticamente.
+
+Antes de trabalho materialmente caro, escolha a menor operação que pode alterar a decisão. Use buscas e leituras delimitadas, agrupe operações independentes e preserve dependências/ordem de mutações. Não paralelize comandos que compartilham estado de Play, edição ou captura. Em vez de retornar Source integral por padrão, retorne caminho, linhas e trecho relevante; amplie quando contexto semântico exigir. Para logs e perfis, filtre no produtor quando possível e preserve unidades, cenário, origem, contagem, erros, variância e extremos materiais. Não trunque o único indício de falha. Não devolva capturas grandes ou gravações por padrão se uma métrica/observação curta responder à questão.
+
+Repetição só se houver uma justificativa concreta: mudança de versão/estado, ruído material, resultado incompleto, hipótese discriminável, correção nova ou risco relevante. Se a operação falhar por sessão, foco, sincronização ou contexto errado, corrija a pré-condição e invalide a evidência afetada, sem repetir controles válidos. Se várias ações seguidas não mudarem decisão, reavalie estratégia, reduza escopo ao pedido ou faça checkpoint; não execute uma sequência maior apenas para parecer exaustivo.
+
+Checkpoint em transição natural, orçamento informado atingido quando verificável, bloqueio, expansão material de escopo ou interrupção do usuário: registre brevemente objetivo, fatos com proveniência, alterações realizadas, critérios atendidos, lacunas e menor próxima ação. Preserve trabalho válido e desfaça instrumentação temporária quando seguro. Não crie arquivos de controle persistentes nem solicite novo turno por rotina. Se o usuário pedir encerramento, não inicie novos testes; só realize cleanup indispensável e autorizado. Se o trabalho ainda puder avançar dentro do pedido e orçamento, continue sem parada artificial.
+
+Cota de assinatura não é uma métrica de runtime Roblox. Sem telemetria real, não afirme acompanhar porcentagens de cota, não invente custos por chamada e não leia logs de conta por padrão. Um orçamento informado pode ser tratado como limite operacional apenas se for verificável; caso contrário, informe a limitação e use checkpoints observáveis acordados (por exemplo, após diagnóstico ou primeiro patch validado). Não imponha teto universal de chamadas, duração ou referências. Segurança, integridade, regressões críticas e evidência solicitada não podem ser descartadas silenciosamente; se houver restrição, explique a lacuna e não declare conclusão não validada.

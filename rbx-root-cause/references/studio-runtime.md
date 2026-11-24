@@ -11,3 +11,7 @@ Use quando há sintoma em execução, Studio conectado ou divergência de origem
 - `execute_luau`, Play, input simulado, `multi_edit` e `save_place` têm efeitos distintos. Não modifique código persistente nem publique por causa de uma investigação sem autorização.
 
 Fonte: https://create.roblox.com/docs/studio/mcp
+
+## Sessão, saída e repetição (v2)
+
+Reutilize descoberta de ferramentas e identidade da sessão enquanto válidas; confira novamente quando houver troca de place/processo, reinício, mudança de Source ou suspeita concreta. Agrupe leituras independentes, não mutações concorrentes sobre o mesmo estado. Retorne evidências focadas com contexto e erros; capture log/trace integral somente se necessário. Antes de novo Play, probe ou captura, identifique a hipótese ou verificação que ainda falta; mantenha reset e isolamento quando influenciam a comparação. Falha por infraestrutura pede correção de pré-condição, não repetição cega. Não faça gravação visual ou screenshot por hábito; use quando evidência visual for material ou pedida.

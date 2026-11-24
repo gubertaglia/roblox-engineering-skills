@@ -17,3 +17,7 @@ Use **somente quando o Studio/MCP for relevante**. Em auditoria de código está
 - Não instale outro MCP, plugin, servidor ou ferramenta por hábito. Sem MCP, faça a melhor análise possível dos arquivos e declare o que não foi validado em runtime.
 
 Fontes: https://create.roblox.com/docs/studio/mcp · https://github.com/Roblox/creator-docs/blob/main/content/en-us/assistant/skills.md
+
+## Sessão, saída e repetição (v2)
+
+Reutilize descoberta de ferramentas e identidade da sessão enquanto válidas; confira novamente quando houver troca de place/processo, reinício, mudança de Source ou suspeita concreta. Agrupe leituras independentes, não mutações concorrentes sobre o mesmo estado. Retorne evidências focadas com contexto e erros; capture log/trace integral somente se necessário. Antes de novo Play, probe ou captura, identifique a hipótese ou verificação que ainda falta; mantenha reset e isolamento quando influenciam a comparação. Falha por infraestrutura pede correção de pré-condição, não repetição cega. Não faça gravação visual ou screenshot por hábito; use quando evidência visual for material ou pedida.

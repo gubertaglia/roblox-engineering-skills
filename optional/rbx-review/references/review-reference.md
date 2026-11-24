@@ -57,3 +57,7 @@ Revisão de diff/consumidores e checagem de contratos primeiro. `Start/Stop Play
 - Propriedades: `CanQuery=false` exige `CanCollide=false`; `CanTouch=false` pode quebrar triggers; `Massless` não se aplica à root; múltiplas âncoras podem dividir assemblies; `Atomic` não é persistência; Motor6D e WeldConstraint não são equivalentes.
 
 Revisar apenas as categorias alteradas pelo diff. A presença de uma técnica sofisticada não é evidência de performance melhor.
+
+## Revisão sem reiniciar a investigação (v2)
+
+Use o diff, testes e evidências do patch como ponto de partida. Revalide quando a origem ou cobertura for insuficiente para uma regressão material, não porque outra skill gerou o resultado. Faça uma revisão focalizada dos contratos alterados e consumidores afetados; se a questão exigir novo diagnóstico sistêmico, descreva a lacuna em vez de expandir a missão automaticamente. Encerre sem inventar achados ou afirmar testes não executados.

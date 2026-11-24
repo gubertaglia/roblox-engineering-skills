@@ -56,3 +56,9 @@ Fontes: https://create.roblox.com/docs/performance-optimization/identify · http
 | Streaming/LOD | memória/join time, dispositivos reais, consistência stream-in e qualidade |
 
 Não extrapole de benchmarks Luau isolados para custos da engine. Use o menor conjunto de métricas suficiente para a hipótese.
+
+## Execução eficiente de campanhas de medição (v2)
+
+Defina antes a decisão e a métrica primária, controles e critérios de comparação. Reutilize harness existente quando compatível; não crie framework de benchmark para teste pontual. Agrupe cenários independentes numa execução quando isolamento, reset, warm-up e proveniência forem mantidos. Retorne resumo com unidades, amostras, percentis pertinentes, extremos e erros; solicite trace bruto apenas para dúvida concreta. Não misture medições de versões, foco, qualidade gráfica, carga ou processos diferentes sem qualificação. Invalide somente os ensaios afetados por pré-condição incorreta.
+
+Repita o suficiente para distinguir efeito de ruído e verificar o risco material, não para satisfazer contagem fixa. Uma vez atendidos os critérios de aceite, encerre; se a diferença for inconclusiva, relate incerteza e o menor experimento discriminante. Para comparação solicitada, não substitua a prova por inferência de código só para poupar cota. Se uma meta não for alcançada, informe o resultado e trade-off, não prometa ganho nem persiga otimizações marginais fora do escopo.
