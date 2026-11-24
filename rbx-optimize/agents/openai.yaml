@@ -1,6 +1,6 @@
 interface:
   display_name: "Roblox Optimize"
   short_description: "Analisar, planejar e otimizar desempenho Roblox"
-  default_prompt: "Use $rbx-optimize para analisar, planejar ou implementar otimizações conforme meu pedido. Compare ganhos esperados, riscos e compromissos de qualidade; em análise ou planejamento, não edite nem execute testes práticos por padrão. Respeite o escopo e a autorização de validação."
+  default_prompt: "Use $rbx-optimize conforme a missão. Avalie ganhos esperados, valor das funcionalidades e alternativas de preservar, simplificar, adaptar, substituir ou remover sistemas. Em análise e planejamento, entregue diagnóstico e plano sem editar ou testar por padrão; eu decido as concessões. Respeite a autorização para implementação e validação."
 policy:
   allow_implicit_invocation: true

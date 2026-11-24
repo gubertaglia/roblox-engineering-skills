@@ -1,3 +1,17 @@
+# Changelog — v2.4.0 (2026-11-24)
+
+## Valor funcional, julgamento técnico e limites consultivos
+
+- **Motivação:** a v2.3.0 já permitia propor concessões funcionais, mas concentrava exemplos e orientação na fidelidade visual. O mantenedor solicitou avaliação explícita do valor de funcionalidades e sistemas, e trouxe um prompt que separa raciocínio, diagnóstico, plano, decisão e execução.
+- `rbx-optimize` amplia compromissos funcionais: preservar, simplificar, adaptar, substituir/unificar, desativar ou remover conforme valor, mecanismo, ganho líquido e risco. Custo alto não implica dispensabilidade. Não são fases obrigatórias.
+- Julgamento técnico independente: questionar premissas e metas conflitantes, justificar concessões mesmo quando impopulares, preservar alternativas compatíveis e não presumir aprovação ou preferências desconhecidas.
+- Dependências e alterações de sistemas: consumidores, contratos, custo residual, lifecycle, persistência, migração, fallback e reversão. Segurança, autoridade, integridade e consistência permanecem não negociáveis.
+- Funcionalidade adaptativa secundária: avaliar transições e custo de controle; não degradar mecânica compartilhada por FPS local. Concessões funcionais exigem autorização antes de aplicar.
+- `rbx-audit` reforça função consultiva e análise de alternativas arquiteturais; `rbx-optimize` mantém modalidades existentes. Leitura não destrutiva é permitida; análise/plano não autorizam edição ou runtime por padrão. Aprovação de plano não é ordem de execução sem instrução clara.
+- Referências existentes e metadados refinados; quatro skills, políticas de invocação e dependências preservadas. Documentação, manifesto e casos de avaliação atualizados. Nenhum teste comportamental ou ganho medido foi demonstrado.
+
+---
+
 # Changelog — v2.3.0 (2026-11-24)
 
 ## Planejamento estratégico de desempenho e compromissos de qualidade

@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v2.3.0 (2026-11-24)
+# Fontes de referência e verificação — v2.4.0 (2026-11-24)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -138,3 +138,7 @@ Refinamentos operacionais derivados das adaptações manuais de prompts e prefer
 ## Motivação da v2.3.0
 
 Planejamento estratégico e compromissos de qualidade derivam do pedido do mantenedor e das referências técnicas já presentes, especialmente [núcleo de decisão](rbx-optimize/references/decision-kernel.md), [render e VFX](rbx-optimize/references/rendering-and-vfx.md) e [planejamento e trade-offs](rbx-optimize/references/performance-planning-and-tradeoffs.md). São critérios de engenharia, não novas APIs nem garantias oficiais. Nenhuma pesquisa externa ou medição de jogo foi realizada nesta atualização.
+
+## Motivação da v2.4.0
+
+Avaliação do valor funcional, julgamento independente e limites consultivos decorrem das solicitações do mantenedor e do prompt de análise/diagnóstico/plano fornecido, combinados com as referências existentes de [planejamento e trade-offs](rbx-optimize/references/performance-planning-and-tradeoffs.md) e [contratos e arquitetura](rbx-audit/references/contracts-state-and-architecture.md). São heurísticas de engenharia, não novos fatos sobre APIs Roblox. Não houve pesquisa externa, teste comportamental ou medição de desempenho nesta atualização.

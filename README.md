@@ -1,8 +1,8 @@
-# Roblox Engineering Skills — v2.3.0
+# Roblox Engineering Skills — v2.4.0
 
 Skills locais para o **Codex no aplicativo ChatGPT (Windows 11)**, com integração **opcional** ao **Roblox Studio MCP oficial**. São procedimentos reutilizáveis para investigação e tomada de decisão; **não** são ferramentas de profiling, subagentes ou substitutos das habilidades oficiais da Roblox. Não exigem CLI, IDE, chave de API extra ou MCP adicional.
 
-**Novidade v2.3.0: planejamento estratégico de desempenho e compromissos de qualidade.** O `rbx-optimize` passa a distinguir análise, planejamento e implementação. Pode recomendar mudanças de design, redução cosmética ou qualidade adaptativa quando o custo-benefício justificar, sem editar nem testar por padrão em análise/planejamento. Preserva os controles de evidência, autorização e eficiência da v2.2.0.
+**Novidade v2.4.0: avaliação do valor de funcionalidades e sistemas.** O `rbx-optimize` compara preservar, simplificar, adaptar, substituir, desativar ou remover recursos quando houver benefício líquido plausível. O agente pode questionar decisões de design e expectativas conflitantes; o usuário decide concessões e autoriza execução. Mantidas análise e planejamento sem alterações ou testes práticos por padrão.
 
 ## Por que esta versão existe
 
@@ -11,6 +11,12 @@ No desenvolvimento de um sistema voxel com Codex Plus (Astra Alto, Standard), um
 Essas observações motivam um ajuste de fluxo: evitar que validações práticas assumidas por padrão consumam tempo, contexto e cota sem benefício proporcional. Não se trata de afirmar que o Codex sempre testa em excesso, nem de prometer economia. Testar continua importante; a v2.1.0 definiu quem executa e quando. Na v2.2.0, aprendemos com as adaptações manuais de prompts: o mantenedor evitou a palavra “investigue” por receio de ciclos de Play/Stop, mas investigação estática profunda continua desejável. Remover exigências de cenários, métricas e relatórios prematuros reduz trabalho potencialmente dispensável. Uma leitura pontual de rede de 127,89 kB/s durante perda de apoio em peças conectadas é contexto útil, não prova da causa nem pico máximo. A saída deve ser proporcional, sem coleta apenas para preencher relatório. Esta atualização não comprova economia de cota ou causalidade isolada.
 
 A v2.3.0 responde a uma necessidade adicional do mantenedor: avaliar o desempenho de um sistema e receber um plano de correções e melhorias antes de decidir o que implementar. Algumas otimizações transparentes podem não ser suficientes; uma simplificação visual moderada, outra representação ou uma política adaptativa pode ter melhor custo-benefício. O agente deve poder questionar decisões de design caras, sem supor que toda perda visual seja aceitável ou que o ganho esteja comprovado. A nova referência concentra esse raciocínio no `rbx-optimize`, evitando uma quinta skill e duplicação técnica.
+
+A v2.4.0 amplia os compromissos visuais da v2.3.0 para decisões funcionais e arquiteturais. A motivação é permitir que a análise avalie se um recurso ou sistema justifica seu custo, e se outra solução entrega valor equivalente com menos trabalho. O princípio consultivo — analisar e raciocinar, entregar diagnóstico e plano, deixar decisão e execução com o usuário quando solicitadas — foi incorporado sem bloquear ferramentas de leitura nem eliminar a modalidade de implementação. Não há evidência de economia real de desempenho ou cota nesta atualização.
+
+### Decisões sobre funcionalidades e sistemas
+
+A análise pode recomendar preservar/otimizar, simplificar, adaptar, substituir/unificar, desativar ou remover. Não são fases: a escolha depende de finalidade, valor, custo, risco, confiança e dependências. Um recurso caro que define a experiência pode merecer investimento, não remoção. Concessões materiais fora da autorização são opções para decisão; segurança, autoridade, integridade e consistência não são negociáveis. Recursos adaptativos precisam de transições seguras, fallback e recuperação, sem degradar mecânicas compartilhadas por sinal local isolado. Consulte [planejamento e trade-offs](rbx-optimize/references/performance-planning-and-tradeoffs.md).
 
 ## Escolha pela intenção, não pelo tema
 
@@ -142,9 +148,9 @@ A skill não deve fabricar métricas ou recomendar uma técnica apenas por apare
 
 ## Instalação no Codex Desktop
 
-Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.2.0 (ou anterior) à v2.3.0, substitua integralmente as pastas das skills para incluir as novas referências; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
+Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.3.0 (ou anterior) à v2.4.0, substitua integralmente as pastas das skills para incluir as novas referências; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
 
-1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.3.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
+1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.4.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
 2. Copie **as três pastas completas** `rbx-audit`, `rbx-root-cause`, `rbx-optimize` diretamente para o diretório de skills reconhecido pelo seu Codex, substituindo as versões antigas. Não copie a pasta externa do ZIP como uma skill.
 3. Opcionalmente, copie `optional/rbx-review` como `rbx-review` no mesmo diretório.
 4. Verifique em **Personalizar → Habilidades** e no seletor `$rbx` do chat Codex. A descoberta na interface não comprova acesso ao Studio MCP.

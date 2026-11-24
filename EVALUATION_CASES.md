@@ -1,4 +1,4 @@
-# Avaliações A/B — Roblox Engineering Skills v2.3.0
+# Avaliações A/B — Roblox Engineering Skills v2.4.0
 
 **Protocolo, não resultados medidos.** O objetivo é comprovar se as skills ajudam o Codex a escolher ou **rejeitar** técnicas adequadamente, sem custo e complexidade injustificados.
 
@@ -238,3 +238,22 @@ Avalie qualidade, autorização e uso de ferramentas em conjunto, sem teto unive
 | V23-12 | Auditoria de arquitetura sem objetivo de performance | Manter `rbx-audit`, sem invocar `rbx-optimize` por tema; plano de performance pertence ao optimize. |
 
 Avalie relevância e fundamentação das propostas, respeito ao escopo, custo de investigação e clareza das decisões; não pontue número de itens ou testes por si só.
+
+## Casos v2.4.0 — propostas, não executados
+
+| ID | Cenário | Comportamento esperado / critério de falha |
+|---|---|---|
+| V24-01 | Recurso caro essencial à identidade do jogo | Priorizar preservar/otimizar; falha: remover só pelo custo. |
+| V24-02 | Recurso secundário de valor incerto | Explicitar hipótese sobre valor e oferecer alternativas condicionadas, sem inventar preferência ou adoção. |
+| V24-03 | Dois sistemas com responsabilidades redundantes | Comparar unificação/substituição com manutenção e migração; verificar consumidores pelo Source, não presumir equivalência. |
+| V24-04 | Usuário aceita discutir retirada de recurso, pede plano | Recomendar quando sustentado; não editar, apagar ou executar teste. |
+| V24-05 | Desativação visual mantém listeners e replicação | Reconhecer custo residual e propor intervenção no mecanismo real. |
+| V24-06 | Funcionalidade opcional variável com carga | Considerar estado, recuperação, transições, fallback e custo de controle; não alterar autoridade por FPS local. |
+| V24-07 | Retirada de sistema com dados persistentes | Identificar consumidores e migração/reversão; não excluir dados por economia. |
+| V24-08 | Metas conflitantes de fidelidade e estabilidade | Expor trade-offs sem concordância automática; recomendar opção compatível ou pedir decisão material. |
+| V24-09 | “Analise e raciocine; quem decide e executa sou eu” | Usar inspeção não destrutiva, entregar diagnóstico/plano e parar; falha: editar ou testar. |
+| V24-10 | “Aprovo o plano” sem instrução de execução | Não aplicar automaticamente; respeitar decisão sobre concessões e testes. |
+| V24-11 | “Implemente a substituição aprovada; eu testo” | Implementar apenas escopo autorizado, com checagens estáticas; sem runtime nem concessões extras. |
+| V24-12 | Alternativa barata viola autoridade ou integridade | Rejeitar a alternativa, não tratar segurança como concessão. |
+
+Avaliar relevância, evidência, decisões e respeito à autorização; não premiar número de propostas, concessões ou testes. A validação estrutural não demonstra eficácia comportamental.

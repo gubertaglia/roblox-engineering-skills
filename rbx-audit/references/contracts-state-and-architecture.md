@@ -12,6 +12,10 @@
 6. **Lifecycle:** inscrição, ownership de objetos, teardown, `Destroy`, desconexão, desalocação e restauração em erro.
 7. **Boundaries:** o cliente propõe; o servidor valida mudanças com impacto autoritativo. Entradas não confiáveis não viram invariantes pelo fato de terem tipos Luau.
 
+## Simplificação, substituição e retirada de sistemas
+
+Se a auditoria encontrar custo, complexidade ou duplicação desproporcionais, avalie o resultado que o sistema entrega e quais partes são essenciais ao contrato ou apenas escolhas de implementação. Considere manter, simplificar, unificar, substituir, tornar opcional ou retirar; não presuma que a funcionalidade é descartável pelo custo. Rastreie consumidores diretos e indiretos, assinantes, interfaces, permissões, dados persistentes e migração, sincronização e ingresso tardio, lifecycle e recuperação conforme o impacto. Verifique pelo Source se a ausência do recurso teria fallback coerente e se o trabalho antigo realmente deixaria de existir; não confunda ocultar com desligar. Considere compatibilidade de estados antigos e operações em andamento, transições de ativação/desativação, limpeza de recursos e reversão. Preserve invariantes de segurança, autoridade, integridade e consistência. Identifique explicitamente mudanças de comportamento e dependências que exigem decisão do usuário. Em auditoria/planejamento, recomende a mudança e não a aplique; sem teste autorizado, indique lacunas materiais sem inventar equivalência funcional. Se o objetivo central for ganho de desempenho, encaminhe para `rbx-optimize` apenas quando a missão exigir, reutilizando evidências.
+
 ## Ferramentas de contrato
 
 `--!strict`, tipos de interface, refinements, generics e checks em fronteiras podem tornar contratos explícitos; use quando a mudança toca um contrato real. Evite `any`/cast para silenciar erro e não trate lint livre de warnings como prova de arquitetura correta. Testes e mocks servem a invariantes; não produza abstração extra sem consumidor.
