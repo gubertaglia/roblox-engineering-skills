@@ -1,4 +1,4 @@
-# Instalação e verificação — Codex Desktop no Windows 11 (v2.1.0)
+# Instalação e verificação — Codex Desktop no Windows 11 (v2.2.0)
 
 Este é um guia **manual**, sem PowerShell, CLI, API keys ou dependências. As três skills principais são `rbx-audit`, `rbx-root-cause` e `rbx-optimize`. A `rbx-review` é opcional.
 
@@ -63,7 +63,7 @@ A interface pode exibir o **nome de apresentação** de `agents/openai.yaml` em 
 - Faça backup **apenas se tiver modificado as skills localmente**.
 - Substitua as pastas `rbx-audit`, `rbx-root-cause` e `rbx-optimize` **por inteiro** no mesmo diretório que já funciona. Evite mesclar referências antigas.
 - Não altere `cavecrew`, `caveman`, `ponytail`, `.system`, plugins ou configuração do Studio MCP.
-- **v2.0.0 (ou anterior) → v2.1.0:** `SKILL.md` e referências refinam responsabilidade pela validação, implementação fundamentada e autorização explícita de runtime; substitua integralmente as pastas para obter os novos arquivos. Consulte [MIGRATION.md](MIGRATION.md).
+- **v2.1.0 (ou anterior) → v2.2.0:** substitua integralmente as pastas para incluir instruções de investigação adaptativa, evidência e saída proporcional; mantenha sua preferência de validação. Consulte [MIGRATION.md](MIGRATION.md).
 
 ## Se não aparecer no Codex
 

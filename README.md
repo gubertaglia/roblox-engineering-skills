@@ -1,14 +1,14 @@
-# Roblox Engineering Skills — v2.1.0
+# Roblox Engineering Skills — v2.2.0
 
 Skills locais para o **Codex no aplicativo ChatGPT (Windows 11)**, com integração **opcional** ao **Roblox Studio MCP oficial**. São procedimentos reutilizáveis para investigação e tomada de decisão; **não** são ferramentas de profiling, subagentes ou substitutos das habilidades oficiais da Roblox. Não exigem CLI, IDE, chave de API extra ou MCP adicional.
 
-**Novidade v2.1.0: responsabilidade pela validação e implementação fundamentada primeiro.** Evolui a eficiência da v2.0.0: o agente não assume automaticamente testes práticos, pode entregar código após evidência estática suficiente e respeita a divisão de trabalho definida pelo usuário/projeto. Mantém segurança, contratos cliente/servidor, referências técnicas e qualidade acordada.
+**Novidade v2.2.0: investigação adaptativa, fidelidade às evidências e entrega proporcional.** Preserva a validação delegada e implementação fundamentada da v2.1.0. Prioriza contexto causal, decisões úteis e código de qualidade, não campanhas de testes ou relatórios extensos. Mantém segurança, contratos e biblioteca técnica.
 
 ## Por que esta versão existe
 
 No desenvolvimento de um sistema voxel com Codex Plus (Astra Alto, Standard), uma execução relatada durou cerca de 24 minutos, consumiu 95 pontos percentuais da janela de cinco horas, acumulou 108 chamadas registradas e aproximadamente 14,7 milhões de tokens processados, incluindo cache. O contexto cresceu de aproximadamente 31 mil para 186 mil tokens. Em outra tarefa de rede, o agente implementou alterações úteis, mas gastou parte de 12 min 50 s em Play, tentativas de leitura de métricas, cenários e confirmação adicional; o usuário relatou 2 pontos percentuais da cota semanal. São tarefas e janelas distintas: não constituem uma comparação controlada nem demonstram que testes ou skills isoladamente causaram o consumo.
 
-Essas observações motivam um ajuste de fluxo: evitar que validações práticas assumidas por padrão consumam tempo, contexto e cota sem benefício proporcional. Não se trata de afirmar que o Codex sempre testa em excesso, nem de prometer economia. Testar continua importante; a novidade é decidir **quem** executa o teste e **quando** é necessário, sem confundir autorização de implementação com autorização de runtime.
+Essas observações motivam um ajuste de fluxo: evitar que validações práticas assumidas por padrão consumam tempo, contexto e cota sem benefício proporcional. Não se trata de afirmar que o Codex sempre testa em excesso, nem de prometer economia. Testar continua importante; a v2.1.0 definiu quem executa e quando. Na v2.2.0, aprendemos com as adaptações manuais de prompts: o mantenedor evitou a palavra “investigue” por receio de ciclos de Play/Stop, mas investigação estática profunda continua desejável. Remover exigências de cenários, métricas e relatórios prematuros reduz trabalho potencialmente dispensável. Uma leitura pontual de rede de 127,89 kB/s durante perda de apoio em peças conectadas é contexto útil, não prova da causa nem pico máximo. A saída deve ser proporcional, sem coleta apenas para preencher relatório. Esta atualização não comprova economia de cota ou causalidade isolada.
 
 ## Escolha pela intenção, não pelo tema
 
@@ -25,7 +25,7 @@ A mesma área técnica (rede, VFX, voxel, física, cache) pode surgir em todas a
 
 ## Como reduzir chamadas MCP sem reduzir a qualidade
 
-O padrão da **v2.1.0** é: **reutilizar evidências → inspecionar código e consumidores → identificar hipótese/contrato → propor ou implementar (se autorizado) → checagens estáticas e validação conforme responsabilidade**. Inspecionar um loop ou fade no servidor pode demonstrar o mecanismo, mas **não** quantifica bytes, FPS ou melhora real. Etiquete: **observado no código**, **inferência técnica**, **medido** e **não verificado**.
+O padrão da **v2.2.0** é: **reutilizar evidências → inspecionar código e consumidores → identificar hipótese/contrato → propor ou implementar (se autorizado) → checagens estáticas e validação conforme responsabilidade**. Inspecionar um loop ou fade no servidor pode demonstrar o mecanismo, mas **não** quantifica bytes, FPS ou melhora real. Etiquete: **observado no código**, **inferência técnica**, **medido** e **não verificado**.
 
 - **"Investigue e monte um plano"**: sem Play/Execute Luau de instrumentação por padrão; leitura estática primeiro; oferecer teste manual breve quando necessário.
 - **"Reproduza e meça"**: o pedido já autoriza testes no escopo; fazer **poucos ensaios discriminantes**, reutilizar medições e interromper controles redundantes. Não transformar isso em profiler exaustivo sem benefício de decisão.
@@ -33,7 +33,7 @@ O padrão da **v2.1.0** é: **reutilizar evidências → inspecionar código e c
 
 Referências condicionais: [análise estática e economia de ferramentas](rbx-optimize/references/static-first-and-tool-efficiency.md), [distribuição cliente/servidor](rbx-optimize/references/client-server-work-placement.md) e [segurança dos remotes](rbx-audit/references/security-and-remote-contracts.md). Limites de ferramentas são **flexíveis**: não sacrificar segurança, integridade ou correção apenas para reduzir contagem de chamadas.
 
-## Responsabilidade pela validação (v2.1.0)
+## Responsabilidade pela validação (preservada na v2.2.0)
 
 | Modalidade | Agente | Usuário |
 |---|---|---|
@@ -60,7 +60,7 @@ sem afirmar que resultados não medidos ou comportamentos não testados foram va
 
 Isso permite instruções curtas, como `Otimize a replicação do sistema; eu farei a validação prática.` A política não impede leitura do Studio em Edit, análise de contratos, segurança ou typecheck/lint pertinentes. Não aplique mudanças inseguras por falta de teste; isole a lacuna ou peça autorização se indispensável.
 
-## Controle de execução na v2.1.0
+## Controle de execução na v2.2.0
 
 - Uma missão combinada pode usar duas skills complementares, mas compartilha escopo, baseline, evidências e critérios de aceite. Não execute cada procedimento como uma tarefa independente.
 - Prefira saída de ferramenta com trechos, métricas e erros relevantes; leia mais quando uma decisão realmente depender disso. Reutilize sessão, Source e medições enquanto comparáveis.
@@ -68,7 +68,11 @@ Isso permite instruções curtas, como `Otimize a replicação do sistema; eu fa
 - Se informar orçamento de cota, acompanhe-o pela interface do Codex: instruções não são um limitador técnico e não garantem visibilidade de saldo ao agente. Não há teto universal de testes. Critérios de risco e evidência continuam prevalecendo.
 - Evite transformar a ausência de medição em bloqueio automático; ganhos inferidos não são ganhos medidos. Se a telemetria falhar, limite novas tentativas à utilidade decisória, não à completude do relatório.
 
-Ponytail, Caveman e Prompt Elaboration são externos a este pacote. Não precisam ser instalados nem invocados para usar estas skills. Evite orientações sobrepostas que não mudem a tarefa.
+**Profundidade adaptativa:** análise localizada quando o mecanismo está delimitado; sistêmica quando há dependências ou contratos afetados; aprofundada quando risco ou incerteza material exige. Não são fases. Investigar não autoriza testar. Antes de verificar mais, considere se a ação altera uma decisão, resolve dúvida ou reduz risco material e se está autorizada.
+
+**Entrega proporcional:** correção — mudança e limites; otimização — custo, alteração e benefício esperado/medido; diagnóstico — causa e evidência decisiva; auditoria/revisão — achados materiais e recomendações. Não exigir relatório, matriz de métricas ou lista de arquivos para preencher formato. Se o usuário valida, indique apenas verificações práticas pertinentes. Preservar detalhe solicitado, riscos e incertezas importantes.
+
+Ponytail, Caveman e Prompt Elaboration são externos a este pacote. Não precisam ser instalados nem invocados para usar estas skills. Evite orientações sobrepostas que não mudem a tarefa. Prompt Elaboration v1.5 preserva contexto e limites; Ponytail pode favorecer simplicidade e Caveman concisão. Nenhuma dessas skills altera a autorização ou substitui análise necessária.
 
 ## Como o Codex usa as skills
 
@@ -117,9 +121,9 @@ A skill não deve fabricar métricas ou recomendar uma técnica apenas por apare
 
 ## Instalação no Codex Desktop
 
-Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.0.0 (ou anterior) à v2.1.0, substitua integralmente as pastas das skills para incluir as novas referências; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
+Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.1.0 (ou anterior) à v2.2.0, substitua integralmente as pastas das skills para incluir as novas referências; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
 
-1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.1.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
+1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.2.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
 2. Copie **as três pastas completas** `rbx-audit`, `rbx-root-cause`, `rbx-optimize` diretamente para o diretório de skills reconhecido pelo seu Codex, substituindo as versões antigas. Não copie a pasta externa do ZIP como uma skill.
 3. Opcionalmente, copie `optional/rbx-review` como `rbx-review` no mesmo diretório.
 4. Verifique em **Personalizar → Habilidades** e no seletor `$rbx` do chat Codex. A descoberta na interface não comprova acesso ao Studio MCP.
@@ -134,6 +138,6 @@ Leitura e análise dentro do pedido não precisam de aprovações artificiais. *
 
 ## Escopo desta versão
 
-A v2.1.0 preserva as quatro skills e a biblioteca técnica da v2.0.0, refinando a responsabilidade pela validação, implementação fundamentada e avaliações propostas. Não adiciona scripts executáveis, MCPs, agentes, frameworks ou dependências. A versão foi checada estaticamente como pacote; **não** foram executados benchmarking Roblox/Studio nem testes A/B com Codex. Integridade do `MANIFEST.json` não comprova eficácia comportamental, ganhos de FPS/RAM ou segurança em runtime.
+A v2.2.0 preserva as quatro skills e a biblioteca técnica da v2.1.0; refina investigação, evidências, decisões, ferramentas e comunicação. Não adiciona dependências. Validação estrutural do pacote não comprova eficácia comportamental, ganhos de desempenho, economia de cota ou segurança em runtime. Nenhum benchmark Roblox/Studio ou teste A/B Codex foi executado nesta atualização.
 
 Consulte [CHANGELOG.md](CHANGELOG.md) para mudanças, [MIGRATION.md](MIGRATION.md) para atualização, [SOURCES.md](SOURCES.md) para documentação e [EVALUATION_CASES.md](EVALUATION_CASES.md) / [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md) para protocolos opcionais.

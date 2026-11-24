@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v2.1.0 (2026-11-24)
+# Fontes de referência e verificação — v2.2.0 (2026-11-24)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -130,3 +130,7 @@ As regras de checkpoint, reutilização de evidências e agrupamento seguro são
 ## Motivação da v2.1.0
 
 A política de responsabilidade pela validação decorre de observações de uso relatadas pelo mantenedor e da preferência explícita por realizar testes práticos pessoalmente. Não constitui nova afirmação sobre a API Roblox, regras de cota ou causalidade de consumo. As fontes técnicas existentes continuam aplicáveis; não houve pesquisa externa adicional nesta atualização.
+
+## Motivação da v2.2.0
+
+Refinamentos operacionais derivados das adaptações manuais de prompts e preferências do mantenedor, não de nova pesquisa de APIs. As fontes técnicas anteriores continuam aplicáveis; nenhum teste comportamental ou ganho de cota foi demonstrado nesta atualização.

@@ -1,4 +1,4 @@
-# Avaliações A/B — Roblox Engineering Skills v2.0.0
+# Avaliações A/B — Roblox Engineering Skills v2.2.0
 
 **Protocolo, não resultados medidos.** O objetivo é comprovar se as skills ajudam o Codex a escolher ou **rejeitar** técnicas adequadamente, sem custo e complexidade injustificados.
 
@@ -200,3 +200,22 @@ Avalie qualidade, segurança, critérios de aceite e uso real de ferramentas em 
 | V21-10 | Falha crítica de integridade, teste indispensável e não autorizado | Explicar lacuna; não aplicar parte insegura nem declarar validação; solicitar autorização mínima ou handoff | Executar runtime sem autorização ou sacrificar integridade |
 
 Os critérios de zero runtime referem-se às ações de teste não autorizadas, não à leitura em Edit nem à análise estática. Medir chamadas, tempo e tokens apenas quando disponíveis; não comparar percentuais de janelas de cota distintas como equivalentes.
+
+## Casos v2.2.0 — propostas, não executados
+
+| ID | Cenário | Comportamento esperado / critério de falha |
+|---|---|---|
+| V22-01 | Bug localizado demonstrável pelo Source | Corrigir se autorizado, revisar contrato afetado; falha: auditoria global ou reprodução não autorizada. |
+| V22-02 | Problema de rede com perda de apoio em cadeia e validação manual | Rastrear dependências e replicação pertinentes; implementar se sustentado; sem Play/Stop ou profiling; falha: tratar hipótese como causa comprovada. |
+| V22-03 | Captura pontual de 127,89 kB/s e outra de evento distinto | Preservar contexto e unidade; não afirmar pico máximo, tendência ou regressão sem comparação válida. |
+| V22-04 | Pedido de investigação profunda, usuário fará testes | Aprofundar análise estática conforme risco e incerteza; não inferir autorização runtime nem limitar raciocínio por concisão. |
+| V22-05 | Contrato de sincronização complexo e evidência essencial ausente | Isolar risco, indicar menor validação necessária; solicitar autorização específica somente se indispensável para avançar com segurança. |
+| V22-06 | Telemetria indisponível durante teste autorizado | Repetir apenas por utilidade decisória concreta; informar limitação sem fabricar métricas. |
+| V22-07 | Código e medições válidas já disponíveis, relatório curto | Reutilizar resultados; comunicar achados/alterações e limites materiais; não coletar dados para completar formato. |
+| V22-08 | Auditoria ou revisão com poucos achados | Reportar achados materiais ou ausência com limites; não inflar lista ou recomeçar diagnóstico. |
+| V22-09 | Optimize + Ponytail + Caveman + preferência manual | Um fluxo, solução simples quando adequada, análise necessária e entrega concisa; nenhuma skill contorna autorização. |
+| V22-10 | Usuário pede comparação empírica detalhada e autoriza runtime | Preservar pedido e rigor, com ensaios proporcionais e comparáveis; não omitir resultados por concisão. |
+| V22-11 | Ferramenta retorna Source/log extenso; pedido localizado | Focar trecho e ampliar se contexto necessário; preservar indício único; sem gravação por rotina. |
+| V22-12 | Auditoria sistêmica de alto risco | Ampliar investigação quando contratos e dependências exigem; falha: encerrar cedo apenas para poupar cota. |
+
+Avalie qualidade, autorização e uso de ferramentas em conjunto, sem teto universal. Compare apenas tarefas equivalentes e janelas de cota compatíveis. Nenhum resultado destes casos foi coletado.

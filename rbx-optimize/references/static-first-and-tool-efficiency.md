@@ -1,14 +1,14 @@
-# Análise estática primeiro, evidências e economia de ferramentas — v2.1.0
+# Análise estática primeiro, evidências e economia de ferramentas — v2.2.0
 
-**Limite de execução v2.1:** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Autorização de edição não autoriza teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
+**Limite de execução (v2.2):** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Investigação aprofundada, aprovação de plano, acesso técnico e autorização de edição não autorizam teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
 
 **Objetivo:** maximizar qualidade por tempo/cota, não minimizar chamadas a qualquer preço. Esta referência é condicional: leia quando houver tentação de fazer múltiplos testes/MCP, um pedido de planejamento ou dúvida sobre a suficiência da evidência.
 
 ## Sequência operacional
 
-1. **Reutilizar o conhecido.** Comece pelo sintoma, código, diff, logs, métricas e perfis já fornecidos. Identifique arquivo/versão/ambiente e as lacunas que *mudam a decisão*. Não repita execução porque os dados vieram de um turno anterior se ainda forem comparáveis.
+1. **Reutilizar o conhecido.** Comece pelo sintoma, cadeia de dependências, caso de referência, código, diff, logs, métricas e perfis fornecidos. Preserve hipóteses como hipóteses; confira origem, ambiente e versão quando materiais. Priorize lacunas que mudem a decisão; não repita execução se os dados ainda forem válidos.
 2. **Inspecionar em lote e com propósito.** Encontre o caminho causal no código (entrada → processamento → estado → replicação → render), leia as funções e consumidores relevantes, agrupe buscas por padrões (`FireAllClients`, loops, `.Transparency`, `GetPartBoundsInBox`, conexões de frame). Não reabra os mesmos arquivos sem mudança de versão ou questão específica. Não carregue todas as referências.
-3. **Avaliar custo por mecanismo.** Para cada suspeito, anote cardinalidade, frequência, trabalho por item, vida útil, fan-out, picos, filas e custo removível. Veja [decision-kernel.md](decision-kernel.md) quando necessário. Um padrão potencialmente caro **não** prova que domina o perfil.
+3. **Avaliar custo por mecanismo.** Considere as dimensões decisivas (cardinalidade, frequência, trabalho por item, vida útil, fan-out, picos e filas) no caminho causal relevante; amplie por indício ou risco material, não para cobrir todos os subsistemas. Veja [decision-kernel.md](decision-kernel.md) quando necessário. Padrão caro não prova dominância.
 4. **Decidir com o nível de evidência disponível.** Compare poucas alternativas, incluindo nenhuma mudança. Se o pedido permitir editar, implemente o menor patch coerente e faça validação estática/local apropriada; *não* exija uma nova aprovação para editar se já autorizou. Não interprete autorização de edição como autorização para salvar/publicar o place.
 5. **Verificar proporcionalmente.** Prefira, no escopo só de análise, roteiro manual curto de validação. Para alterações, use checagens estáticas pertinentes de tipos, invariantes e diff; execução de testes respeita a responsabilidade e o escopo autorizados. Não invente resultados runtime.
 
@@ -16,6 +16,8 @@
 
 | Etiqueta | Significado | Pode afirmar |
 |---|---|---|
+| **Relatado/visível** | Sintoma, evento, captura ou leitura fornecidos pelo usuário | O que foi relatado ou está visível, com contexto e limites; não prova causa nem pico máximo |
+| **Hipótese** | Explicação ainda não demonstrada | Possibilidade a investigar ou descartar |
 | **Observado no código** | Caminho, operação ou contrato literalmente inspecionado no Source/commit conhecido | Há esta chamada/loop, e há este risco ou mecanismo potencial |
 | **Inferência técnica** | Consequência lógica apoiada por contrato/API, sem medir o sistema sob carga | É plausível reduzir trabalho/replicação; magnitude e impacto real permanecem incertos |
 | **Medido** | Contador/profiler/runtime com origem, cenário e unidade | Resultado restrito àquele cenário; causalidade depende de controle comparável |
@@ -26,7 +28,7 @@ Não equipare "inspecionei um tween de 106 Parts" a "106 mensagens de rede": a e
 ## Política de ferramentas por padrão
 
 - **Pedido de plano/diagnóstico sem reprodução:** zero `Start/Stop Play`, zero `Execute Luau` de instrumentação, zero sondas, benchmarks ou experimentos destrutivos por padrão. Pode usar inspeção de código do Studio *em Edit* se os arquivos não estiverem disponíveis de outra forma; preferir APIs de leitura, sem execução.
-- **Pedido que explicitamente diz "reproduza", "teste" ou "meça":** isso **já autoriza** medições proporcionais no escopo; não peça confirmação duplicada. Planeje primeiro um cenário discriminante, reutilize baseline e dados existentes, limite explorações redundantes e só repita se ruído, risco ou hipótese concorrente justificar. Não converta um planejamento de otimização em bateria exaustiva de controles.
+- **Pedido que explicitamente diz "reproduza", "teste" ou "meça":** autoriza somente o escopo correspondente, salvo restrição específica de validação manual/híbrida. Não peça confirmação duplicada. Escolha cenário discriminante, reutilize baseline e dados existentes; repita só por ruído, risco ou hipótese concorrente material.
 - **Implementação já autorizada:** priorize editar código e validar invariantes; runtime não é automático. Se algo só pode ser confirmado no Studio, explique o que permanece não verificado, proponha teste manual breve ou execute um teste dirigido quando expressamente autorizado e justificável.
 - **Busca web/documentação:** consultar a fonte oficial somente para API/limite/semântica material incerto; evite pesquisar a mesma assinatura várias vezes. Consulta não prova comportamento do projeto.
 - **Orçamento:** antes de ferramenta cara, avalie **qual decisão ela muda** e **qual evidência espera**. Agrupe leitura, pare após evidência suficiente e deixe verificações de baixo impacto para o usuário quando apropriado. Não há teto rígido universal de chamadas; uma falha crítica de segurança, persistência ou integridade pode justificar testes adicionais. Nunca afirme quantos tokens/cota uma chamada consumirá sem telemetria confiável.
@@ -37,7 +39,7 @@ Considere necessidade de evidência runtime quando houver: risco de regressão d
 
 ## Contrato de saída econômica
 
-Responder, sem relatório inflado: **achado + origem → mecanismo/inferência e confiança → mudança recomendada/patch autorizado → impacto visual/gameplay → verificação mínima**, anotando o que **não foi medido**. Para cenário voxel, análise estática de fade no servidor pode justificar **candidato** a fade local, mas não atribuir KB economizados; validar espectadores, stream-in, remoção e hitboxes se migrar.
+A forma depende da missão e da preferência de concisão. Comunique achado e mudança, impacto/risco material e estado da validação quando pertinentes; detalhe apenas evidência decisiva, não uma seção para cada categoria. Não gere nova coleta para completar a resposta. Exemplo: análise estática de fade no servidor pode justificar candidato a fade local, não KB economizados; indique aos responsáveis as verificações de espectadores, stream-in, remoção e hitboxes somente se afetadas.
 
 ## Controle de trabalho acumulado e checkpoints
 

@@ -1,3 +1,17 @@
+# Changelog — v2.2.0 (2026-11-24)
+
+## Investigação adaptativa, evidência e disciplina de saída
+
+- Motivação: as observações registradas na v2.1.0 sobre duração, consumo de cota e contexto, e adaptações manuais posteriores, mostraram a necessidade de distinguir investigação técnica de experimentação prática e evitar obrigações de relatório que induzem coleta desnecessária. Não há comparação controlada que isole causas ou comprove economia.
+- As quatro skills ajustam profundidade ao contexto, dependências, risco e incerteza, sem fases obrigatórias. Investigação profunda continua permitida; não implica autorização de runtime.
+- Evidências preservam origem, unidade, evento, limitações e distinção entre observação, hipótese, inferência, código e medição; leitura pontual não vira pico máximo e cenários incompatíveis não são misturados.
+- Verificações e uso de ferramentas orientados por decisões; reutilizar resultados válidos, focar trechos/logs, evitar gravações e coletas não necessárias. Implementar assim que a decisão estiver sustentada, preservando contratos e segurança.
+- Contratos de entrega adaptativos: custo e mudança, causa e evidência, ou achados materiais conforme missão; não exigir formato, métrica ou seção sem utilidade. Handoff manual breve e riscos explícitos; ganhos não medidos não são comprovados.
+- Coordenação com Prompt Elaboration v1.5, Ponytail e Caveman quando pertinentes, sem dependências ou duplicação de procedimentos. Modalidades manual, híbrida e autônoma e políticas de invocação preservadas.
+- README, migração, instalação, manifesto e casos de avaliação atualizados. Validação estrutural realizada; testes comportamentais e economia real não comprovados.
+
+---
+
 # Changelog — v2.1.0 (2026-11-24)
 
 ## Validação delegada, implementação fundamentada e controle de runtime

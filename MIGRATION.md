@@ -1,10 +1,10 @@
-# Atualização — v2.0.0 → v2.1.0 (inclusive versões anteriores)
+# Atualização — v2.1.0 → v2.2.0 (inclusive versões anteriores)
 
-A **v2.1.0** mantém `$rbx-audit`, `$rbx-root-cause`, `$rbx-optimize` e `$rbx-review` opcional, com os mesmos nomes e políticas de invocação. O principal ajuste é a **responsabilidade pela validação**: implementação fundamentada, checagens estáticas pertinentes e testes práticos somente conforme autorização. Preserva controle de execução, evidência compartilhada e segurança da versão anterior. Não altera configurações ou cota do Codex.
+A **v2.2.0** mantém as quatro skills, nomes e políticas de invocação. Refina investigação adaptativa, evidências e entrega proporcional, preservando validação conforme autorização e implementação fundamentada. Preferências existentes em `AGENTS.md` continuam válidas; não é necessário mudar modalidades nem instalar dependências.
 
 ## Atualizar o Codex Desktop
 
-1. Extraia este ZIP. Localize `rbx-audit`, `rbx-root-cause` e `rbx-optimize` dentro da pasta externa `roblox-engineering-skills-v2.1.0`.
+1. Extraia este ZIP. Localize `rbx-audit`, `rbx-root-cause` e `rbx-optimize` dentro da pasta externa `roblox-engineering-skills-v2.2.0`.
 2. Copie as **pastas inteiras** e substitua suas versões no diretório de skills já reconhecido (no ambiente documentado: `%USERPROFILE%\.codex\skills`). Não instale a pasta externa como se fosse uma skill.
 3. Opcional: instale `optional/rbx-review` como `rbx-review`. Não substitua Ponytail, Caveman, configurações do Studio/MCP ou outras skills.
 4. Atualize/reinicie a descoberta de habilidades do Codex e confira os nomes no seletor `$`.

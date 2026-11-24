@@ -1,0 +1,88 @@
+name: Publish Roblox Engineering Skills v2.2.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-v2.2.0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact release commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Verify manifest and build release ZIP
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+
+          version = "2.2.0"
+          manifest = json.loads(Path("MANIFEST.json").read_text(encoding="utf-8"))
+          assert manifest["version"] == version, "Wrong manifest version"
+          hashes = manifest["sha256"]
+          assert len(hashes) == manifest["files"] == 46, "Unexpected content file count"
+          assert set(hashes) == {str(p) for p in Path(".").rglob("*") if p.is_file() and ".git" not in p.parts and ".github" not in p.parts and p.name != "MANIFEST.json"}, "Manifest does not match repository content"
+          for name, expected in hashes.items():
+              path = Path(name)
+              assert path.is_file(), f"Missing file: {name}"
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, f"SHA mismatch: {name}"
+
+          package_name = f"roblox-engineering-skills-v{version}.zip"
+          package_root = f"roblox-engineering-skills-v{version}"
+          with ZipFile(package_name, "w", ZIP_DEFLATED, compresslevel=9) as archive:
+              for name in sorted([*hashes, "MANIFEST.json"]):
+                  archive.write(name, f"{package_root}/{name}")
+          with ZipFile(package_name) as archive:
+              assert archive.testzip() is None, "Corrupt ZIP"
+              assert len(archive.namelist()) == 47, "Wrong ZIP file count"
+          print(f"Verified {len(hashes)} SHA-256 hashes; generated {package_name}")
+          PY
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-notes.md <<'NOTES'
+          # Roblox Engineering Skills — v2.2.0
+
+          ## Motivação
+          As observações de alto consumo de cota, duração e crescimento do contexto registradas na v2.1.0 e as adaptações manuais de prompts motivaram separar investigação técnica de testes práticos e evitar coletas e relatórios desnecessários. Não há comparação controlada que isole causas ou comprove economia.
+
+          ## Principais mudanças
+          - Investigação adaptativa: profundidade conforme contexto, dependências, risco e incerteza.
+          - Fidelidade às evidências: distinguir observações, hipóteses, inferências, medições e limitações; não misturar eventos.
+          - Verificações orientadas por decisões e uso focado de ferramentas, sem coleta ou gravações por rotina.
+          - Implementação fundamentada e entrega proporcional, com riscos e validações pendentes explícitos.
+          - Validação manual, híbrida e autônoma preservada; investigar não autoriza executar testes práticos.
+          - Coordenação com Prompt Elaboration v1.5, Ponytail e Caveman, sem dependências obrigatórias.
+          - README, changelog, instalação, migração e 12 novos cenários de avaliação atualizados.
+
+          ## Instalação
+          Baixe o ZIP anexado e substitua as pastas das skills conforme INSTALL_WINDOWS.md e MIGRATION.md. rbx-review permanece opcional.
+
+          ## Verificação e limites
+          O workflow valida os 46 hashes SHA-256 do manifesto e a integridade dos 47 arquivos do ZIP. Testes comportamentais no Codex/Studio e economia real de cota ainda não foram demonstrados.
+          NOTES
+
+      - name: Publish v2.2.0 and attach ZIP
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "v2.2.0" >/dev/null 2>&1; then
+            echo "Release already exists; not replacing published assets."
+            exit 1
+          fi
+          gh release create "v2.2.0" "roblox-engineering-skills-v2.2.0.zip" --target "$GITHUB_SHA" --title "Roblox Engineering Skills — v2.2.0" --notes-file release-notes.md --latest

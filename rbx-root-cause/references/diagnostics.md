@@ -1,14 +1,14 @@
 # Instrumentação e interpretação de logs — referência opcional
 
-**Limite de execução v2.1:** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Autorização de edição não autoriza teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
+**Limite de execução (v2.2):** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Investigação aprofundada, aprovação de plano, acesso técnico e autorização de edição não autorizam teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
 
 Inspirada no prompt de debug do usuário. É uma técnica de observabilidade, **não** um ritual obrigatório.
 
 ## Quando usar
 
 - Prefira leitura direta do código se a falha estiver demonstrada estaticamente.
-- Se o custo e o sintoma forem temporais, use profiling/contadores; se faltar causalidade, adicione eventos de log nos pontos de decisão.
-- Capture a mesma operação desde o pedido até sua conclusão/rejeição. Diferencie a execução do cliente e a do servidor, e identifique rodada, ação ou entidade quando necessário.
+- Se o sintoma temporal não for explicado por Source e logs existentes, considere profiling/contadores ou eventos de log nos pontos discriminantes, somente se autorizados e capazes de alterar uma decisão. Não instrumente para preencher relatório.
+- Em coleta autorizada, capture a operação relevante desde o pedido até sua conclusão/rejeição quando a sequência for decisiva. Diferencie a execução do cliente e a do servidor, e identifique rodada, ação ou entidade quando necessário.
 
 ## Construir logs úteis e econômicos
 
@@ -26,5 +26,5 @@ Inspirada no prompt de debug do usuário. É uma técnica de observabilidade, **
 1. Verifique se os eventos são da versão e do contexto corretos. Logs de um objeto/módulo copiado podem apontar um falso zero.
 2. Verifique campos ausentes, amostragem insuficiente, ordem impossível e interferência da instrumentação.
 3. Reconstrua a linha temporal com eventos de clientes e servidor separadamente e, quando confiável, correlacione-os. Se houver resultado obsoleto, confira versionamento, invalidação e commit de tarefas concorrentes; se houver lentidão progressiva, diferencie vazamento, fila crescente e remesh/recomputação histórica.
-4. Cite eventos/valores que sustentam a causa. Se a instrumentação falhou, corrija somente a lacuna.
+4. Cite somente eventos/valores decisivos, sem omitir contrapontos materiais. Se a instrumentação falhou, corrija a lacuna apenas se a próxima tentativa tiver utilidade concreta e autorização; senão relate a limitação.
 5. Remova os logs de diagnóstico quando não forem mais necessários, após validação e permissão.

@@ -1,6 +1,6 @@
 # Evidência para auditorias sistêmicas
 
-**Limite de execução v2.1:** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Autorização de edição não autoriza teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
+**Limite de execução (v2.2):** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Investigação aprofundada, aprovação de plano, acesso técnico e autorização de edição não autorizam teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
 
 Use quando a conclusão depende de execução, fonte de código, comparação de versões ou risco entre módulos.
 
@@ -12,12 +12,14 @@ Para cada resultado importante, associe quando aplicável: versão/hash do Sourc
 
 ## Natureza da evidência
 
+- **Observação relatada/visível:** sintoma, sequência, captura ou leitura fornecida; preserve origem, unidade e limitações sem inferir causa ou pico máximo.
+- **Inferência técnica:** efeito previsto por mecanismo/contrato, não magnitude empírica.
 - **Bug demonstrado por código:** caminho concreto incompatível com contrato, ainda que não reproduzido em gameplay.
 - **Falha reproduzida:** ações/estado/resultado observados com contexto e passos.
 - **Gargalo medido:** tempo, retenção ou custo atribuído a subsistema com metodologia identificada.
 - **Hipótese:** explicação plausível ainda sem experimento discriminante.
 
-Essas categorias não são equivalentes: menos instâncias numa chamada isolada, compilação, menos warnings ou uma alteração com resultados esperados não provam maior FPS.
+Não misture eventos, versões, lados Client/Server ou janelas incompatíveis; se a proveniência for desconhecida, qualifique apenas a conclusão afetada. Essas categorias não são equivalentes: menos instâncias numa chamada isolada, compilação, menos warnings ou uma alteração com resultados esperados não provam maior FPS.
 
 ## Distinguir duas provas
 
@@ -30,4 +32,4 @@ Uma auditoria pode entregar a primeira prova e recomendar como obter a segunda, 
 
 Rastreie quem lê/escreve o mesmo estado, ordem, invalidação de caches, limites, concorrência, authority, física, streaming, entrada tardia, rollback e ciclos de vida. Identifique riscos não verificáveis explicitamente.
 
-Plano útil: mecanismo → dependências afetadas → proposta mínima → teste que aceita/rejeita a hipótese → riscos. Se não houver problema material, isso também é um resultado válido.
+Plano útil quando solicitado: evidência decisiva, mecanismo, dependências e recomendação proporcionais; verificação pertinente segue autorização. Não exija preencher cada campo nem criar nova coleta para relatório. Se não houver problema material, isso também é um resultado válido.

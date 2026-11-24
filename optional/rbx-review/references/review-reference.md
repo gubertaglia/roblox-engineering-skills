@@ -1,6 +1,6 @@
 # Luau Strict, integridade e segurança — referência opcional
 
-**Limite de execução v2.1:** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Autorização de edição não autoriza teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
+**Limite de execução (v2.2):** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Investigação aprofundada, aprovação de plano, acesso técnico e autorização de edição não autorizam teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
 
 Fonte conceitual: biblioteca antiga do usuário, reinterpretada como critérios de revisão e não exigências genéricas de API.
 
@@ -63,3 +63,5 @@ Revisar apenas as categorias alteradas pelo diff. A presença de uma técnica so
 ## Revisão sem reiniciar a investigação (v2)
 
 Use o diff, testes e evidências do patch como ponto de partida. Revalide quando a origem ou cobertura for insuficiente para uma regressão material, não porque outra skill gerou o resultado. Faça uma revisão focalizada dos contratos alterados e consumidores afetados; se a questão exigir novo diagnóstico sistêmico, descreva a lacuna em vez de expandir a missão automaticamente. Encerre sem inventar achados ou afirmar testes não executados.
+
+A profundidade segue o diff e seus consumidores: amplie somente por risco material ou evidência de regressão. Reutilize checagens válidas, sem executar novamente para completar uma lista. Entregue os achados acionáveis, preservando evidência e severidade; sem achados, indique limites relevantes. Não exija uma narrativa de cada arquivo revisado.

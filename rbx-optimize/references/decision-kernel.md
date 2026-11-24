@@ -1,6 +1,6 @@
 # Núcleo de decisão de desempenho — v1.8
 
-**Use depois de localizar um custo plausível, antes de selecionar técnica.** É um modelo de investigação, não uma fórmula oficial da Roblox nem uma obrigação de produzir tabelas na resposta. Aplique apenas as dimensões que discriminam alternativas no caso concreto.
+**Use depois de localizar um custo plausível, antes de selecionar técnica.** É um modelo de investigação, não uma fórmula oficial da Roblox nem uma obrigação de produzir tabelas na resposta. Aplique apenas as dimensões que discriminam alternativas no caso concreto. Comece pelo fluxo associado às condições e dependências relatadas; aprofunde quando surgir indício, contrato afetado ou incerteza decisiva. Evidência estática de trabalho removível pode sustentar um patch autorizado sem quantificar dominância; não espere classificar cada custo. Não confunda ausência de medição com ausência de evidência, nem uma inferência com ganho medido.
 
 ## 1. Decomponha o mecanismo do custo
 
