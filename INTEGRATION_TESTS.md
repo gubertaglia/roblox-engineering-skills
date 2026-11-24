@@ -1,4 +1,4 @@
-# Protocolo de integração v2.4.0 — Codex App + Roblox Studio MCP
+# Protocolo de integração v2.5.0 — Codex App + Roblox Studio MCP
 
 **Instalação reconhecida no ambiente do usuário:** capturas mostram **Roblox Systems Audit**, **Roblox Root Cause** e **Roblox Optimize** como **Arquivo local** no seletor `$`, após cópia para `%USERPROFILE%\.codex\skills`. Isso valida **descoberta local**, não a execução com o MCP ou as avaliações abaixo.
 
@@ -100,3 +100,8 @@ Use os casos V23 de [EVALUATION_CASES.md](EVALUATION_CASES.md) em avaliação fu
 ## Checagens v2.4.0 (propostas; não executadas)
 
 Use os casos V24 de [EVALUATION_CASES.md](EVALUATION_CASES.md) em avaliações futuras autorizadas. Verifique distinção entre custo e valor, alternativas de sistema sustentadas por evidência, dependências e custo residual, concessões condicionadas, julgamento independente e limites consultivos. Compare pedidos de plano, aprovação sem ordem de execução e implementação explicitamente autorizada; nenhuma avaliação precisa iniciar jogo para verificar roteamento de intenção. Não confunda proposta funcional adaptativa com sistema implementado ou ganho medido.
+
+## Checagens v2.5.0 (propostas, não executadas)
+
+- Exercitar V25-01 a V25-04 com snapshots locais e respostas de Studio em Edit antes de considerar integração ao vivo.
+- Quando houver validação de integração autorizada, conferir num place de teste o mapeamento, a propagação das mudanças previstas e a preservação de versões no conflito. Essas checagens podem ser feitas em Edit.

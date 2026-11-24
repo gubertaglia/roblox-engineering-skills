@@ -29,7 +29,7 @@ Não equipare "inspecionei um tween de 106 Parts" a "106 mensagens de rede": a e
 
 ## Política de ferramentas por padrão
 
-- **Pedido de plano/diagnóstico sem reprodução:** zero `Start/Stop Play`, zero `Execute Luau` de instrumentação, zero sondas, benchmarks ou experimentos destrutivos por padrão. Pode usar inspeção de código do Studio *em Edit* se os arquivos não estiverem disponíveis de outra forma; preferir APIs de leitura, sem execução.
+- **Pedido de plano/diagnóstico sem reprodução:** zero `Start/Stop Play`, zero `Execute Luau` de instrumentação, zero sondas, benchmarks ou experimentos destrutivos por padrão. Use arquivos ativos para o código sincronizado e APIs de leitura em Edit quando a questão depender do DataModel, do código fora do sync ou de confirmar a versão carregada.
 - **Pedido que explicitamente diz "reproduza", "teste" ou "meça":** autoriza somente o escopo correspondente, salvo restrição específica de validação manual/híbrida. Não peça confirmação duplicada. Escolha cenário discriminante, reutilize baseline e dados existentes; repita só por ruído, risco ou hipótese concorrente material.
 - **Implementação já autorizada:** priorize editar código e validar invariantes; runtime não é automático. Se algo só pode ser confirmado no Studio, explique o que permanece não verificado, proponha teste manual breve ou execute um teste dirigido quando expressamente autorizado e justificável.
 - **Busca web/documentação:** consultar a fonte oficial somente para API/limite/semântica material incerto; evite pesquisar a mesma assinatura várias vezes. Consulta não prova comportamento do projeto.

@@ -4,7 +4,16 @@
 
 Use **somente quando o Studio/MCP for relevante**. Em auditoria de código estático, prefira Source/diffs/arquivos já disponíveis. Não use `Start/Stop Play`, `Execute Luau` nem descoberta repetida de sessão para uma pergunta respondível por leitura; pedido explícito para reproduzir autoriza apenas a reprodução proporcional. Skill local do Codex (`$rbx-audit`) não é a habilidade nativa do Roblox consultada por `skill` no MCP.
 
-## Identificar a fonte de verdade
+## Escolher a fonte no Script Sync
+
+- Leia as instruções do projeto e identifique as raízes ativas e seu mapeamento para o place. Arquivo com o mesmo nome, backup, laboratório, exportação e snapshot histórico não comprovam qual script está ativo. Se o projeto usa Rojo ou outro fluxo, siga o mapeamento desse fluxo.
+- Para código sincronizado com mapeamento estabelecido, pesquise e faça alterações autorizadas no disco. Em Edit, use leitura MCP para propriedades, atributos, hierarquia, scripts fora do sync ou para confirmar uma versão carregada quando isso mudar a conclusão. Em tarefa mista, faça cada alteração por um único caminho, sem repetir o patch por MCP.
+- Se a diferença for material, verifique place, caminho completo, raiz mapeada, estado do sync e possíveis mudanças de terceiros. Compare apenas os scripts envolvidos. Enquanto a origem estiver em dúvida, preserve os dois lados e avance nas partes independentes. Se a resolução exigir descartar uma mudança e a intenção não estiver definida, apresente a diferença antes de escolher o lado.
+- Criar, renomear, mover ou excluir arquivos em uma raiz sincronizada pode mudar o DataModel. Confira os alvos e as referências afetadas. Preserve nomes e convenções de extensão (por exemplo, `.luau`, `.local.luau`, `.legacy.luau` e `init.*.luau`) salvo mudança intencional. Valide o diff local e confira o resultado em Edit quando a propagação ou a hierarquia for parte do aceite.
+
+Fontes do mapeamento: [Script Sync](https://create.roblox.com/docs/pt-br/scripting/sync) e [fluxos baseados em arquivos](https://create.roblox.com/docs/projects/file-based-workflows).
+
+## Identificar a sessão e o código carregado
 
 1. Descubra as ferramentas que esta sessão realmente expõe. No MCP oficial, `list_roblox_studios` fornece os Studios conectados; confirme nome, `place_id` e `studio_id`. `get_studio_state` permite distinguir Edit e Play e contextos de execução disponíveis.
 2. Para afirmações sobre código, confira o `Source` efetivamente carregado usando leitura de script e compare com disco/commit se a sincronização estiver em dúvida. `game.PlaceVersion`, versão do save Team Create, editor e datamodel de Play **não são evidências intercambiáveis**.

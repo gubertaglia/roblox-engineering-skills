@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v2.4.0 (2026-11-24)
+# Fontes de referência e verificação — v2.5.0 (2026-11-24)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -142,3 +142,8 @@ Planejamento estratégico e compromissos de qualidade derivam do pedido do mante
 ## Motivação da v2.4.0
 
 Avaliação do valor funcional, julgamento independente e limites consultivos decorrem das solicitações do mantenedor e do prompt de análise/diagnóstico/plano fornecido, combinados com as referências existentes de [planejamento e trade-offs](rbx-optimize/references/performance-planning-and-tradeoffs.md) e [contratos e arquitetura](rbx-audit/references/contracts-state-and-architecture.md). São heurísticas de engenharia, não novos fatos sobre APIs Roblox. Não houve pesquisa externa, teste comportamental ou medição de desempenho nesta atualização.
+
+## Fontes específicas da v2.5.0
+
+- Roblox Creator Hub, [Script Sync](https://create.roblox.com/docs/pt-br/scripting/sync), para mapeamento, sufixos, propagação de operações e resolução de conflitos.
+- Roblox Creator Hub, [fluxos baseados em arquivos](https://create.roblox.com/docs/projects/file-based-workflows), para distinguir Script Sync de Rojo e outros fluxos.

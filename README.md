@@ -1,8 +1,8 @@
-# Roblox Engineering Skills — v2.4.0
+# Roblox Engineering Skills — v2.5.0
 
 Skills locais para o **Codex no aplicativo ChatGPT (Windows 11)**, com integração **opcional** ao **Roblox Studio MCP oficial**. São procedimentos reutilizáveis para investigação e tomada de decisão; **não** são ferramentas de profiling, subagentes ou substitutos das habilidades oficiais da Roblox. Não exigem CLI, IDE, chave de API extra ou MCP adicional.
 
-**Novidade v2.4.0: avaliação do valor de funcionalidades e sistemas.** O `rbx-optimize` compara preservar, simplificar, adaptar, substituir, desativar ou remover recursos quando houver benefício líquido plausível. O agente pode questionar decisões de design e expectativas conflitantes; o usuário decide concessões e autoriza execução. Mantidas análise e planejamento sem alterações ou testes práticos por padrão.
+**Novidade v2.5.0:** as quatro skills escolhem entre arquivos locais e Studio MCP conforme a operação. Em projetos com Script Sync, o agente usa o mapeamento do projeto, evita aplicar o mesmo patch nos dois ambientes e preserva as versões até esclarecer divergências.
 
 ## Por que esta versão existe
 
@@ -69,11 +69,28 @@ Referências condicionais: [análise estática e economia de ferramentas](rbx-op
 
 Essas modalidades são convenções das skills, não controles nativos nem um limitador de cota. Não é necessário escolher a cada tarefa. Sem autorização clara de runtime, a skill não inicia sessões de jogo/testes práticos. Aprovar plano ou código não autoriza automaticamente Play, profiling, simulação, instrumentação ou multi-cliente. Um pedido explícito de reproduzir, testar ou medir autoriza o escopo correspondente, salvo restrição mais específica.
 
-### Preferência persistente por projeto
+### Fluxo com Script Sync
 
-Se você prefere testar pessoalmente, acrescente ao `AGENTS.md` do projeto (preservando instruções existentes):
+| Operação | Fonte preferida |
+|---|---|
+| Pesquisar, revisar ou editar código sincronizado | Arquivos da raiz ativa indicada pelo projeto |
+| Inspecionar instâncias, atributos, propriedades e código fora do sync | Studio MCP em Edit, quando disponível |
+| Alteração que depende de código e de uma propriedade do place | Arquivos para o código e Studio para a propriedade, com um caminho de edição por alvo |
+| Divergência material entre disco e Studio | Leitura focada nos alvos e no mapeamento antes de alterar ou retomar o sync |
+
+A confirmação em Edit é útil quando o estado do place faz parte do aceite. Um diff de código local, sozinho, valida o conteúdo no disco. Confira a classe, o contexto de execução e as referências quando mover, renomear ou excluir conteúdo sincronizado. Veja as [regras do Script Sync](https://create.roblox.com/docs/pt-br/scripting/sync).
+
+### Preferências persistentes por projeto
+
+Adapte este exemplo no `AGENTS.md` se o projeto usar Script Sync e você fizer os testes práticos. Preencha as raízes reais e preserve as instruções existentes.
 
 ```md
+## Roblox Studio
+- Use [raízes ativas do Script Sync] para o código sincronizado.
+- Use MCP em Edit para instâncias, propriedades ou conteúdo fora do sync.
+- Edite cada alvo em um único ambiente e preserve as versões em caso de conflito.
+- Mantenha [backups, laboratórios e evidências] fora das raízes sincronizadas.
+
 ## Validação prática
 O usuário realiza os testes no Roblox Studio, avaliações visuais e medições de desempenho.
 Priorize análise do Source, implementação e revisão localizada do diff.
@@ -148,9 +165,9 @@ A skill não deve fabricar métricas ou recomendar uma técnica apenas por apare
 
 ## Instalação no Codex Desktop
 
-Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.3.0 (ou anterior) à v2.4.0, substitua integralmente as pastas das skills para incluir as novas referências; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
+Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.4.0 (ou anterior) à v2.5.0, substitua integralmente as pastas das skills para incluir as instruções atualizadas; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
 
-1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.4.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
+1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.5.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
 2. Copie **as três pastas completas** `rbx-audit`, `rbx-root-cause`, `rbx-optimize` diretamente para o diretório de skills reconhecido pelo seu Codex, substituindo as versões antigas. Não copie a pasta externa do ZIP como uma skill.
 3. Opcionalmente, copie `optional/rbx-review` como `rbx-review` no mesmo diretório.
 4. Verifique em **Personalizar → Habilidades** e no seletor `$rbx` do chat Codex. A descoberta na interface não comprova acesso ao Studio MCP.
@@ -165,6 +182,6 @@ Leitura e análise dentro do pedido não precisam de aprovações artificiais. *
 
 ## Escopo desta versão
 
-A v2.3.0 preserva as quatro skills, a biblioteca técnica e as políticas da v2.2.0; acrescenta planejamento e avaliação de compromissos ao `rbx-optimize`, com uma referência condicional. Não adiciona dependências. Validação estrutural do pacote não comprova eficácia comportamental, ganhos de desempenho, economia de cota ou segurança em runtime. Nenhum benchmark Roblox/Studio ou teste A/B Codex foi executado nesta atualização.
+A v2.5.0 introduz a seleção de fonte por operação e o tratamento de divergências do Script Sync nas skills existentes. A verificação do pacote cobre estrutura e integridade. Os casos comportamentais e a economia de cota ainda precisam de avaliação.
 
 Consulte [CHANGELOG.md](CHANGELOG.md) para mudanças, [MIGRATION.md](MIGRATION.md) para atualização, [SOURCES.md](SOURCES.md) para documentação e [EVALUATION_CASES.md](EVALUATION_CASES.md) / [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md) para protocolos opcionais.

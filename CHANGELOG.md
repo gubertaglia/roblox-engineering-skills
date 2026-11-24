@@ -1,3 +1,14 @@
+# Changelog — v2.5.0 (2026-11-24)
+
+## Script Sync, arquivos locais e Studio MCP
+
+- As quatro skills priorizam os arquivos mapeados para o código sincronizado e usam o Studio em Edit quando a resposta depende do place ou da versão carregada.
+- Tarefas mistas usam um caminho de edição por alvo. Divergências materiais pedem comparação focada e preservação das versões enquanto a origem estiver em dúvida.
+- A referência de Studio cobre mudanças de nome, hierarquia, exclusão e sufixos que definem a classe ou o contexto de execução.
+- O README traz um exemplo de configuração por projeto e o protocolo inclui quatro casos de avaliação offline propostos.
+
+---
+
 # Changelog — v2.4.0 (2026-11-24)
 
 ## Valor funcional, julgamento técnico e limites consultivos

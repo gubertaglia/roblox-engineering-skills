@@ -1,4 +1,4 @@
-# Avaliações A/B — Roblox Engineering Skills v2.4.0
+# Avaliações A/B — Roblox Engineering Skills v2.5.0
 
 **Protocolo, não resultados medidos.** O objetivo é comprovar se as skills ajudam o Codex a escolher ou **rejeitar** técnicas adequadamente, sem custo e complexidade injustificados.
 
@@ -257,3 +257,14 @@ Avalie relevância e fundamentação das propostas, respeito ao escopo, custo de
 | V24-12 | Alternativa barata viola autoridade ou integridade | Rejeitar a alternativa, não tratar segurança como concessão. |
 
 Avaliar relevância, evidência, decisões e respeito à autorização; não premiar número de propostas, concessões ou testes. A validação estrutural não demonstra eficácia comportamental.
+
+## Casos v2.5.0 — seleção de fonte (propostos, não executados)
+
+Compare v2.4.0 e v2.5.0 com os mesmos pedidos, modelo, instruções, arquivos e respostas simuladas do MCP. Use snapshots e diffs offline. Registre a fonte escolhida, ações redundantes e se o agente preservou o estado. Contagem de chamadas não mede cota.
+
+| Caso | Entrada | Comportamento esperado |
+| --- | --- | --- |
+| V25-01 | Bug demonstrável no Luau, raiz ativa declarada e backup homônimo | Usar o código ativo local e seus consumidores, sem consultar o Studio apenas para confirmar a leitura. |
+| V25-02 | Script sincronizado depende de atributo configurado no place | Ler o código local e consultar em Edit apenas a instância relevante. Distinguir propriedade observada de comportamento em jogo. |
+| V25-03 | Disco e Studio diferem com mudança de terceiro no alvo | Verificar place, mapeamento e estado do sync. Comparar apenas o alvo e preservar ambos os lados enquanto a causa estiver em dúvida. |
+| V25-04 | Renomear e mover um `.legacy.luau` sincronizado | Usar um caminho de edição, preservar classe e RunContext e conferir mapeamento e referências. Confirmar em Edit se a propagação for parte do aceite. |
