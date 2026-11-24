@@ -44,7 +44,7 @@ Para cada mudança plausível, complete mentalmente:
 5. **Refutação:** em que condição a mudança é rejeitada? Qual observação contradiz a hipótese?
 6. **Mudança mínima:** qual intervenção reversível atinge a causa sem reescrever a arquitetura sem necessidade?
 
-Não apresente todas as alternativas ao usuário se a evidência discrimina uma. Se uma alteração só troca CPU por RAM ou latência, exponha o trade-off relevante; não a chame automaticamente de otimização.
+Não apresente todas as alternativas ao usuário se a evidência discrimina uma. Em planejamento, apresente também as alternativas materialmente diferentes em fidelidade, risco ou benefício, inclusive as que dependem de decisão explícita, sem tratá-las como autorização. Use [planejamento e trade-offs](performance-planning-and-tradeoffs.md) para priorizar ganho líquido, confiança, reversibilidade e dependências. Se uma alteração só troca CPU por RAM ou latência, exponha o trade-off relevante; não a chame automaticamente de otimização.
 
 ## Situações comparativas
 

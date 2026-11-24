@@ -1,8 +1,8 @@
-# Roblox Engineering Skills — v2.2.0
+# Roblox Engineering Skills — v2.3.0
 
 Skills locais para o **Codex no aplicativo ChatGPT (Windows 11)**, com integração **opcional** ao **Roblox Studio MCP oficial**. São procedimentos reutilizáveis para investigação e tomada de decisão; **não** são ferramentas de profiling, subagentes ou substitutos das habilidades oficiais da Roblox. Não exigem CLI, IDE, chave de API extra ou MCP adicional.
 
-**Novidade v2.2.0: investigação adaptativa, fidelidade às evidências e entrega proporcional.** Preserva a validação delegada e implementação fundamentada da v2.1.0. Prioriza contexto causal, decisões úteis e código de qualidade, não campanhas de testes ou relatórios extensos. Mantém segurança, contratos e biblioteca técnica.
+**Novidade v2.3.0: planejamento estratégico de desempenho e compromissos de qualidade.** O `rbx-optimize` passa a distinguir análise, planejamento e implementação. Pode recomendar mudanças de design, redução cosmética ou qualidade adaptativa quando o custo-benefício justificar, sem editar nem testar por padrão em análise/planejamento. Preserva os controles de evidência, autorização e eficiência da v2.2.0.
 
 ## Por que esta versão existe
 
@@ -10,22 +10,42 @@ No desenvolvimento de um sistema voxel com Codex Plus (Astra Alto, Standard), um
 
 Essas observações motivam um ajuste de fluxo: evitar que validações práticas assumidas por padrão consumam tempo, contexto e cota sem benefício proporcional. Não se trata de afirmar que o Codex sempre testa em excesso, nem de prometer economia. Testar continua importante; a v2.1.0 definiu quem executa e quando. Na v2.2.0, aprendemos com as adaptações manuais de prompts: o mantenedor evitou a palavra “investigue” por receio de ciclos de Play/Stop, mas investigação estática profunda continua desejável. Remover exigências de cenários, métricas e relatórios prematuros reduz trabalho potencialmente dispensável. Uma leitura pontual de rede de 127,89 kB/s durante perda de apoio em peças conectadas é contexto útil, não prova da causa nem pico máximo. A saída deve ser proporcional, sem coleta apenas para preencher relatório. Esta atualização não comprova economia de cota ou causalidade isolada.
 
+A v2.3.0 responde a uma necessidade adicional do mantenedor: avaliar o desempenho de um sistema e receber um plano de correções e melhorias antes de decidir o que implementar. Algumas otimizações transparentes podem não ser suficientes; uma simplificação visual moderada, outra representação ou uma política adaptativa pode ter melhor custo-benefício. O agente deve poder questionar decisões de design caras, sem supor que toda perda visual seja aceitável ou que o ganho esteja comprovado. A nova referência concentra esse raciocínio no `rbx-optimize`, evitando uma quinta skill e duplicação técnica.
+
 ## Escolha pela intenção, não pelo tema
 
 | Skill local | Quando usar | Saída principal |
 |---|---|---|
 | `$rbx-audit` | Precisa entender arquitetura, contratos, dependências e riscos **sistêmicos** | Achados fundamentados e plano; sem editar por padrão |
 | `$rbx-root-cause` | Existe um **bug/sintoma específico** cujo mecanismo não está claro | Causa, evidências e incertezas; sem refatorar por padrão |
-| `$rbx-optimize` | O objetivo é **reduzir custo de desempenho** de um sistema | Gargalo, alternativa escolhida/rejeitada, resultado antes/depois quando disponível |
+| `$rbx-optimize` | O objetivo é **analisar, planejar ou reduzir custo de desempenho** de um sistema | Diagnóstico, plano priorizado com compromissos, ou alteração autorizada; resultados medidos somente quando disponíveis |
 | `$rbx-review` *(opcional)* | Existe **diff/patch** pronto e a pergunta é se introduziu regressões | Problemas novos/agravados e correção mínima; somente leitura por padrão |
 
 A mesma área técnica (rede, VFX, voxel, física, cache) pode surgir em todas as skills. **O que decide a skill é a pergunta do usuário.** Se a missão mudar, a transição pode ser feita sem repetir o trabalho já comprovado. Não é necessário carregar todas para tarefas grandes.
 
 `agents/openai.yaml` controla apresentação e política de invocação; **não cria subagentes**. As três principais aceitam invocação implícita e explícita; a revisão opcional é configurada como explicit-only (`allow_implicit_invocation: false`). A disponibilidade e o comportamento exato da seleção dependem da versão/superfície do Codex.
 
+## Planejamento de desempenho (v2.3.0)
+
+| Intenção | Entrega | Limite |
+| --- | --- | --- |
+| Análise | Mecanismos de custo e oportunidades | Sem editar |
+| Planejamento | Plano priorizado, alternativas, riscos e concessões | Sem editar ou aplicar o plano |
+| Implementação | Alterações fundamentadas e revisão pertinente | Somente no escopo autorizado |
+
+Análise e planejamento não iniciam Play/Stop, profiling, instrumentação, simulações ou benchmarks por padrão. Inspecione Source e dados existentes. Uma solicitação explícita e compatível de validação adicional autoriza somente essa coleta, não implementação automática. A política de validação manual/híbrida/autônoma continua valendo para missões autorizadas.
+
+O plano compara custo removido e introduzido, estabilidade, qualidade, funcionalidade, escala, manutenção, confiança e reversibilidade. Favorece ganhos transparentes quando vantajosos, mas também pode propor LOD, reduções cosméticas, representações alternativas ou alterações de design. Concessões que extrapolem as restrições acordadas ficam condicionadas à aprovação; segurança, autoridade e integridade não são negociáveis. Benefícios sem medição são esperados, não comprovados.
+
+Exemplo de pedido:
+
+> $rbx-optimize Analise o desempenho deste sistema e elabore um plano priorizado de correções e melhorias. Considere alternativas que preservem a qualidade e concessões visuais pequenas ou mudanças de design quando houver benefício relevante. Questione custos desproporcionais. Não altere o jogo nem execute testes práticos; eu farei as medições.
+
+A skill deve terminar no plano. Um exemplo de proposta seria simplificar fumaça distante se o custo geométrico for plausível; se o custo for overdraw, física ou replicação, a solução deve mudar. Nenhum ganho numérico é presumido. Veja [planejamento de desempenho e trade-offs](rbx-optimize/references/performance-planning-and-tradeoffs.md).
+
 ## Como reduzir chamadas MCP sem reduzir a qualidade
 
-O padrão da **v2.2.0** é: **reutilizar evidências → inspecionar código e consumidores → identificar hipótese/contrato → propor ou implementar (se autorizado) → checagens estáticas e validação conforme responsabilidade**. Inspecionar um loop ou fade no servidor pode demonstrar o mecanismo, mas **não** quantifica bytes, FPS ou melhora real. Etiquete: **observado no código**, **inferência técnica**, **medido** e **não verificado**.
+O padrão preservado da **v2.2.0** é: **reutilizar evidências → inspecionar código e consumidores → identificar hipótese/contrato → propor ou implementar (se autorizado) → checagens estáticas e validação conforme responsabilidade**. Inspecionar um loop ou fade no servidor pode demonstrar o mecanismo, mas **não** quantifica bytes, FPS ou melhora real. Etiquete: **observado no código**, **inferência técnica**, **medido** e **não verificado**.
 
 - **"Investigue e monte um plano"**: sem Play/Execute Luau de instrumentação por padrão; leitura estática primeiro; oferecer teste manual breve quando necessário.
 - **"Reproduza e meça"**: o pedido já autoriza testes no escopo; fazer **poucos ensaios discriminantes**, reutilizar medições e interromper controles redundantes. Não transformar isso em profiler exaustivo sem benefício de decisão.
@@ -33,7 +53,7 @@ O padrão da **v2.2.0** é: **reutilizar evidências → inspecionar código e c
 
 Referências condicionais: [análise estática e economia de ferramentas](rbx-optimize/references/static-first-and-tool-efficiency.md), [distribuição cliente/servidor](rbx-optimize/references/client-server-work-placement.md) e [segurança dos remotes](rbx-audit/references/security-and-remote-contracts.md). Limites de ferramentas são **flexíveis**: não sacrificar segurança, integridade ou correção apenas para reduzir contagem de chamadas.
 
-## Responsabilidade pela validação (preservada na v2.2.0)
+## Responsabilidade pela validação (preservada na v2.3.0)
 
 | Modalidade | Agente | Usuário |
 |---|---|---|
@@ -60,7 +80,7 @@ sem afirmar que resultados não medidos ou comportamentos não testados foram va
 
 Isso permite instruções curtas, como `Otimize a replicação do sistema; eu farei a validação prática.` A política não impede leitura do Studio em Edit, análise de contratos, segurança ou typecheck/lint pertinentes. Não aplique mudanças inseguras por falta de teste; isole a lacuna ou peça autorização se indispensável.
 
-## Controle de execução na v2.2.0
+## Controle de execução (preservado da v2.2.0)
 
 - Uma missão combinada pode usar duas skills complementares, mas compartilha escopo, baseline, evidências e critérios de aceite. Não execute cada procedimento como uma tarefa independente.
 - Prefira saída de ferramenta com trechos, métricas e erros relevantes; leia mais quando uma decisão realmente depender disso. Reutilize sessão, Source e medições enquanto comparáveis.
@@ -99,6 +119,7 @@ O Codex não precisa ler todas as referências para escolher uma técnica. A `$r
 | Risco de abuso via remotes e autorização | [Segurança e fronteira de confiança](rbx-audit/references/security-and-remote-contracts.md) |
 | Assemblies, colliders, raycasts | [Física e espacial](rbx-optimize/references/physics-and-spatial.md) |
 | Overdraw, partículas, GPU | [Renderização e VFX](rbx-optimize/references/rendering-and-vfx.md) |
+| Plano de desempenho, custo-benefício e concessões | [Planejamento e trade-offs](rbx-optimize/references/performance-planning-and-tradeoffs.md) |
 | Streaming, carregamento, mundo grande | [Streaming e escala](rbx-optimize/references/streaming-and-world-scale.md) |
 | Mudanças propostas em LOD, streaming de Model, BasePart, Mesh/Union ou juntas | [Decisões de propriedades e juntas](rbx-optimize/references/instance-property-decisions.md) |
 | Fase do frame, Deferred events, prediction/rollback | [Simulação e autoridade](rbx-optimize/references/simulation-and-authority.md) |
@@ -121,9 +142,9 @@ A skill não deve fabricar métricas ou recomendar uma técnica apenas por apare
 
 ## Instalação no Codex Desktop
 
-Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.1.0 (ou anterior) à v2.2.0, substitua integralmente as pastas das skills para incluir as novas referências; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
+Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.2.0 (ou anterior) à v2.3.0, substitua integralmente as pastas das skills para incluir as novas referências; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
 
-1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.2.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
+1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.3.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
 2. Copie **as três pastas completas** `rbx-audit`, `rbx-root-cause`, `rbx-optimize` diretamente para o diretório de skills reconhecido pelo seu Codex, substituindo as versões antigas. Não copie a pasta externa do ZIP como uma skill.
 3. Opcionalmente, copie `optional/rbx-review` como `rbx-review` no mesmo diretório.
 4. Verifique em **Personalizar → Habilidades** e no seletor `$rbx` do chat Codex. A descoberta na interface não comprova acesso ao Studio MCP.
@@ -138,6 +159,6 @@ Leitura e análise dentro do pedido não precisam de aprovações artificiais. *
 
 ## Escopo desta versão
 
-A v2.2.0 preserva as quatro skills e a biblioteca técnica da v2.1.0; refina investigação, evidências, decisões, ferramentas e comunicação. Não adiciona dependências. Validação estrutural do pacote não comprova eficácia comportamental, ganhos de desempenho, economia de cota ou segurança em runtime. Nenhum benchmark Roblox/Studio ou teste A/B Codex foi executado nesta atualização.
+A v2.3.0 preserva as quatro skills, a biblioteca técnica e as políticas da v2.2.0; acrescenta planejamento e avaliação de compromissos ao `rbx-optimize`, com uma referência condicional. Não adiciona dependências. Validação estrutural do pacote não comprova eficácia comportamental, ganhos de desempenho, economia de cota ou segurança em runtime. Nenhum benchmark Roblox/Studio ou teste A/B Codex foi executado nesta atualização.
 
 Consulte [CHANGELOG.md](CHANGELOG.md) para mudanças, [MIGRATION.md](MIGRATION.md) para atualização, [SOURCES.md](SOURCES.md) para documentação e [EVALUATION_CASES.md](EVALUATION_CASES.md) / [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md) para protocolos opcionais.

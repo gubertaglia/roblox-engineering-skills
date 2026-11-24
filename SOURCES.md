@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v2.2.0 (2026-11-24)
+# Fontes de referência e verificação — v2.3.0 (2026-11-24)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -134,3 +134,7 @@ A política de responsabilidade pela validação decorre de observações de uso
 ## Motivação da v2.2.0
 
 Refinamentos operacionais derivados das adaptações manuais de prompts e preferências do mantenedor, não de nova pesquisa de APIs. As fontes técnicas anteriores continuam aplicáveis; nenhum teste comportamental ou ganho de cota foi demonstrado nesta atualização.
+
+## Motivação da v2.3.0
+
+Planejamento estratégico e compromissos de qualidade derivam do pedido do mantenedor e das referências técnicas já presentes, especialmente [núcleo de decisão](rbx-optimize/references/decision-kernel.md), [render e VFX](rbx-optimize/references/rendering-and-vfx.md) e [planejamento e trade-offs](rbx-optimize/references/performance-planning-and-tradeoffs.md). São critérios de engenharia, não novas APIs nem garantias oficiais. Nenhuma pesquisa externa ou medição de jogo foi realizada nesta atualização.

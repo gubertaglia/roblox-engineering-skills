@@ -1,4 +1,4 @@
-# Protocolo de integração v2.2.0 — Codex App + Roblox Studio MCP
+# Protocolo de integração v2.3.0 — Codex App + Roblox Studio MCP
 
 **Instalação reconhecida no ambiente do usuário:** capturas mostram **Roblox Systems Audit**, **Roblox Root Cause** e **Roblox Optimize** como **Arquivo local** no seletor `$`, após cópia para `%USERPROFILE%\.codex\skills`. Isso valida **descoberta local**, não a execução com o MCP ou as avaliações abaixo.
 
@@ -92,3 +92,7 @@ A verificação estrutural deste ZIP não executa estes casos.
 ## Checagens v2.2.0 (propostas; não executadas)
 
 Use os casos V22 de [EVALUATION_CASES.md](EVALUATION_CASES.md) em avaliação futura autorizada. Verifique que profundidade e formato variam com a missão, que evidências de eventos distintos não são fundidas, que preferências informais de validação impedem runtime não autorizado e que pedidos explícitos de medição não são omitidos. Compare volume de retornos, operações e duração apenas quando observáveis, sem presumir telemetria de cota. A verificação estrutural do pacote não exige abrir Studio ou executar agentes.
+
+## Checagens v2.3.0 (propostas; não executadas)
+
+Use os casos V23 de [EVALUATION_CASES.md](EVALUATION_CASES.md) em avaliação futura autorizada. Verifique leitura estática e encerramento no plano em pedidos de planejamento, ausência de alterações persistentes ou ações runtime não autorizadas, fidelidade às evidências, apresentação de concessões condicionadas e preservação de segurança/autoridade. Compare modos de análise, planejamento e implementação com o mesmo contexto, sem exigir benchmark de jogo para validar roteamento de intenção. O pacote não inclui um sistema de qualidade adaptativa implementado; avalie a pertinência das propostas, não ganhos hipotéticos.

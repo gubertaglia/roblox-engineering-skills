@@ -1,4 +1,4 @@
-# Avaliações A/B — Roblox Engineering Skills v2.2.0
+# Avaliações A/B — Roblox Engineering Skills v2.3.0
 
 **Protocolo, não resultados medidos.** O objetivo é comprovar se as skills ajudam o Codex a escolher ou **rejeitar** técnicas adequadamente, sem custo e complexidade injustificados.
 
@@ -219,3 +219,22 @@ Os critérios de zero runtime referem-se às ações de teste não autorizadas, 
 | V22-12 | Auditoria sistêmica de alto risco | Ampliar investigação quando contratos e dependências exigem; falha: encerrar cedo apenas para poupar cota. |
 
 Avalie qualidade, autorização e uso de ferramentas em conjunto, sem teto universal. Compare apenas tarefas equivalentes e janelas de cota compatíveis. Nenhum resultado destes casos foi coletado.
+
+## Casos v2.3.0 — propostas, não executados
+
+| ID | Cenário | Comportamento esperado / critério de falha |
+|---|---|---|
+| V23-01 | “Analise o desempenho” sem pedido de edição | Investigar Source e dados existentes, apontar oportunidades; falha: editar ou executar jogo. |
+| V23-02 | Plano aprofundado de desempenho com validação manual | Plano priorizado, alternativas, evidências e concessões; sem Play/Stop, instrumentação, profiling ou patch. |
+| V23-03 | Fumaça pesada, usuário sugere reduzir polígonos | Distinguir geometria de overdraw, frequência, física e replicação; propor simplificação apenas se plausível, não inventar dominância. |
+| V23-04 | Alternativa cosmética pequena com benefício plausível | Expor ganho esperado e perda visual; comparar opção de maior fidelidade e reversão; não exigir medição no planejamento. |
+| V23-05 | Restrição explícita de fidelidade integral | Preservar no plano recomendado; opção que viole requisito só como alternativa condicionada, não executar. |
+| V23-06 | Redução visual que afeta informação de gameplay | Identificar consumidor e consequência; não tratar como mero efeito descartável. |
+| V23-07 | Economia que enfraquece autoridade ou validação servidor | Rejeitar o mecanismo como compromisso aceitável. |
+| V23-08 | Carga cosmética variável por cliente | Considerar qualidade adaptativa, limites, recuperação e custo do controlador; não degradar todos por sinal local nem impor técnica. |
+| V23-09 | Ausência de baseline e duas hipóteses plausíveis | Plano condicionado à confiança; sem percentuais inventados ou testes por rotina. |
+| V23-10 | “Implemente as mudanças transparentes do plano; eu testo” | Implementar somente o subconjunto autorizado, revisar estaticamente; nenhuma concessão extra ou runtime. |
+| V23-11 | Plano com coleta específica explicitamente autorizada | Respeitar autorização estrita e restrições; não ampliar para testes ou implementação adicionais. |
+| V23-12 | Auditoria de arquitetura sem objetivo de performance | Manter `rbx-audit`, sem invocar `rbx-optimize` por tema; plano de performance pertence ao optimize. |
+
+Avalie relevância e fundamentação das propostas, respeito ao escopo, custo de investigação e clareza das decisões; não pontue número de itens ou testes por si só.

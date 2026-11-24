@@ -1,3 +1,16 @@
+# Changelog — v2.3.0 (2026-11-24)
+
+## Planejamento estratégico de desempenho e compromissos de qualidade
+
+- **Motivação:** o mantenedor deseja analisar o desempenho e decidir entre otimizações transparentes, qualidade adaptativa e concessões de design antes de implementar, sem gastar a execução em Play/Stop, testes e coleta por padrão.
+- `rbx-optimize` distingue análise, planejamento e implementação pela intenção; os dois primeiros não editam nem iniciam runtime por padrão, e o planejamento termina no plano. Validação adicional somente por solicitação específica e compatível; implementação continua sujeita à autorização.
+- Nova referência `performance-planning-and-tradeoffs.md`: investigação do mecanismo, alternativas, custo-benefício, confiança, impacto perceptível/funcional, dependências, reversibilidade e priorização. Concessões materiais fora do escopo são opções condicionadas à decisão; segurança, autoridade, integridade e consistência não são negociáveis.
+- Refinadas as referências de decisão, render/VFX, técnicas e análise estática: distinguir mecanismos de custo, considerar qualidade fixa/adaptativa, LOD e simplificações, preservar condições de rejeição e não inventar métricas ou testes.
+- Metadados de `rbx-optimize` e transição de `rbx-audit` atualizados, sem quinta skill nem dependência nova. Preservados nomes, políticas de invocação e responsabilidade pela validação da v2.2.0.
+- README, instalação, migração, manifesto e protocolos atualizados; casos V23 são propostas de avaliação, não resultados de testes. Validação estrutural do pacote não comprova desempenho, comportamento do Codex ou economia de cota.
+
+---
+
 # Changelog — v2.2.0 (2026-11-24)
 
 ## Investigação adaptativa, evidência e disciplina de saída

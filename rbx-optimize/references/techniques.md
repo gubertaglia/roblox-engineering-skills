@@ -1,6 +1,6 @@
 # Roteador de técnicas — decisões, não receitas (v1.8)
 
-**Use este roteiro quando houver hipóteses ou técnicas concorrentes.** O `SKILL.md` oferece acesso direto às referências especializadas; não é obrigatório abrir este roteiro antes de cada uma. Não percorra todos os documentos nem transforme o catálogo em checklist. Identifique o custo dominante por evidência; a classe causal importa mais do que o nome popular da técnica. Comece pela menor intervenção capaz de resolver o problema.
+**Use este roteiro quando houver hipóteses ou técnicas concorrentes.** O `SKILL.md` oferece acesso direto às referências especializadas; não é obrigatório abrir este roteiro antes de cada uma. Não percorra todos os documentos nem transforme o catálogo em checklist. Identifique o mecanismo candidato por evidência; atribua dominância somente com dados suficientes; a classe causal importa mais do que o nome popular da técnica. Comece pela menor intervenção capaz de resolver o problema.
 
 Antes de comparar técnicas, use o [decision kernel](decision-kernel.md) se ainda faltar entender **cardinalidade, frequência, trabalho, residência, fan-out, fidelidade ou custo líquido**. Não leia o kernel se o mecanismo já estiver claro; não cite a heurística como equação oficial Roblox.
 
@@ -39,8 +39,8 @@ Antes de selecionar técnica, responda na medida permitida pela tarefa:
 3. Corrigir lifecycle, retenção e fluxos de eventos/filas antes de ajustar microcustos.
 4. Considerar cache, pooling, Parallel Luau, `@native`, buffers ou LOD **somente se o gargalo correspondente estiver sustentado**.
 
-Um sistema pode exigir exatamente o oposto dessa sequência, conforme medições. Não adicionar técnicas por demonstração de conhecimento.
+Um sistema pode exigir exatamente o oposto dessa sequência, conforme evidências. Para planos ou compromissos relevantes, compare alternativas transparentes, simplificações, mudança de design e qualidade adaptativa com [planejamento e trade-offs](performance-planning-and-tradeoffs.md); não implemente concessões não autorizadas. Não adicionar técnicas por demonstração de conhecimento.
 
 ## Contrato curto para avaliar qualquer técnica
 
-**Sinal → pré-condições → economia prevista → custos/riscos → condição de rejeição → prova antes/depois → regressões.** Se não houver prova comparável, relate *proposta promissora* ou *resultado não medido*, nunca um percentual inventado. Preserve baseline e opção de reversão quando houver edição autorizada.
+**Sinal → pré-condições → economia prevista → custos/riscos → condição de rejeição → prova antes/depois → regressões.** Se não houver prova comparável, relate *proposta promissora* ou *resultado não medido*, nunca um percentual inventado. Preserve baseline e opção de reversão quando houver edição autorizada. Em planejamento, descreva critérios de validação futura somente quando decisivos; não execute os ensaios nem modifique o projeto.

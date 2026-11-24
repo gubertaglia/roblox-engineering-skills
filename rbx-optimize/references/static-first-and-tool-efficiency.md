@@ -2,6 +2,8 @@
 
 **Limite de execução (v2.2):** as técnicas de teste abaixo são opções, não ordens para iniciar runtime. A responsabilidade pela validação definida no `SKILL.md` e pelo usuário/projeto prevalece. Se manual ou não autorizada, use evidências existentes, inspeção estática e indique o menor teste manual útil; não abra Play/Stop, simulação, instrumentação, benchmark ou múltiplos clientes. Investigação aprofundada, aprovação de plano, acesso técnico e autorização de edição não autorizam teste. Se indispensável e não autorizado, explique e solicite apenas a verificação necessária; não declare resultado não medido.
 
+**Planejamento v2.3:** um pedido de análise ou plano não autoriza editar nem iniciar runtime. Inspecione somente Source e evidências disponíveis; produza recomendações e encerre. Se houver solicitação explícita de validação adicional, respeite seu escopo e as restrições do usuário. Falta de baseline pode limitar confiança, não obriga testes. Consulte [planejamento e trade-offs](performance-planning-and-tradeoffs.md) para alternativas e compromissos.
+
 **Objetivo:** maximizar qualidade por tempo/cota, não minimizar chamadas a qualquer preço. Esta referência é condicional: leia quando houver tentação de fazer múltiplos testes/MCP, um pedido de planejamento ou dúvida sobre a suficiência da evidência.
 
 ## Sequência operacional

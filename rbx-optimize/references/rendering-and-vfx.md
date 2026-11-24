@@ -1,11 +1,11 @@
 # Renderização, geometria e VFX
 
-**Primeiro confirme se o gargalo é GPU, cena/render ou CPU de criação de objetos.** Uma partícula pode custar mais por área de tela e overdraw do que por contagem; um Part pode custar mais pela física/rede que pelo desenho.
+**Primeiro diferencie mecanismos candidatos de GPU, cena/render e CPU de criação de objetos com Source e evidências existentes.** Confirme dominância somente com dados suficientes; não execute medições no planejamento nem sem autorização. Uma partícula pode custar mais por área de tela e overdraw do que por contagem; um Part pode custar mais pela física/rede que pelo desenho.
 
 ## Partículas, transparência e efeitos
 
 - **Sinal:** GPU/frame time cresce com smoke, dust, transparência, luzes ou explosões; piora ao preencher grande parte da tela.
-- **Pré-condição:** medir em dispositivo relevante, área de tela, vida, quantidade simultânea, sobreposição e QualityLevel.
+- **Pré-condição:** considerar dispositivo relevante, área de tela, vida, quantidade simultânea, sobreposição e QualityLevel; usar medições existentes quando disponíveis. Novas medições pertencem à validação autorizada, não são pré-requisito universal para propor uma hipótese.
 - **Opções:** limitar trabalho visual por distância/visibilidade/importância, reduzir overdraw e lifetime, usar emissor/asset adequado, reutilizar objetos quando churn for o custo comprovado.
 - **Custos:** perda de expressividade, pop-in, efeito inconsistente entre jogadores; a engine já pode reduzir qualidade automaticamente.
 - **Rejeite:** cortar todas as partículas quando o gargalo real é remesh/física ou quando quantidade isolada não explica uso de GPU.
@@ -36,9 +36,11 @@ Use [client-server-work-placement.md](client-server-work-placement.md) quando a 
 ## Qualidade adaptativa, LOD e efeito local
 
 - **Sinal:** equipamento-alvo sofre mais que desktop; efeitos cosméticos têm custo variável e não participam de regra autoritativa.
-- **Opções:** reduzir densidade/duração/detalhe visual em cenários críticos, com degradação gradual e limites de histerese; reservar estado autoritativo do servidor.
+- **Opções:** comparar qualidade fixa, LOD e adaptação por pressão de carga cosmética; reduzir densidade/duração/detalhe visual quando o mecanismo justificar, com limites, histerese, recuperação gradual, prioridade por importância e fallback. Reservar estado autoritativo do servidor. Não introduzir controlador mais caro que o efeito nem degradar todos os clientes por carga local. Ajustes e limiares dependem do projeto.
 - **Custos:** oscilação de qualidade, divergência visual, novos limites ou efeitos não reproduzidos para observadores.
 - **Prova:** frame pacing e qualidade percebida em hardware real, visual compatível com gameplay, cenários de carga e entrada tardia.
+
+**Decisão de qualidade:** avalie fidelidade e ganho líquido conforme [planejamento e trade-offs](performance-planning-and-tradeoffs.md). Preserve legibilidade e contratos de gameplay; não confunda reduzir polígonos com reduzir overdraw, frequência, instâncias ou física. A proposta pode incluir concessões, mas alterações materiais não acordadas exigem autorização. As provas descritas acima são sugestões de validação futura, não ordens para testar.
 
 **Exemplo voxel:** um acabamento superficial e debris distante podem variar visualmente sem multiplicar corpos físicos; preservar semântica dos impactos e colisões é obrigatório.
 
