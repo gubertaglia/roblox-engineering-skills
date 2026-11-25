@@ -1,3 +1,15 @@
+# Changelog — v2.6.0 (2026-11-24)
+
+## Validação adaptativa e autorização de testes
+
+- As quatro skills distinguem permissão para recomendar de autorização para executar. Testes com valor decisório material podem ser solicitados mesmo sem serem essenciais.
+- Níveis N0–N4 e necessidade independente; custo qualitativo, escopo concreto, condição de parada e alternativa sem runtime. Escolha do menor teste discriminante, sem etapas obrigatórias.
+- Preservação das modalidades manual, híbrida e autônoma; autorização por teste ou teto explícito dentro do escopo; recusa, proibição de pedidos e limites específicos prevalecem.
+- Evita escalada não autorizada, fragmentação artificial de campanhas, repetição sem utilidade e estimativas fictícias de cota. Planejamento, edição, salvamento e publicação continuam distintos.
+- Referências harmonizadas, documentação de migração e casos de avaliação offline propostos. Nenhuma skill adicional ou dependência. Não foram executados testes comportamentais Codex/Studio nem medidos ganhos de cota.
+
+---
+
 # Changelog — v2.5.0 (2026-11-24)
 
 ## Script Sync, arquivos locais e Studio MCP

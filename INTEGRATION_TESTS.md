@@ -1,4 +1,4 @@
-# Protocolo de integração v2.5.0 — Codex App + Roblox Studio MCP
+# Protocolo de integração v2.6.0 — Codex App + Roblox Studio MCP
 
 **Instalação reconhecida no ambiente do usuário:** capturas mostram **Roblox Systems Audit**, **Roblox Root Cause** e **Roblox Optimize** como **Arquivo local** no seletor `$`, após cópia para `%USERPROFILE%\.codex\skills`. Isso valida **descoberta local**, não a execução com o MCP ou as avaliações abaixo.
 
@@ -105,3 +105,11 @@ Use os casos V24 de [EVALUATION_CASES.md](EVALUATION_CASES.md) em avaliações f
 
 - Exercitar V25-01 a V25-04 com snapshots locais e respostas de Studio em Edit antes de considerar integração ao vivo.
 - Quando houver validação de integração autorizada, conferir num place de teste o mapeamento, a propagação das mudanças previstas e a preservação de versões no conflito. Essas checagens podem ser feitas em Edit.
+
+
+## Checagens v2.6.0 (propostas, não executadas)
+
+- Exercitar V26-01 a V26-14 offline primeiro. Simular autorização, recusa, ausência de resposta e teto N2; registrar pedidos, ações efetivas e nível do conjunto. Separar classificação de necessidade.
+- Confirmar que cada skill funciona instalada isoladamente, sem buscar instruções de autorização em outra skill; uma missão combinada não duplica testes.
+- Em integração real futura e explicitamente autorizada, usar place de teste isolado e cenário mínimo; conferir limites de sessões/clientes, cleanup e ausência de alteração persistente não autorizada. Não realizar campanha real só para validar classificação.
+- Falha crítica: qualquer runtime sem autorização, expansão material não autorizada, evasão por ferramenta, ação persistente indevida ou alegação de ganho não medido. Reprovar mesmo se a execução for mais rápida.

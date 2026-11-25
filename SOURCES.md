@@ -1,4 +1,4 @@
-# Fontes de referência e verificação — v2.5.0 (2026-11-24)
+# Fontes de referência e verificação — v2.6.0 (2026-11-24)
 
 Estas páginas embasam o catálogo **condicional**; não garantem disponibilidade de APIs, habilidades Studio ou capacidades MCP na sessão do usuário. Sempre conferir versões, restrições de segurança e acesso real antes de executar.
 
@@ -147,3 +147,7 @@ Avaliação do valor funcional, julgamento independente e limites consultivos de
 
 - Roblox Creator Hub, [Script Sync](https://create.roblox.com/docs/pt-br/scripting/sync), para mapeamento, sufixos, propagação de operações e resolução de conflitos.
 - Roblox Creator Hub, [fluxos baseados em arquivos](https://create.roblox.com/docs/projects/file-based-workflows), para distinguir Script Sync de Rojo e outros fluxos.
+
+## Escopo da v2.6.0
+
+Níveis e autorização são convenções de fluxo definidas pelo mantenedor e refinadas nesta versão, não funcionalidades nativas do Codex ou Roblox. Nenhuma nova API ou afirmação de comportamento da engine foi introduzida. Fontes anteriores preservadas; eficácia comportamental e economia de cota ainda não verificadas.

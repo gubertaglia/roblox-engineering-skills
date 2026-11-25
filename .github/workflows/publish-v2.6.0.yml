@@ -1,0 +1,83 @@
+name: Publish Roblox Engineering Skills v2.6.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-v2.6.0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact release commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Verify manifest and build release ZIP
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+
+          version = "2.6.0"
+          manifest = json.loads(Path("MANIFEST.json").read_text(encoding="utf-8"))
+          assert manifest["version"] == version, "Wrong manifest version"
+          hashes = manifest["sha256"]
+          assert len(hashes) == manifest["files"] == 47, "Unexpected content file count"
+          assert set(hashes) == {str(p) for p in Path(".").rglob("*") if p.is_file() and ".git" not in p.parts and ".github" not in p.parts and p.name != "MANIFEST.json"}, "Manifest does not match repository content"
+          for name, expected in hashes.items():
+              path = Path(name)
+              assert path.is_file(), f"Missing file: {name}"
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, f"SHA mismatch: {name}"
+
+          package_name = f"roblox-engineering-skills-v{version}.zip"
+          package_root = f"roblox-engineering-skills-v{version}"
+          with ZipFile(package_name, "w", ZIP_DEFLATED, compresslevel=9) as archive:
+              for name in sorted([*hashes, "MANIFEST.json"]):
+                  archive.write(name, f"{package_root}/{name}")
+          with ZipFile(package_name) as archive:
+              assert archive.testzip() is None, "Corrupt ZIP"
+              assert len(archive.namelist()) == 48, "Wrong ZIP file count"
+          print(f"Verified {len(hashes)} SHA-256 hashes; generated {package_name}")
+          PY
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-notes.md <<'NOTES'
+          # Roblox Engineering Skills — v2.6.0
+
+          ## Adaptive Validation & Test Authorization
+          - Níveis N0–N4, custo operacional qualitativo e necessidade independente: opcional, recomendado, fortemente recomendado ou essencial.
+          - As quatro skills podem solicitar testes de valor decisório material, sem presumir autorização para executar.
+          - Autorização por teste ou teto explícito; escopo, critério de parada, alternativa manual e proteção contra escalada ou repetição desnecessária.
+          - Preserva Script Sync, análise estática primeiro e modalidades manual, híbrida e autônoma.
+          - Nove referências técnicas harmonizadas e 14 novos casos de avaliação offline propostos.
+
+          ## Instalação
+          Baixe o ZIP anexado e substitua integralmente as pastas das skills conforme INSTALL_WINDOWS.md e MIGRATION.md. Revise restrições antigas de testes no AGENTS.md. rbx-review permanece opcional.
+
+          ## Verificação e limites
+          O workflow valida os 47 hashes SHA-256 do manifesto e os 48 arquivos do ZIP. Os casos de avaliação são propostos; não foram executados testes comportamentais no Codex ou benchmarks no Roblox Studio. Não há comprovação de ganhos de desempenho ou economia de cota.
+          NOTES
+
+      - name: Publish v2.6.0 and attach ZIP
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "v2.6.0" >/dev/null 2>&1; then
+            echo "Release already exists; not replacing published assets."
+            exit 1
+          fi
+          gh release create "v2.6.0" "roblox-engineering-skills-v2.6.0.zip" --target "$GITHUB_SHA" --title "Roblox Engineering Skills — v2.6.0" --notes-file release-notes.md --latest

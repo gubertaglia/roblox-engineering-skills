@@ -1,8 +1,10 @@
-# Roblox Engineering Skills — v2.5.0
+# Roblox Engineering Skills — v2.6.0
 
 Skills locais para o **Codex no aplicativo ChatGPT (Windows 11)**, com integração **opcional** ao **Roblox Studio MCP oficial**. São procedimentos reutilizáveis para investigação e tomada de decisão; **não** são ferramentas de profiling, subagentes ou substitutos das habilidades oficiais da Roblox. Não exigem CLI, IDE, chave de API extra ou MCP adicional.
 
-**Novidade v2.5.0:** as quatro skills escolhem entre arquivos locais e Studio MCP conforme a operação. Em projetos com Script Sync, o agente usa o mapeamento do projeto, evita aplicar o mesmo patch nos dois ambientes e preserva as versões até esclarecer divergências.
+**Novidade v2.6.0:** validação adaptativa com níveis N0–N4, necessidade independente e autorização por escopo ou teto. A IA pode solicitar testes de valor técnico material sem executá-los por conta própria.
+
+**Preservado da v2.5.0:** as quatro skills escolhem entre arquivos locais e Studio MCP conforme a operação. Em projetos com Script Sync, o agente usa o mapeamento do projeto, evita aplicar o mesmo patch nos dois ambientes e preserva as versões até esclarecer divergências.
 
 ## Por que esta versão existe
 
@@ -59,15 +61,33 @@ O padrão preservado da **v2.2.0** é: **reutilizar evidências → inspecionar 
 
 Referências condicionais: [análise estática e economia de ferramentas](rbx-optimize/references/static-first-and-tool-efficiency.md), [distribuição cliente/servidor](rbx-optimize/references/client-server-work-placement.md) e [segurança dos remotes](rbx-audit/references/security-and-remote-contracts.md). Limites de ferramentas são **flexíveis**: não sacrificar segurança, integridade ou correção apenas para reduzir contagem de chamadas.
 
-## Responsabilidade pela validação (preservada na v2.3.0)
+## Responsabilidade pela validação (v2.6.0)
 
 | Modalidade | Agente | Usuário |
 |---|---|---|
 | Manual | Análise, implementação autorizada, diff, checagens estáticas | Play, testes, medições, avaliação visual |
-| Híbrida | Mesmas atividades + testes específicos autorizados | Demais testes práticos |
+| Híbrida | Mesmas atividades + testes específicos ou teto autorizado | Demais testes práticos |
 | Autônoma | Análise, implementação e runtime proporcional ao escopo autorizado | Aceite final conforme o fluxo |
 
 Essas modalidades são convenções das skills, não controles nativos nem um limitador de cota. Não é necessário escolher a cada tarefa. Sem autorização clara de runtime, a skill não inicia sessões de jogo/testes práticos. Aprovar plano ou código não autoriza automaticamente Play, profiling, simulação, instrumentação ou multi-cliente. Um pedido explícito de reproduzir, testar ou medir autoriza o escopo correspondente, salvo restrição mais específica.
+
+### Níveis de teste e necessidade (v2.6.0)
+
+| Nível | Escopo típico | Custo operacional qualitativo |
+|---|---|---|
+| N0 — Estático | Source, Edit não destrutivo, diff, lint, tipos, contratos | Muito baixo/baixo, conforme escopo |
+| N1 — Leve | Unitário isolado ou reprodução pontual | Baixo |
+| N2 — Moderado | Uma sessão Play dirigida, controles relacionados ou profiling focal | Moderado |
+| N3 — Aprofundado | Benchmark antes/depois, multi-cliente, estresse controlado ou instrumentação relevante | Alto |
+| N4 — Extensivo | Campanha de sessões/cenários, investigação ampla ou regressões sistêmicas | Muito alto |
+
+Classifique pelo maior custo/escopo previsível do conjunto (inclusive preparação e repetição), não apenas pelo nome da técnica. Um teste pequeno pode subir de nível se exigir várias sessões, e vários N1 não podem ser usados para contornar um teto. N0 não executa código de jogo nem harness dinâmico. Os níveis não são fases nem estimativas de tokens. Independente do nível, declare a necessidade: **opcional** (confiança incremental), **recomendado** (melhora material), **fortemente recomendado** (incerteza/risco material) ou **essencial** (decisão afetada não é responsável sem evidência).
+
+A IA pode solicitar teste com valor decisório mesmo quando ele não for essencial. Não deve pedir por ritual nem bloquear trabalho seguro por teste opcional. Para N1–N4, declare nível e necessidade antes de executar. Quando faltar autorização, uma solicitação curta deve informar:
+
+> **N2 — Moderado | Fortemente recomendado.** Objetivo: distinguir custo de simulação e custo de apresentação. Justificativa: a leitura não isola a causa do pico. Escopo: uma sessão, um cenário, uma captura dirigida; sem gravação ou edição persistente. Custo: moderado. Parada: obter o observável definido ou atingir o limite da sessão. Sem autorização: entregar análise estática e instruções para teste manual.
+
+Exemplos de autorização: `Eu faço os testes, mas pode solicitar autorização se houver benefício técnico.`; `Autorizo até N2 nesta tarefa; peça autorização acima disso.`; `Autorizo somente o cenário proposto.`; `Não execute testes nem solicite autorização.` O último mantém apenas análise/validação estática permitida e registro de limitações. Acesso completo não é autorização. Silêncio não aprova. Recusa não deve gerar insistência. Autorização não se transfere automaticamente entre tarefas, nem permite salvar/publicar, alterações persistentes, instrumentação fora do escopo ou concessões de design. Agrupe solicitações relacionadas, reutilize resultados e pare ao atingir evidência ou limite; peça nova autorização antes de expansão material. As quatro skills incluem a política no próprio `SKILL.md`, sem dependência de outra skill instalada.
 
 ### Fluxo com Script Sync
 
@@ -95,13 +115,14 @@ Adapte este exemplo no `AGENTS.md` se o projeto usar Script Sync e você fizer o
 O usuário realiza os testes no Roblox Studio, avaliações visuais e medições de desempenho.
 Priorize análise do Source, implementação e revisão localizada do diff.
 Não inicie Play/Stop, simulação, instrumentação, profiling, benchmarks ou sessões
-com múltiplos clientes sem autorização específica. Se indispensável para avançar
-com segurança, explique a lacuna e peça autorização para a menor verificação.
+com múltiplos clientes sem autorização específica. Pode solicitar autorização
+quando um teste tiver valor decisório material; declare nível, necessidade, escopo,
+custo qualitativo e critério de parada. Sem autorização, continue a parte segura.
 Faça checagens estáticas pertinentes. Entregue riscos e testes manuais essenciais,
 sem afirmar que resultados não medidos ou comportamentos não testados foram validados.
 ```
 
-Isso permite instruções curtas, como `Otimize a replicação do sistema; eu farei a validação prática.` A política não impede leitura do Studio em Edit, análise de contratos, segurança ou typecheck/lint pertinentes. Não aplique mudanças inseguras por falta de teste; isole a lacuna ou peça autorização se indispensável.
+Isso permite instruções curtas, como `Otimize a replicação do sistema; eu farei a validação prática.` A política não impede leitura do Studio em Edit, análise de contratos, segurança ou typecheck/lint pertinentes. Não aplique mudanças inseguras por falta de teste; isole a lacuna ou solicite autorização delimitada quando houver valor decisório material.
 
 ## Controle de execução (preservado da v2.2.0)
 
@@ -165,9 +186,9 @@ A skill não deve fabricar métricas ou recomendar uma técnica apenas por apare
 
 ## Instalação no Codex Desktop
 
-Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.4.0 (ou anterior) à v2.5.0, substitua integralmente as pastas das skills para incluir as instruções atualizadas; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
+Guia completo: **[INSTALL_WINDOWS.md](INSTALL_WINDOWS.md)**. Para atualizar da v2.5.0 (ou anterior) à v2.6.0, substitua integralmente as pastas das skills para incluir as instruções atualizadas; os nomes de invocação e as políticas implícitas/explícitas são mantidos.
 
-1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.5.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
+1. Extraia o ZIP da versão desejada (por exemplo, `roblox-engineering-skills-v2.6.0`). Se usar GitHub, confirme primeiro que a versão correspondente está publicada.
 2. Copie **as três pastas completas** `rbx-audit`, `rbx-root-cause`, `rbx-optimize` diretamente para o diretório de skills reconhecido pelo seu Codex, substituindo as versões antigas. Não copie a pasta externa do ZIP como uma skill.
 3. Opcionalmente, copie `optional/rbx-review` como `rbx-review` no mesmo diretório.
 4. Verifique em **Personalizar → Habilidades** e no seletor `$rbx` do chat Codex. A descoberta na interface não comprova acesso ao Studio MCP.
@@ -182,6 +203,6 @@ Leitura e análise dentro do pedido não precisam de aprovações artificiais. *
 
 ## Escopo desta versão
 
-A v2.5.0 introduz a seleção de fonte por operação e o tratamento de divergências do Script Sync nas skills existentes. A verificação do pacote cobre estrutura e integridade. Os casos comportamentais e a economia de cota ainda precisam de avaliação.
+A v2.6.0 amplia a política de solicitação e autorização de testes, mantendo a seleção de fonte por operação e o tratamento de divergências do Script Sync da v2.5.0. A verificação do pacote cobre estrutura e integridade. Os casos comportamentais e a economia de cota ainda precisam de avaliação.
 
 Consulte [CHANGELOG.md](CHANGELOG.md) para mudanças, [MIGRATION.md](MIGRATION.md) para atualização, [SOURCES.md](SOURCES.md) para documentação e [EVALUATION_CASES.md](EVALUATION_CASES.md) / [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md) para protocolos opcionais.

@@ -1,10 +1,10 @@
-# Instalação e verificação — Codex Desktop no Windows 11 (v2.5.0)
+# Instalação e verificação — Codex Desktop no Windows 11 (v2.6.0)
 
 Este é um guia **manual**, sem PowerShell, CLI, API keys ou dependências. As três skills principais são `rbx-audit`, `rbx-root-cause` e `rbx-optimize`. A `rbx-review` é opcional.
 
 ## Instalação pela primeira vez
 
-1. Baixe `roblox-engineering-skills-v2.5.0.zip` na [release v2.5.0](https://github.com/gubertaglia/roblox-engineering-skills/releases/tag/v2.5.0) e use **Extrair Tudo** no Windows.
+1. Obtenha `roblox-engineering-skills-v2.6.0.zip` (arquivo distribuído diretamente ou release correspondente, se publicada) e use **Extrair Tudo** no Windows.
 2. Abra a pasta extraída (geralmente `roblox-engineering-skills-main`). Nela, selecione as **pastas completas** `rbx-audit`, `rbx-root-cause` e `rbx-optimize`; copie com **Ctrl+C**.
 3. Na barra de endereço do Explorador, abra `%USERPROFILE%\.codex\skills` **se esse diretório já existir e contiver as skills reconhecidas pelo seu Codex**. Em uma instalação real do Codex Desktop, esse foi o local de Caveman e Ponytail, e nele a skills anteriores apareceram no seletor como **Arquivo local**.
 4. Cole as três pastas com **Ctrl+V**. Elas precisam ficar **diretamente dentro de `skills`**, ao lado das demais skills, e cada uma deve conter o respectivo `SKILL.md`.
@@ -32,7 +32,7 @@ C:\Users\<seu-usuario>\.codex\skills\
     └── references/
 ```
 
-**Errado:** `...\skills\roblox-engineering-skills-v2.5.0\rbx-audit\SKILL.md` — a pasta externa do ZIP está um nível acima do necessário. **Certo:** `...\skills\rbx-audit\SKILL.md`.
+**Errado:** `...\skills\roblox-engineering-skills-v2.6.0\rbx-audit\SKILL.md` — a pasta externa do ZIP está um nível acima do necessário. **Certo:** `...\skills\rbx-audit\SKILL.md`.
 
 ## Qual caminho usar?
 
@@ -63,7 +63,7 @@ A interface pode exibir o **nome de apresentação** de `agents/openai.yaml` em 
 - Faça backup **apenas se tiver modificado as skills localmente**.
 - Substitua as pastas `rbx-audit`, `rbx-root-cause` e `rbx-optimize` **por inteiro** no mesmo diretório que já funciona. Evite mesclar referências antigas.
 - Não altere `cavecrew`, `caveman`, `ponytail`, `.system`, plugins ou configuração do Studio MCP.
-- **v2.4.0 (ou anterior) → v2.5.0:** substitua integralmente as pastas para incluir o fluxo de Script Sync; mantenha sua preferência de validação. Consulte [MIGRATION.md](MIGRATION.md).
+- **v2.5.0 (ou anterior) → v2.6.0:** substitua integralmente as pastas para incluir a política de autorização por nível e preservar Script Sync; revise preferências explícitas de validação. Consulte [MIGRATION.md](MIGRATION.md).
 - Não há skill nova para instalar: use `$rbx-optimize` e peça análise ou plano sem implementação. A solicitação de plano não autoriza testes nem alterações.
 
 ## Se não aparecer no Codex
